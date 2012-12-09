@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<script>
+
+// For sync, send postMessage to notify of approval?
+
+window.addEventListener('DOMContentLoaded', function () {
+
+    var errBack = function (error) {
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error type: ' + error + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+    // errBack = false;
+
+    function runSync1 () {
+        var xhr = AsYouWish.requestPrivs('xhr');
+        if (!xhr) {
+            var c = confirm('I have approved the XHR request');
+            window.location.reload();
+            return;
+        }
+        var x = new xhr.XMLHttpRequest();
+        x.open('GET', 'http://mozilla.org/', false);
+        x.send(null);
+        alert(x.responseText);
+        setTimeout(runSync2, 0);
+    }
+    function runSync2 () {
+        var URLObj = AsYouWish.requestPrivs('url');
+        if (!URLObj) {
+            var c = confirm('I have approved the URL request');
+            window.location.reload();
+            return;
+        }
+        alert(
+            URLObj.fromFilename('C:\\')
+        );
+        alert(
+            URLObj.toFilename('file:///C:/')
+        );
+        
+        var url = URLObj.URL('http://example.com/');
+        alert(url);
+        alert(url.scheme);
+    }
+    runSync1();
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+</body></html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<script>
+
+/**
+AsYouWish.removePrivs(); // Only usable on current site
+alert("Privileges successfully reset!");
+throw '';
+//*/
+
+window.addEventListener('DOMContentLoaded', function () {
+setInterval(function () {
+    var errBack = function (error, error2, error3) {
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error type: ' + error + (error2 ? ' ' + error2 : '') + (error3 ? ' ' + error3 : '') + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+    // errBack = false; // Try default (only alerts when refused)
+
+    try {
+        
+        AsYouWish.requestPrivs(['xhr', 'url'], function (xhr, URLObj) {
+            var x = new xhr.XMLHttpRequest();
+            x.open('GET', 'http://mozilla.org/', false);
+            x.send(null);
+            alert(x.responseText);
+
+            alert(
+                URLObj.fromFilename('C:\\')
+            );
+            alert(
+                URLObj.toFilename('file:///C:/')
+            );
+            
+            var url = URLObj.URL('http://example.com/');
+            
+            alert(url);
+            alert(url.scheme);
+            
+        }, errBack);
+        
+    } catch (e) {
+        alert('page error: ' + e);
+    }
+}, 7000); // 
+});
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+</body></html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<script>
+/*globals alert, document, window, AsYouWish*/
+
+window.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+    
+    var errBack = function (error) {
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error type: ' + error + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+
+    try {
+        AsYouWish.requestPrivs('simple-storage', function (ss) {
+            try {
+                if (!ss.storage.abc) {
+                    ss.storage.abc = 3131;
+                }
+                else {
+                    ss.storage.abc++;
+                }
+                alert(ss.storage.abc);
+            }
+            catch(e) {
+                alert(e.fileName + ' '+ e.lineNumber + e);
+            }
+        }, errBack);
+        
+    } catch (e) {
+        alert('page error: ' + e);
+    }
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+</body></html>

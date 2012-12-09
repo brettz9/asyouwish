@@ -1,0 +1,29 @@
+/*
+General styling
+*/
+body {width:885px;}
+fieldset {float:left;max-width:30%}
+label {font-weight:bold;display:block;}
+select {
+    min-width: 100px;
+    max-width: 220px;
+    margin: 0 auto; /* For centering; also requires text-align:center and display:block (if not already) on parent */
+    margin-top:10px;
+}
+.focus {text-align:center;display:block;}
+
+/**
+* Allow enough space to view whole URL inside select menus since tooltips not working here
+*/
+select:hover {
+    position:fixed;
+    margin-left: -350px;
+    max-width: 1200px !important;
+}
+
+/**
+* Risky options
+*/
+.dangerous {color:red;}
+.risky {color:pink;}
+

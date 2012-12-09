@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<!-- data-l10n-id="AsYouWish Options"-->
+<title>AsYouWish Options</title>
+<link rel="stylesheet" type="text/css" href="options.css" />
+</head>
+<body>
+    <fieldset><legend>Protocols (besides "https") from which privileges may be requested</legend>
+        <div class="focus">
+            <br />
+            <label>Allow privilege requests<br />from all protocols<br /><span class="dangerous">(DANGEROUS)</span>
+                <input type="checkbox" id="allowAllProtocols"/>
+            </label>
+            <br /><br />
+            <label>Protocol to allow<br /><span class="dangerous">(DANGEROUS)</span>:<br /> 
+                <input id="protocolToAllow" size="10" />
+                <button id="addAllowedProtocol">Add</button>
+                <button id="addCurrentProtocol">Grab current website's protocol</button>
+            </label>
+            <br />
+            <label>Allowed protocols:<br />
+                <select id="allowedProtocols" multiple="multiple" size="3">
+                </select>
+            </label>
+            <br />
+            <button id="removeAllowedProtocols">Remove selected allowed protocols</button>
+        </div>
+    </fieldset>
+    <fieldset><legend>Websites from which privileges may be requested</legend><br />
+        <div class="focus">
+            <label>Allow privilege requests from all websites whose protocols are allowed (only HTTPS by default)<br />
+                <span class="risky">(RISKY)</span><input type="checkbox" id="allowAllWebsites"/>
+            </label>
+            <br />
+            <label>Website to allow (<span class="risky">potentially risky</span> if site not trustworthy or properly secured): 
+                <input id="websiteToAllow" type="url" size="25" />
+                <button id="addAllowedWebsite">Add</button>
+                <button id="addCurrentWebsite">Grab current website</button>
+            </label>
+            <br />
+            <label>Allowed websites:<br />
+                <select id="allowedWebsites" multiple="multiple" size="3"></select>
+            </label>
+            <br />
+            <button id="removeAllowedWebsites">Remove selected allowed websites</button>
+        </div>
+    </fieldset>
+    <fieldset><legend>Websites from which specific privileges have already been requested by the site and approved</legend>
+        <div class="focus">
+            <label>Allowed and approved websites:<br />
+                <select id="websitesApproved" multiple="multiple" size="16"></select>
+            </label>
+            <br />
+            <button id="removeApprovedWebsites">Remove selected approved websites</button>
+        </div>
+    </fieldset>
+</body>
+</html>
