@@ -84,13 +84,13 @@ harmony with RequireJS which can make non-privileged
 module inclusions as well which do not require a prefix):
 
 ```javascript
-requestPrivs(['priv!xhr', 'priv!url'], function (xhr, URLObj) {
+require(['priv!xhr', 'priv!url'], function (xhr, URLObj) {
 
-  // ...
+    // ...
 
-  }, function (errorObj) {
+}, function (errorObj) {
     alert(errorObj.state + '::' + errorObj.args);
-  });
+});
 ```
 
 RequireJS also always requires an array, so I may settle on that
@@ -117,16 +117,16 @@ easy installation by users--they're called add-ons. :) And yes, as with
 add-ons I would hope such as Mozilla may be able to host this privileged
 HTML at their App Store as they do with add-ons and non-privileged web apps.
 
-1) AsYouWish informs the user of exactly which privileges are being
+1. AsYouWish informs the user of exactly which privileges are being
 required--addons, on the other hand, are, if approved by the user,
 given full privileges without discrimination (though the ones hosted at
 addons.mozilla.org are vetted at least for security and I was told that
 Mozilla intends to make it harder to install (presumably non-AMO) 3rd
 party add-ons).
-2) This approach could I think more probably become standardized upon so
+2. This approach could I think more probably become standardized upon so
 developers could use just one way to request such privileges, rather than
 creating different code for different browsers.
-3) It allows the developer to host the content at their own site in a simple
+3. It allows the developer to host the content at their own site in a simple
 way (or just on their own machine) without packaging up their files into
 special zip files, etc., as is necessary with addons. The fewer the
 obstacles, and shorter the testing iteration cycle, the faster users can
