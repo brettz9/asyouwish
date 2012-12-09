@@ -107,6 +107,23 @@ This is similar to these technologies, but the aim is to be potentially
 cross-browser (and 
 enablePrivilege is [out the door](https://bugzilla.mozilla.org/show_bug.cgi?id=546848) now in Firefox).
 
+Comparison to "Molecule Man" in the Marvel Universe
+===================================================
+
+Sorry, I just love the analogy too much whereby the "Molecule Man" in Marvel comics discovers, 
+courtesy of a God-like being, that it has only been a mental block keeping him from 
+manipulating organic matter in addition to inorganic matter. While the danger there too is clear,
+there are similarly a potentially great many benefits.
+
+My feeling is that inhibitions have kept the web from being opened up to a wider developer base
+as with the web, both with addons' cross-browser incompatibilities, need for dealing with zipping and
+installing special file formats, etc., as well as a helpless attidue that "The web is the web, 
+the browser is the browser, and never the twain shall meet".
+
+(Thanks to the [Marvel Database](http://forums.marveldatabase.com) for the image!)
+
+![Molecule Man being given his insights](https://raw.github.com/brettz9/asyouwish/master/Marvel%20Super%20Heroes%20Secret%20Wars%20Vol%201%2011%20p6.jpg "Molecule Man gaining insights")
+
 Future goals
 ============
 
@@ -148,3 +165,4 @@ The name dervies from what it allows (so users and developers can have convenien
 excessively circumscribed, even while taking into account security concerns) and is also a 
 nod to the [25th anniversary](http://www.usatoday.com/story/entertainment/2012/10/03/princess-bride-cast-reunites-for-25th-anniversary/1610061/)
 to the film Princess Bride where this line was used in the film.
+
