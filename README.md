@@ -11,7 +11,9 @@ security vetting as part of the process to get the add-on accepted at [AMO](http
 
 Obviously allowing privileges may be dangerous if used by a malicious site (as with addons), 
 so there needs to be a way to inform the user that there is a request and allow them to 
-refuse or accept. AsYouWish tries to provide this.
+refuse or accept. AsYouWish tries to provide this (the beta is also available for testing via
+the Mozilla [Addon Builder](https://builder.addons.mozilla.org/package/164286/latest/) site, though
+I have to emphasize again that this has not been reviewed for security!
 
 Access is granted to specific URLs, not including the query string/hash. Privileges do not
 apply site or even folder wide to allow a greater sense of security and choice in case a 
@@ -144,7 +146,6 @@ Some additional intended use cases
 1. One particular reason I am interested in this is that I feel it is unfortunate that for current web applications, 
 different third parties cannot access a shared database hosted privately in the user's browser (unless it 
 "belongs" to one of the websites). 
-
 For example, in an application I'm hoping to build, I'd like to let the user store books they have found and
 browsed offline, but I'd also like to expose the data so that other web applications could also access it 
 (if the user permitted), allowing people to innovate into the future without requiring new ways of 
@@ -155,10 +156,12 @@ a neutral and familiar way.
 shared databases (others have done a browser-in-browser using the Flash plugin, but I'd like to see it work 
 without plugins--I'm hoping Firefox may eventually come around to including AsYouWish by default since it
 now uses a whitelist, etc. by default).
-
 The advantage I see to this is that it may allow normal web developers the ability to use familiar and easier 
 languages to innovate with user interfaces, while accessing the trickier and lower level plumbing
 handled by the browsers.
+
+3. Last but not least, a Git-accessible client-side web-based IDE... (Firefox can execute files and processes, so 
+if nothing else, some kind of command-line interface).
 
 Name
 ====
