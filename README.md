@@ -11,7 +11,9 @@ security vetting as part of the process to get the add-on accepted at [AMO](http
 
 Obviously allowing privileges may be dangerous if used by a malicious site (as with addons), 
 so there needs to be a way to inform the user that there is a request and allow them to 
-refuse or accept. AsYouWish tries to provide this.
+refuse or accept. AsYouWish tries to provide this (the beta is also available for testing via
+the Mozilla [Addon Builder](https://builder.addons.mozilla.org/package/164286/latest/) site, though
+I have to emphasize again that this has not been reviewed for security!
 
 Access is granted to specific URLs, not including the query string/hash. Privileges do not
 apply site or even folder wide to allow a greater sense of security and choice in case a 
