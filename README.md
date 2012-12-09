@@ -120,7 +120,8 @@ as with the web, both with addons' cross-browser incompatibilities, need for dea
 installing special file formats, etc., as well as a helpless attidue that "The web is the web, 
 the browser is the browser, and never the twain shall meet".
 
-(Thanks to the [Marvel Database](http://forums.marveldatabase.com) for the image!)
+(Thanks to Marvel for great comic fun (the low-res image is from Marvel's copyrighted work) and 
+thanks to the [Marvel Database](http://forums.marveldatabase.com) for scanning the image!)
 
 ![Molecule Man being given his insights](https://raw.github.com/brettz9/asyouwish/master/Marvel%20Super%20Heroes%20Secret%20Wars%20Vol%201%2011%20p6.jpg "Molecule Man gaining insights")
 
