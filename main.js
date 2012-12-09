@@ -32,7 +32,7 @@ Todos:
     b) alternatively allow invoking of a specific URL at start-up optionally within a hidden DOM window so no visible tabs would need to 
     open (e.g., if you wanted a Firefox context menu overlay, but still wanted to have it load your live webpage). Add to preferences 
     so a preferences 'add-on' could list and edit these or add within normal add-ons dialog.
-2) See if can get Browser-in-Browser (BIB) working; and storage for allowing creation of shared APIs into which browsers could hook
+2) See if can get Browser-in-Browser (BIB) working using simple-storage for allowing creation of shared APIs into which browsers could hook
     a) Use https://addons.mozilla.org/en-US/developers/docs/sdk/latest/packages/api-utils/content/proxy.html ?
 
 Rejected ideas:
@@ -258,17 +258,10 @@ exports.main = function () {
                 case 'addon-kit/clipboard':
                     obj = require('addon-kit/clipboard');
                     break;
-                
-                case 'addon-kit/simple-storage': // Not working
+                case 'addon-kit/simple-storage':
                     obj = require('addon-kit/simple-storage');
-                    /*
-                    // Temporarily try this
-                    for (p in obj) { 
-                        ret[p] = obj[p];
-                    }
-                    return ret;
-                    */
                     break;
+
                 default: // May be possible to get here if allowed in permissions.
                     throw 'Dynamic module loading is not yet supported.';
             }
