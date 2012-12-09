@@ -24,11 +24,12 @@ define({
         }, function (state) {
             load.error(
                 /**
-                * @property {'bad-privilege'|'failed-retrieval'|'refused'|'dismissed'|'removed'} state The state of the error
+                * @property {'bad-privilege'|'failed-retrieval'|'refused'|'denied'|'dismissed'|'removed'} state The state of the error
                 * @property {Array} [args] Additional arguments as an array:
                 *                                               arg1:
                 *                                                   with 'bad-privilege' or 'failed-retrieval': the privilege name which failed
                 *                                                   with 'refused', it gives an array of the refused privileges
+                *                                                   with 'denied', it will indicate whether denied upon 'initial' or 'callback' execution
                 *                                               arg2:
                 *                                                   with 'refused', it will be an array of the already approved privileges
                 */
