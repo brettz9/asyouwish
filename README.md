@@ -162,6 +162,9 @@ The advantage I see to this is that it may allow normal web developers the abili
 languages to innovate with user interfaces, while accessing the trickier and lower level plumbing
 handled by the browsers.
 
+3. Last but not least, a Git-accessible client-side web-based IDE... (Firefox can execute files and processes, so 
+if nothing else, some kind of command-line interface).
+
 Name
 ====
 The name dervies from what it allows (so users and developers can have convenience in apps not 
