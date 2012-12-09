@@ -77,8 +77,9 @@ The following will remove privileges for the current site.
 AsYouWish.removePrivs(); // Only usable on current site
 ```
 
-Using the provided priv plugin for RequireJS, the API is similar,
-with a difference with errors, and the need to prefix each
+Using the provided priv plugin for RequireJS (which also
+of course requires RequireJS itself), the API is similar,
+with a difference with errors and a need to prefix each
 requested privilege with `priv!` (this is for the sake of
 harmony with RequireJS which can make non-privileged
 module inclusions as well which do not require a prefix):
@@ -102,7 +103,9 @@ be provided eventually on
 the [wiki](https://github.com/brettz9/asyouwish/wiki).
 
 Again, please do not get too comfortable with the current API, as details
-may change.
+may change. I am strongly leaning toward the RequireJS API though
+I have to consider how to allow it to work with existing code (and
+ideally avoid the need for an additional file needing to be included).
 
 Advantages over custom add-ons
 ==============================
