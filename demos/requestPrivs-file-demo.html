@@ -5,30 +5,29 @@
 
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
-    
-    /*var errBack = function (error) {
+
+    var errBack = function (error) {
         document.getElementById('errs').
             appendChild(document.createTextNode('Error type: ' + error + '\n'));
         document.getElementById('errs').
             appendChild(document.createElement('br'));
-    };*/
+    };
 
-    function remove () {    
-        try {
-            AsYouWish.removePrivs(); // Only usable on current site
-            alert("Privileges successfully reset!");
-            
-        } catch (e) {
-            alert('page error: ' + e);
-        }
+    try {
+
+        AsYouWish.requestPrivs('file', function (fileObj) {
+            alert(
+                fileObj.read('C:\\Program Files (x86)\\Mozilla Firefox\\application.ini')
+            );
+        }, errBack);
+
+    } catch (e) {
+        alert('page error: ' + e);
     }
-    document.getElementById('remove').addEventListener('click', remove);
 });
 
 </script>
 </head><body>
-
-<input type="button" id="remove" value="Reset privileges to require permissions again?" />
 
 <div id="errs"></div>
 

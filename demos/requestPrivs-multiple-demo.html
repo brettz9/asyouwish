@@ -19,7 +19,7 @@ setInterval(function () {
     // errBack = false; // Try default (only alerts when refused)
 
     try {
-        
+
         AsYouWish.requestPrivs(['xhr', 'url'], function (xhr, URLObj) {
             var x = new xhr.XMLHttpRequest();
             x.open('GET', 'http://mozilla.org/', false);
@@ -32,18 +32,18 @@ setInterval(function () {
             alert(
                 URLObj.toFilename('file:///C:/')
             );
-            
+
             var url = URLObj.URL('http://example.com/');
-            
+
             alert(url);
             alert(url.scheme);
-            
+
         }, errBack);
-        
+
     } catch (e) {
         alert('page error: ' + e);
     }
-}, 7000); // 
+}, 7000); //
 });
 </script>
 </head><body>

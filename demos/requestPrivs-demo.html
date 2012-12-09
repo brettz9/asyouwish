@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', function () {
     // errBack = false; // Try default (only alerts when refused)
 
     try {
-        
+
         AsYouWish.requestPrivs('xhr', function (xhr) {
             var x = new xhr.XMLHttpRequest();
             x.open('GET', 'http://mozilla.org/', false);
@@ -28,15 +28,15 @@ window.addEventListener('DOMContentLoaded', function () {
                 alert(
                     URLObj.toFilename('file:///C:/')
                 );
-                
+
                 var url = URLObj.URL('http://example.com/');
-                
+
                 alert(url);
                 alert(url.scheme);
             }, errBack);
-            
+
         }, errBack);
-        
+
     } catch (e) {
         alert('page error: ' + e);
     }

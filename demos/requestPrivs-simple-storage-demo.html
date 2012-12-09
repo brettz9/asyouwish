@@ -5,7 +5,7 @@
 
 window.addEventListener('DOMContentLoaded', function () {
     'use strict';
-    
+
     var errBack = function (error) {
         document.getElementById('errs').
             appendChild(document.createTextNode('Error type: ' + error + '\n'));
@@ -14,14 +14,21 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     try {
-        
-        AsYouWish.requestPrivs('clipboard', function (clip) {
-            alert(
-                'In the clipboard:' + clip.get()
-            );
-            
+        AsYouWish.requestPrivs('simple-storage', function (ss) {
+            try {
+                if (!ss.storage.abc) {
+                    ss.storage.abc = 3131;
+                }
+                else {
+                    ss.storage.abc++;
+                }
+                alert(ss.storage.abc);
+            }
+            catch(e) {
+                alert(e.fileName + ' '+ e.lineNumber + e);
+            }
         }, errBack);
-        
+
     } catch (e) {
         alert('page error: ' + e);
     }
