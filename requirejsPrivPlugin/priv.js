@@ -2,9 +2,9 @@
 * requireJS plugin to allow privileged requests to be treated like regular ones upon approval of all requested items
 * @example
 require(['priv!api-utils/xhr', 'priv!api-utils/file'], function (xhrObj, fileObj) {
-    
+
 }, function (state, arg1, arg2) {
-    
+
 });
 */
 

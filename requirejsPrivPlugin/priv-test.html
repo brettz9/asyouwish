@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<title>RequireJS priv plugin demo</title>
+<script src="require.js"></script>
+<script>
+
+window.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+
+    var errBack = function (error) {
+        var args = error.args;
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error state: ' + error.state + ((args && args.length) ? ' with args ' + args.join(', ') : '') + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+
+    try {
+        require(['priv!file'], function (fileObj) {
+            alert(
+                fileObj.read('C:\\Program Files (x86)\\Mozilla Firefox\\application.ini')
+            );
+        }, errBack);
+
+    } catch (e) {
+        alert('page error: ' + e);
+    }
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+</body></html>

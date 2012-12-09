@@ -669,12 +669,14 @@ exports.main = function () {
                                 errBack('denied', 'callback');
                                 return;
                             }
-                            // We call on "this", so can execute removePrivs() on "this" within callback; should be safe since __exposedProps__ defined on this object
-                            //safeWindow.setTimeout.apply(this, [callback, 0].concat([].slice.call(arguments))); // To avoid subsequent notifications not appearing upon immediate chaining of privilege requests
+
+                            // To avoid subsequent notifications not appearing upon immediate chaining of privilege requests
                             var args = [].slice.call(arguments);
                             safeWindow.setTimeout(function () {
                                 callback.apply(null, new Spapi().wrap(args));
                             }, 0);
+                            // We were calling on "this", so can execute removePrivs() on "this" within callback; should be safe since __exposedProps__ defined on this object
+                            // issues? safeWindow.setTimeout.apply(this, [callback, 0].concat([].slice.call(arguments)));
                         };
                         wrapErrorFunc = function (callb) {
                             return function () {
