@@ -2,7 +2,9 @@ All files (including require.js which is copyright Dojo Foundation) are
 released under the MIT or new BSD license except 
 PopupNotifications.js and specialpowers.js (which are MPL 2.0).
 The file "Marvel Super Heroes Secret Wars Vol 1 11 p6.jpg" is a low
-resolution image of a pane out of a copyrighted comic from Marvel Comics.
+resolution image of a pane out of a copyrighted comic from
+Marvel Comics and is only included for illustrative purposes for the
+README.md
 
 ---------------------------------------------
 Copyright (C) 2012 Brett Zamir
