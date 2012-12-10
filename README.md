@@ -98,14 +98,18 @@ RequireJS also always requires an array, so I may settle on that
 for AsYouWish as well as perhaps harmonize the errBack argument
 format if not the name of the function itself.
 
-Further details (e.g., possible error types) should hopefully 
+Further details (e.g., possible error types) should hopefully
 be provided eventually on
 the [wiki](https://github.com/brettz9/asyouwish/wiki).
 
 Again, please do not get too comfortable with the current API, as details
-may change. I am strongly leaning toward the RequireJS API though
-I have to consider how to allow it to work with existing code (and
-ideally avoid the need for an additional file needing to be included).
+may change.
+
+I am strongly leaning toward the RequireJS API, so I recommend use
+of the plugin API for now; it should also be easier to keep that stable if the
+built-in API changes (e.g., to auto-inject our own require() function which
+supports the plugin and replicates existing functionality, avoiding the
+need for an additional file inclusion).
 
 Advantages over custom add-ons
 ==============================
@@ -145,8 +149,8 @@ hopefully accessible enough to easy introspection.
 Comparison to ActiveX / netscape.security.PrivilegeManager.enablePrivilege
 ==========================================================================
 
-This is similar to these technologies, but the aim is to be potentially 
-cross-browser (and 
+This is similar to these technologies, but the aim is to be potentially
+cross-browser (and
 enablePrivilege is [out the door](https://bugzilla.mozilla.org/show_bug.cgi?id=546848) now in Firefox).
 
 Comparison to "Molecule Man" in the Marvel Universe
