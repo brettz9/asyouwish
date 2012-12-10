@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<script>
+/*globals alert, document, window, AsYouWish*/
+
+window.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+
+    var errBack = function (error) {
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error type: ' + error + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+
+    try {
+        AsYouWish.requestPrivs('chrome', function (chrome) {
+            var str = '', fileUtils = {}, fileStr = 'C:\\Program Files (x86)\\Mozilla Firefox\\application.ini',
+                Components = chrome.components;
+            
+            // This approach did not work, as module apparently had trouble calling Components.Constructor
+            //Components.utils.import("resource://gre/modules/FileUtils.jsm", fileUtils);
+            // alert(fileUtils.FileUtils.File) // undefined
+            // var file = new fileUtils.FileUtils.File(fileStr);
+
+            var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+            file.initWithPath(fileStr);
+            
+            var fis = Components.classes["@mozilla.org/network/file-input-stream;1"].createInstance(Components.interfaces.nsIFileInputStream);
+            fis.init(file, -1, -1, 0);
+
+            var charset = /* Need to find out what the character encoding is. Using UTF-8 for this example: */ "UTF-8";
+            var is = Components.classes["@mozilla.org/intl/converter-input-stream;1"]
+                               .createInstance(Components.interfaces.nsIConverterInputStream);
+            // This assumes that fis is the nsIInputStream you want to read from
+            is.init(fis, charset, 1024, 0xFFFD);
+            is.QueryInterface(Components.interfaces.nsIUnicharLineInputStream);
+             
+            // if (is instanceof Components.interfaces.nsIUnicharLineInputStream) { // Addon didn't like this instanceof check
+            if (is.readLine) {
+              var line = {};
+              var cont;
+              do {
+                cont = is.readLine(line);
+
+                // Now you can do something with line.value
+                str += line.value + '\n';
+              } while (cont);
+            }
+            
+            alert(str + '::' + str.length);
+            
+        }, errBack);
+
+    } catch (e) {
+        alert('page error: ' + e);
+    }
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+</body></html>
