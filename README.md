@@ -216,7 +216,10 @@ handled by the browsers.
 
 3. Ability to distribute web utility apps which read or write to files, so
 web apps which, for example, build configuration files, do not need to
-force the user to copy paste from a text box.
+force the user to copy paste from a text box or depend on downloading
+and installing some bulky server-side language interpreter (possibly
+in a non-JavaScript language). AsYouWish might even be used to make a
+server!
 
 4. Last but not least, a Git-accessible client-side web-based
 IDE... (Firefox can execute files and processes, so if
