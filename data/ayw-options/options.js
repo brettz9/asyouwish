@@ -66,11 +66,25 @@ Object.defineProperty(HTMLSelectElement.prototype, 'selectedOptions', {get: func
 
 
 // UTILITIES
+
+function emptyElement (selector) {
+    var elem = $(selector);
+    while (elem.hasChildNodes()) {
+        elem.removeChild(elem.firstChild);
+    }
+}
+
+function insertOption (selectSelector, option) {
+    $(selectSelector).appendChild(option);
+}
+
 function makeOption(text, value) {
-        return value ?  
-            '<option value="' + value + '">' + text + '</option>' :
-            '<option>' + text + '</option>';
-    // return '<option title="' + value + '">' + value + '</option>'; // Didn't work
+    var option = document.createElement('option');
+    if (value) {
+        option.value = value;
+    }
+    option.title = option.text = text; // Adding tooltip doesn't work
+    return option;
 }
 function $ (sel) {
     var results = document.querySelectorAll(sel);
@@ -167,12 +181,13 @@ self.port.on('setAllowAllProtocols', function (setting) { // Originates from mai
     $('#allowAllProtocols').checked = setting;
 });
 self.port.on('setAllowedProtocols', function (protocols) { // Originates from main.js (on load)
-    $('#allowedProtocols').innerHTML = protocols.reduce(function (str, protocol) {
-        return str + makeOption(protocol); 
-    }, '');
+    emptyElement('#allowedProtocols');
+    protocols.forEach(function (protocol) {
+        insertOption('#allowedProtocols', makeOption(protocol));
+    });
 });
 self.port.on('addedAllowedProtocol', function (protocol) { // Originates from addAllowedProtocol
-    $('#allowedProtocols').innerHTML += makeOption(protocol);
+    insertOption('#allowedProtocols', makeOption(protocol));
 });
 self.port.on('removedAllowedProtocol', optionFromSelectByValueRemover('#allowedProtocols')); // Originates from removeAllowedProtocols
 self.port.on('addedCurrentProtocol', function (protocol) { // Originates from addCurrentProtocol
@@ -186,14 +201,16 @@ self.port.on('setAllowAllWebsites', function (setting) { // Originates from main
     $('#allowAllWebsites').checked = setting;
 });
 self.port.on('setAllowedWebsites', function (websites) { // Originates from main.js (on load)
-    $('#allowedWebsites').innerHTML = websites.reduce(function (str, website) {
-        return str + makeOption(website); 
-    }, '');
+    emptyElement('#allowedWebsites');
+    websites.forEach(function (website) {
+        insertOption('#allowedWebsites', makeOption(website));
+    });
 });
 self.port.on('setWebsitesApproved', function (websites, approvedPrivs) { // Originates from main.js (on load)
-    $('#websitesApproved').innerHTML = websites.map(function (website, i) {
-        return makeOption(website + ' (' + approvedPrivs[i].join(', ') + ')', website);
-    }).join('');
+    emptyElement('#websitesApproved');
+    websites.forEach(function (website, i) {
+        insertOption('#websitesApproved', makeOption(website + ' (' + approvedPrivs[i].join(', ') + ')', website));
+    });
 });
 
 // Activated (like a callback) by event initiated here
@@ -201,7 +218,7 @@ self.port.on('addedCurrentWebsite', function (website) { // Originates from allo
     $('#websiteToAllow').value = website;
 });
 self.port.on('addedAllowedWebsite', function (website) { // Originates from addAllowedWebsite
-    $('#allowedWebsites').innerHTML += makeOption(website);
+    insertOption('#allowedWebsites', makeOption(website));
 });
 self.port.on('removedAllowedWebsite', optionFromSelectByValueRemover('#allowedWebsites')); // Originates from removeAllowedWebsites
 self.port.on('removedWebsiteApproved', optionFromSelectByValueRemover('#websitesApproved')); // Originates from removeApprovedWebsites
@@ -210,9 +227,8 @@ self.port.on('removedWebsiteApproved', optionFromSelectByValueRemover('#websites
 self.port.on('setWebsiteApproved', function (websiteAndPrivs) { // Originates from main.js (dynamically)
     var website = websiteAndPrivs[0],
         approvedPrivs = websiteAndPrivs[1];
-    $('#websitesApproved').innerHTML += makeOption(website + ' (' + approvedPrivs.join(', ') + ')', website);
+    insertOption('#websitesApproved', makeOption(website + ' (' + approvedPrivs.join(', ') + ')', website));
 });
-
 
 
 }());
