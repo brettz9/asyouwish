@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<script>
+/*globals alert, document, window, AsYouWish*/
+
+window.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+
+    var errBack = function (error) {
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error type: ' + error + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+
+    try {
+        AsYouWish.requestPrivs('chrome', function (chrome) {
+            var str = '', fileUtils = {}, fileStr = 'C:\\Program Files (x86)\\Mozilla Firefox\\application.ini',
+                Components = chrome.components;
+            
+            // This approach did not work, as module apparently had trouble calling Components.Constructor
+            //Components.utils.import("resource://gre/modules/FileUtils.jsm", fileUtils);
+            // alert(fileUtils.FileUtils.File) // undefined
+            // var file = new fileUtils.FileUtils.File(fileStr);
+
+            var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
+            file.initWithPath(fileStr);
+
+            // First, get and initialize the converter
+            var converter = Components.classes["@mozilla.org/intl/scriptableunicodeconverter"]
+                                      .createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
+            converter.charset = /* The character encoding you want, using UTF-8 here */ "UTF-8";
+             
+            // This assumes that 'file' is a variable that contains the file you want to read, as an nsIFile
+            var fis = Components.classes["@mozilla.org/network/file-input-stream;1"]
+                                .createInstance(Components.interfaces.nsIFileInputStream);
+            fis.init(file, -1, -1, 0);
+             
+            var lis = fis.QueryInterface(Components.interfaces.nsILineInputStream);
+            var lineData = {};
+            var cont;
+            do {
+              cont = lis.readLine(lineData);
+              var line = converter.ConvertToUnicode(lineData.value);
+
+             // Now you can do something with line
+             str += line + '\n';
+
+            } while (cont);
+            fis.close();
+            
+            alert(str + '::' + str.length);
+            
+        }, errBack);
+
+    } catch (e) {
+        alert('page error: ' + e);
+    }
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+</body></html>
