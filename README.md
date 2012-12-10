@@ -214,7 +214,11 @@ the ability to use familiar and easier languages to innovate with
 user interfaces, while accessing the trickier and lower level plumbing
 handled by the browsers.
 
-3. Last but not least, a Git-accessible client-side web-based
+3. Ability to distribute web utility apps which read or write to files, so
+web apps which, for example, build configuration files, do not need to
+force the user to copy paste from a text box.
+
+4. Last but not least, a Git-accessible client-side web-based
 IDE... (Firefox can execute files and processes, so if
 nothing else, some kind of command-line interface).
 
