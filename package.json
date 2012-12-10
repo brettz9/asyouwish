@@ -1,0 +1,46 @@
+{
+    "preferences": [
+        {
+            "name": "allowedProtocols", 
+            "type": "string", 
+            "description": "Array (as string) of schemes besides https which are permitted to request privileges.", 
+            "value": "[]", 
+            "title": "Allowed protocols"
+        }, 
+        {
+            "name": "allowedWebsites", 
+            "type": "string", 
+            "description": "Array (as string) of websites which are explicitly permitted to request privileges.", 
+            "value": "[]", 
+            "title": "Allowed websites"
+        }, 
+        {
+            "name": "allowedWebsitesApproved", 
+            "type": "string", 
+            "description": "Array (as string) of websites which are explicitly permitted to request privileges and have done so, and user granted them.", 
+            "value": "[]", 
+            "title": "Allowed and approved websites"
+        }, 
+        {
+            "name": "allowAllProtocols", 
+            "type": "bool", 
+            "description": "Boolean of whether to allow privilege requests to be made from any protocol (and thus any website)", 
+            "value": false, 
+            "title": "Allow all protocols"
+        }, 
+        {
+            "name": "allowAllWebsites", 
+            "type": "bool", 
+            "description": "Boolean of whether to allow privilege requests to be made from all websites with approved protocols", 
+            "value": false, 
+            "title": "Allow all websites whose protocols are approved"
+        }
+    ], 
+    "name": "asyouwish", 
+    "license": "MPL 2.0/MIT/New BSD", 
+    "author": "Brett Zamir", 
+    "version": "0.1", 
+    "fullName": "As You Wish", 
+    "id": "jid1-9Ddk7IgYYaBCAw", 
+    "description": "Inject AsYouWish global with requestPrivs() method as a wrapper for require() of SDK modules (and in the future, possibly custom modules) to provide a uniform means to website authors of requesting escalated privileges from users."
+}
