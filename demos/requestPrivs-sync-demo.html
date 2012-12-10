@@ -2,7 +2,9 @@
 <html><head><meta charset="utf-8" />
 <script>
 
-// For sync, send postMessage to notify of approval?
+// Synchronous support may be deprecated at some point, so it is best not to rely on it for now.
+
+// Note to self: Todo for sync support: send postMessage to notify of approval?
 
 window.addEventListener('DOMContentLoaded', function () {
 
@@ -45,7 +47,12 @@ window.addEventListener('DOMContentLoaded', function () {
         alert(url);
         alert(url.scheme);
     }
-    runSync1();
+    try {
+        runSync1();
+    }
+    catch (e) {
+        alert('Page callback error' + e);
+    }
 });
 
 </script>

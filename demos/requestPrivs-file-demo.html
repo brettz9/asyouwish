@@ -14,11 +14,15 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     try {
-
         AsYouWish.requestPrivs('file', function (fileObj) {
-            alert(
-                fileObj.read('C:\\Program Files (x86)\\Mozilla Firefox\\application.ini')
-            );
+            try {
+                alert(
+                    fileObj.read('C:\\Program Files (x86)\\Mozilla Firefox\\application.ini')
+                );
+            }
+            catch (e) {
+                alert('Page callback error' + e);
+            }
         }, errBack);
 
     } catch (e) {

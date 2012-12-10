@@ -21,22 +21,28 @@ setInterval(function () {
     try {
 
         AsYouWish.requestPrivs(['xhr', 'url'], function (xhr, URLObj) {
-            var x = new xhr.XMLHttpRequest();
-            x.open('GET', 'http://mozilla.org/', false);
-            x.send(null);
-            alert(x.responseText);
+            try {
+                var x = new xhr.XMLHttpRequest();
+                x.open('GET', 'http://mozilla.org/', false);
+                x.send(null);
+                alert(x.responseText);
 
-            alert(
-                URLObj.fromFilename('C:\\')
-            );
-            alert(
-                URLObj.toFilename('file:///C:/')
-            );
+                alert(
+                    URLObj.fromFilename('C:\\')
+                );
+                alert(
+                    URLObj.toFilename('file:///C:/')
+                );
 
-            var url = URLObj.URL('http://example.com/');
+                var url = URLObj.URL('http://example.com/');
 
-            alert(url);
-            alert(url.scheme);
+                alert(url);
+                alert(url.scheme);
+
+            }
+            catch (e) {
+                alert('Page callback error' + e);
+            }
 
         }, errBack);
 

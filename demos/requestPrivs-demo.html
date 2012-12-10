@@ -15,25 +15,37 @@ window.addEventListener('DOMContentLoaded', function () {
     try {
 
         AsYouWish.requestPrivs('xhr', function (xhr) {
-            var x = new xhr.XMLHttpRequest();
-            x.open('GET', 'http://mozilla.org/', false);
-            x.send(null);
-            alert(x.responseText);
+            try {
+                var x = new xhr.XMLHttpRequest();
+                x.open('GET', 'http://mozilla.org/', false);
+                x.send(null);
+                alert(x.responseText);
 
-            // We don't want to trigger request twice, so we wait until callback returns.
-            AsYouWish.requestPrivs('url', function (URLObj) {
-                alert(
-                    URLObj.fromFilename('C:\\')
-                );
-                alert(
-                    URLObj.toFilename('file:///C:/')
-                );
 
-                var url = URLObj.URL('http://example.com/');
+                // We don't want to trigger request twice, so we wait until callback returns.
+                AsYouWish.requestPrivs('url', function (URLObj) {
+                    try {
+                        alert(
+                            URLObj.fromFilename('C:\\')
+                        );
+                        alert(
+                            URLObj.toFilename('file:///C:/')
+                        );
 
-                alert(url);
-                alert(url.scheme);
-            }, errBack);
+                        var url = URLObj.URL('http://example.com/');
+
+                        alert(url);
+                        alert(url.scheme);
+                    }
+                    catch (e) {
+                        alert('Page callback error 2' + e);
+                    }
+                }, errBack);
+
+            }
+            catch (e) {
+                alert('Page callback error 1' + e);
+            }
 
         }, errBack);
 

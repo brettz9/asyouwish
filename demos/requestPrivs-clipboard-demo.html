@@ -14,12 +14,15 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     try {
-
         AsYouWish.requestPrivs('clipboard', function (clip) {
-            alert(
-                'In the clipboard:' + clip.get()
-            );
-
+            try {
+                alert(
+                    'In the clipboard:' + clip.get()
+                );
+            }
+            catch (e) {
+                alert('Page callback error' + e);
+            }
         }, errBack);
 
     } catch (e) {
