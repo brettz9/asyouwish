@@ -8,16 +8,14 @@ privileges to be made from regular HTML.
 to your data (not only browser data) so don't install--especially at this
 time--unless you are willing to take the risks. It is hoped this may go
 through a thorough security vetting as part of the process to get the
-add-on accepted at [AMO](https://addons.mozilla.org/).***
+add-on accepted at [AMO](https://addons.mozilla.org/). The current
+way this add-on may be tested is either thorugh the built XPI file
+included with the source, or by using the SDK cfx tool.***
 
 Obviously allowing privileges may be dangerous if used by a malicious
 site (as with addons), so there needs to be a way to inform the user that
 there is a request and allow them to refuse or accept. AsYouWish tries
-to provide this (the latest beta is also available for testing via the Mozilla
-[Addon Builder](https://builder.addons.mozilla.org/package/164286/latest/)
-site, though I have to emphasize again that this has not been reviewed
-for security (and it is missing localization information, including
-detailed warnings)!
+to provide this.
 
 Access is granted to specific URLs, not including the query string/hash.
 Privileges do not apply site or even folder wide to allow a greater sense
