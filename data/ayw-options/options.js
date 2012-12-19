@@ -87,7 +87,7 @@ function makeOption(text, value) {
     if (value) {
         option.value = value;
     }
-    option.title = option.text = text; // Adding tooltip doesn't work
+    option.title = option.text = text; // Adding tooltip without CSS doesn't work
     return option;
 }
 

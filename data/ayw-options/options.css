@@ -13,12 +13,19 @@ select {
 .focus {text-align:center;display:block;}
 
 /**
-* Allow enough space to view whole URL inside select menus since tooltips not working here
+* Allow enough space to view whole URL inside select menus since default tooltips not working here
 */
-select:hover {
-    position:fixed;
-    margin-left: -350px;
-    max-width: 1200px !important;
+option[title]:hover:before {
+  content: attr(title);
+  padding:5px 6px;
+  margin-top: 20px;
+  margin-left: 30px;
+  max-width:1200px !important;
+  border:1px solid #cccccc;
+  background:lightyellow;
+  color:#555555;
+  display:inline;
+  position:absolute;
 }
 
 /**
