@@ -18,7 +18,9 @@ window.addEventListener('DOMContentLoaded', function () {
             try {
                 for (var key in tabs) {
                     var tab = tabs[key];
-                    
+                    if (!tab.url) {
+                        continue;
+                    }
                     var a = document.createElement('a');
                     a.href = tab.url;
                     a.appendChild(document.createTextNode(tab.title));
