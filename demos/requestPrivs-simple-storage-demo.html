@@ -23,6 +23,16 @@ window.addEventListener('DOMContentLoaded', function () {
                     ss.storage.abc++;
                 }
                 alert(ss.storage.abc);
+
+                AsYouWish.requestPrivs('x-namespaced-simple-storage-http://brett-zamir.me', function (nss) {
+                    if (!nss.def) {
+                        nss.def = 5;
+                    }
+                    else {
+                        nss.def++;
+                    }
+                    alert(nss.def);
+                });
             }
             catch(e) {
                 alert(e.fileName + ' '+ e.lineNumber + e);

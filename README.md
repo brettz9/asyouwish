@@ -72,6 +72,16 @@ currently also possible, though this Mozilla-oriented API may be removed
 in the future, especially if existing functionality becomes available through
 other means.
 
+The following custom API has also been added:
+* **x-namespaced-simple-storage**: Simple storage applied to a particular
+namespaced subobject; allows sites to only request privileges for shared
+storage on a particular namespace without needing any particular site to
+be the sole owner/manager of the data.
+
+(Custom APIs should normally only be added if they offer some functionality
+that is particularly suited to the web environment; otherwise, we will defer to
+the SDK APIs.)
+
 Once the initial testing phase is complete (now maybe "beta" for functionality,
 though "alpha" as far as potential for security risks since I am not so familiar
 with the security model in Firefox), it should be easy to add more low-level
