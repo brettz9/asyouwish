@@ -19,7 +19,7 @@ option[title]:hover:before {
   content: attr(title);
   padding:5px 6px;
   margin-top: 20px;
-  margin-left: 30px;
+  margin-left: -230px;
   max-width:1200px !important;
   border:1px solid #cccccc;
   background:lightyellow;

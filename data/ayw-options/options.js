@@ -186,10 +186,7 @@ self.port.on('setAllowedProtocols', function (protocols) { // Originates from ma
         insertOption('#allowedProtocols', makeOption(protocol));
     });
 });
-self.port.on('addedAllowedProtocol', function (protocol) { // Originates from addAllowedProtocol
-    insertOption('#allowedProtocols', makeOption(protocol));
-});
-self.port.on('removedAllowedProtocol', optionFromSelectByValueRemover('#allowedProtocols')); // Originates from removeAllowedProtocols
+
 self.port.on('addedCurrentProtocol', function (protocol) { // Originates from addCurrentProtocol
     $('#protocolToAllow').value = protocol;
 });
@@ -217,11 +214,6 @@ self.port.on('setWebsitesApproved', function (websites, approvedPrivs) { // Orig
 self.port.on('addedCurrentWebsite', function (website) { // Originates from allowWebsite
     $('#websiteToAllow').value = website;
 });
-self.port.on('addedAllowedWebsite', function (website) { // Originates from addAllowedWebsite
-    insertOption('#allowedWebsites', makeOption(website));
-});
-self.port.on('removedAllowedWebsite', optionFromSelectByValueRemover('#allowedWebsites')); // Originates from removeAllowedWebsites
-self.port.on('removedWebsiteApproved', optionFromSelectByValueRemover('#websitesApproved')); // Originates from removeApprovedWebsites
 
 // Activated from main.js
 self.port.on('setWebsiteApproved', function (websiteAndPrivs) { // Originates from main.js (dynamically)
