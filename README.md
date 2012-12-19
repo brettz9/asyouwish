@@ -13,10 +13,11 @@ add-on accepted at [AMO](https://addons.mozilla.org/).***
 Obviously allowing privileges may be dangerous if used by a malicious
 site (as with addons), so there needs to be a way to inform the user that
 there is a request and allow them to refuse or accept. AsYouWish tries
-to provide this (the beta is also available for testing via the Mozilla
+to provide this (the latest beta is also available for testing via the Mozilla
 [Addon Builder](https://builder.addons.mozilla.org/package/164286/latest/)
 site, though I have to emphasize again that this has not been reviewed
-for security!
+for security (and it is missing localization information, including
+detailed warnings)!
 
 Access is granted to specific URLs, not including the query string/hash.
 Privileges do not apply site or even folder wide to allow a greater sense
@@ -26,20 +27,56 @@ which may seek their own privileges.
 Exposed privileges
 ====================
 
-Requests at this point can be for:
-* reading or writing files on the user's desktop
-* accessing the clipboard
-* making cross-domain browser requests (accessing a remote website
+At present, all [high-level APIs](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/)
+are exposed, as well as the following low-level APIs: io/file and net/xhr.
+
+Requests at this point can therefore be made of the user for:
+* **clipboard**: Accessing or setting the clipboard
+* **context-menu**: Accessing or adding to the browser's own context menu
+* **file**: Reading, removing, or writing files and directories on the user's desktop
+* **hotkeys**: Creating new browser-wide keyboard shortcuts
+* **page-mod**: Modifying any web content the user loads in the browser
+* **page-worker**: Performing hidden loads of cross-domain web content
+* **panel**: Loading HTML into a dialog
+* **passwords**: Reading or removing user's site passwords or store new passwords
+* **private-browsing**: Detecting of when user is in private browsing mode.
+* **selection**: Accessing user highlighted selections made within the browser
+* **simple-storage**: Accessing SHARED simple storage to store data accessible to any
+other AsYouWish-enabled website approved by the user without needing one site to act
+as gate-keeper of the data.
+* **tabs**: Listening to changes in user tabs, controlling tabs, opening new tabs, or accessing any other opened browser tab content
+* **widget**: Creating an addon user interface (widget) to be hosted in the add-on bar
+* **windows**: Listening to changes in user's browser tabs, controlling tabs, opening new tabs, or accessing any other opened browser tab content
+* **xhr** or **request**: Making cross-domain browser requests (accessing a remote website
 using the user's credentials)
-* access to SHARED simple storage to store data accessible to any
-other AsYouWish website approved by the user.
-* URL utilities
- 
+
+The following, apparently fully safe libraries made available by the Addons SDK
+and which can perhaps be allowed without permissions in the future (if not standardized):
+* **url**: URL parsing/retrieval utilities
+* **base64**: Character-set-aware base64 encoding and decoding
+* **querystring**: Serializing/deserializing of URL query strings
+
+The following other high-level APIs have currently been allowed, but they are
+apparently of limited to no use because they are either already available to
+regular websites or they are specific to the AsYouWish addon.
+* **notifications**: Creating Toaster-style notifications; use Web Notifications instead?
+* **console**: Accessing addon console object (including 'exception' method)
+* **addon-page**: Opening AsYouWish's data/index.html in a bare type of tab (doesn't exist currenty)
+* **l10n**: Acccesing AsYouWish's localization strings
+* **self**: Accessing data of the AsYouWish addon
+* **simple-prefs**: Storing and setting non-site-specific preferences for AsYouWish if stored using this preference
+* **timers**: Accessing web-like timing
+
+Requiring the chrome object (for access to most XPCOM functionality) is
+currently also possible, though this Mozilla-oriented API may be removed
+in the future, especially if existing functionality becomes available through
+other means.
+
 Once the initial testing phase is complete (now maybe "beta" for functionality,
 though "alpha" as far as potential for security risks since I am not so familiar
-with the security model in Firefox), it should be easy to add more APIs,
-mostly just needing some warning text for users which adequately warns
-them of risks to that API.
+with the security model in Firefox), it should be easy to add more low-level
+APIs (where relevant), mostly just needing some warning text for users which
+adequately warns them of risks to that API.
 
 API
 ===
@@ -77,6 +114,16 @@ The following will remove privileges for the current site.
 AsYouWish.removePrivs(); // Only usable on current site
 ```
 
+To get an object whose keys indicate all available privileges,
+and whose alues are the localized text warnings that will be
+shown to the user, the following is currently exposed for
+debugging or detection purposes (but may be removed
+or changed in the future):
+
+```javascript
+AsYouWish.getDefaultPrivs();
+```
+
 Using the provided priv plugin for RequireJS (which also
 of course requires RequireJS itself), the API is similar,
 with a difference with errors and a need to prefix each
@@ -87,7 +134,7 @@ module inclusions as well which do not require a prefix):
 ```javascript
 require(['priv!xhr', 'priv!url'], function (xhr, URLObj) {
 
-    // ...
+    // e.g., same as above...
 
 }, function (errorObj) {
     alert(errorObj.state + '::' + errorObj.args);
@@ -144,7 +191,8 @@ Comparison to Plugins like Flash
 
 I'm hoping this can really turn into an API agreed on by the browsers so
 available by default. The add-on itself is written in JavaScript, so
-hopefully accessible enough to easy introspection.
+hopefully accessible enough to easy introspection. AsYouWish has no
+need for special file formats, HTML object tags, etc.
 
 Comparison to ActiveX / netscape.security.PrivilegeManager.enablePrivilege
 ==========================================================================
@@ -152,6 +200,40 @@ Comparison to ActiveX / netscape.security.PrivilegeManager.enablePrivilege
 This is similar to these technologies, but the aim is to be potentially
 cross-browser (and
 enablePrivilege is [out the door](https://bugzilla.mozilla.org/show_bug.cgi?id=546848) now in Firefox).
+
+Comparison to [Microsoft HTA](http://en.wikipedia.org/wiki/HTML_Application) (HTML Application) files
+===========================================
+
+While the concepts are similar, AsYouWish differs in these regards:
+1. HTA files, when run from the browser, require user permission before
+loading; AsYouWish allows web applications to function normally while
+conditionally requesting support for higher privileges without being
+necessarily dependent on them. Admittedly, however, a dedicated
+content-type/file extension may be useful in the future toward promoting
+usage of the synchronous API.
+2. There is no means to execute AsYouWish with exe privileges unless
+the user has approved, though user may allow the "file" protocol to
+execute AsYouWish-enabled web applications locally.
+3. Although there is no `<HTA:application>` element for declaratively
+defining within HTML a means of accessing the "add-on", the user
+may pin the AsYouWish-enabled site as an application tab (a normal
+browser feature), and the developer may use the "widget" API to make
+the application accessible via the add-on bar (though the contentScript
+may need to be expressed as an eval-able string currently since it may
+otherwise expect the script files to be stored within the AsYouWish
+addon). Note, however, that adding to the add-on bar will not be available
+on  browser restart; there is currently no means in AsYouWish allowed
+for genuine add-on registration (i.e., to appear within the Addons dialog
+and auto-load on browser restart), though it is planned for the future.
+4. HTA files apparently provide, once the user has permitted their
+execution, full access to privileged APIs such as `ActiveXObject`,
+`execCommand`, and `window.clipboardData`. While it should be
+possible to emulate IE in this regard, I felt it was not worthwhile given
+the proprietary nature of ActiveXObject and its arguments, the
+lack of a uniform privileged API, and the apparent lack of (easy?)
+extensibility of IE itself to support the APIs such as are being added
+now to Firefox. The same APIs would also not be mirrorable within
+regular websites using AsYouWish's asynchronous API.
 
 Comparison to "Molecule Man" in the Marvel Universe
 ===================================================
@@ -188,7 +270,7 @@ websites in perhaps a hidden window, if approved by the user on
 browser start-up.
 3. Blacklists might be a nice addition.
 4. Localization (i18n is mostly done)
-5. And of course expose more APIs....
+5. And expose more low-level APIs....
 
 Some additional intended use cases
 ==================================
@@ -207,7 +289,7 @@ a neutral and familiar way.
 2. I also like the idea of a browser-in-a-browser which could theoretically
 be done with privileges and shared databases (others have done a
 browser-in-browser using the Flash plugin, but I'd like to see it work
-without plugins--I'm hoping Firefox may eventually come around to
+without plugins--I'm hoping Mozilla may eventually come around to
 including AsYouWish by default since it now uses a whitelist, etc. by default).
 The advantage I see to this is that it may allow normal web developers
 the ability to use familiar and easier languages to innovate with

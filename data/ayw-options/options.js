@@ -66,6 +66,10 @@ Object.defineProperty(HTMLSelectElement.prototype, 'selectedOptions', {get: func
 
 
 // UTILITIES
+function $ (sel) {
+    var results = document.querySelectorAll(sel);
+    return results.length === 1 ? results[0] : results;
+}
 
 function emptyElement (selector) {
     var elem = $(selector);
@@ -86,10 +90,6 @@ function makeOption(text, value) {
     option.title = option.text = text; // Adding tooltip doesn't work
     return option;
 }
-function $ (sel) {
-    var results = document.querySelectorAll(sel);
-    return results.length === 1 ? results[0] : results;
-}
 
 function optionFromSelectByValueRemover (sel) {
     return function (value) {
@@ -108,8 +108,8 @@ $('#addCurrentProtocol').addEventListener('click', function (e) {
     self.port.emit('addCurrentProtocol'); // Response will be in addedCurrentProtocol
 });
 $('#addAllowedProtocol').addEventListener('click', function (e) {
-    var protocol = $('#protocolToAllow').value.replace(/\s+/, '');
-    if (protocol && protocol !== 'https') { // No need to add
+    var protocol = $('#protocolToAllow').value.replace(/\s+/, '').replace(/:(?:\/\/)?$/, '');
+    if (protocol) { // No need to add
         self.port.emit('addAllowedProtocol', protocol); // Response will be in addedAllowedProtocol
     }
 });
@@ -137,7 +137,7 @@ $('#addCurrentWebsite').addEventListener('click', function (e) {
 });
 $('#addAllowedWebsite').addEventListener('click', function (e) {
     var website = $('#websiteToAllow').value.replace(/\s+/, '');
-    if (website && website !== 'https') {
+    if (website) {
         self.port.emit('addAllowedWebsite', website); // Response will be in addedAllowedWebsite
     }
 });
