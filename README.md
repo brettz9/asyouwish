@@ -269,7 +269,7 @@ restart). In addition, or instead, I'd like to allow websites to at least launch
 websites in perhaps a hidden window, if approved by the user on
 browser start-up.
 3. Blacklists might be a nice addition.
-4. Localization (i18n is mostly done)
+4. Localization (i18n is done)
 5. And expose more low-level APIs....
 
 Some additional intended use cases
