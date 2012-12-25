@@ -32,6 +32,10 @@ window.addEventListener('DOMContentLoaded', function () {
                                           .createInstance(Components.interfaces.nsIScriptableUnicodeConverter);
                 converter.charset = /* The character encoding you want, using UTF-8 here */ "UTF-8";
                  
+                 // alert(Components.interfaces.nsIScriptableUnicodeConverter); // nsIScriptableUnicodeConverter
+                 // alert(typeof converter); // object
+                 // alert(converter instanceof Components.interfaces.nsIScriptableUnicodeConverter); // TypeError: invalid 'instanceof' operand ({wrappedObject:({})})
+
                 // This assumes that 'file' is a variable that contains the file you want to read, as an nsIFile
                 var fis = Components.classes["@mozilla.org/network/file-input-stream;1"]
                                     .createInstance(Components.interfaces.nsIFileInputStream);
