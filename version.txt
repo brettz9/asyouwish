@@ -1,0 +1,22 @@
+For the future: "Addons" version:
+* Support restartless "addons" including ability to access privileges
+
+Version notes:
+
+0.3
+* SDK-interaction Bug fix: Adapt SDK code to allow widget API to accept wrapped panels
+* Minor bug fix: Make "current" options empty on panel open
+* Feature: Expose remaining low-level APIs
+* Improvement: Retry notification in case two attempts made to open at same time
+
+0.2
+* Bug fix: Replace ugly select option expansion with CSS-based tooltip
+* Feature: Add and wrap remaining high level APIs and add own custom x-namespaced-simple-storage API (a subset of simple-storage)
+* Feature: add getDefautPrivs() API for introspection on possible privs
+* Improvement: Listen to all option changes, e.g., from Firefox's own dialog
+* Improvement: Remove hard-coding of https for those who wish to disallow
+* Improvement:i18n options HTML file
+* Improvement: Add try-catch within callbacks in demos
+
+0.1
+* Initial release
