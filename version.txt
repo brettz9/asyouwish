@@ -1,5 +1,6 @@
 For the future: "Addons" version:
 * Support restartless "addons" including ability to access privileges
+* Force allow all protocols to also allow all websites, and disabling of allow all websites to disable allow all protocols (radio button-like behavior)
 
 Version notes:
 
