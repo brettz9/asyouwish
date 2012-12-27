@@ -1,8 +1,10 @@
 For the future: "Addons" version:
 * Support restartless "addons" including ability to access privileges
-* Force allow all protocols to also allow all websites, and disabling of allow all websites to disable allow all protocols (radio button-like behavior)
 
 Version notes:
+
+0.3.1
+* Force allow all protocols to also allow all websites, and disabling of allow all websites to disable allow all protocols (radio button-like behavior)
 
 0.3
 * SDK-interaction Bug fix: Adapt SDK code to allow widget API to accept wrapped panels

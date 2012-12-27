@@ -389,7 +389,7 @@ the browser is the browser, and never the twain shall meet".
 copyrighted work) and thanks to the
 [Marvel Database](http://forums.marveldatabase.com) for scanning the image!)
 
-![Molecule Man being given his insights](https://raw.github.com/brettz9/asyouwish/master/Marvel%20Super%20Heroes%20Secret%20Wars%20Vol%201%2011%20p6.jpg "Molecule Man gaining insights")
+![Molecule Man being given his insights](https://raw.github.com/brettz9/asyouwish/master/copyrighted/Marvel%20Super%20Heroes%20Secret%20Wars%20Vol%201%2011%20p6.jpg "Molecule Man gaining insights")
 
 Addons
 ======
