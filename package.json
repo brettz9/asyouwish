@@ -36,11 +36,11 @@
             "title": "Allow all websites whose protocols are approved"
         },
         {
-            "name": "addons",
+            "name": "addonWebsites",
             "type": "string",
             "description": "Object (as string) whose keys are the websites which are permitted to launch in a hidden window on browser restart with privileges and whose values are meta-data about the 'addon'.",
             "value": "{\\\"http://127.0.0.1/ayw/demos/requestPrivs-addon-demo.html\\\":{}",
-            "title": "Addons"
+            "title": "'Addon' websites"
         }
     ],
     "name": "asyouwish",

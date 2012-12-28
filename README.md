@@ -406,7 +406,7 @@ copyrighted work) and thanks to the
 Addons
 ======
 Though planned for version 0.4, there is no easy way currently to register
-sites as addons (unless adding XPI files which can be done without
+sites as 'addon' websites (unless adding XPI files which can be done without
 AsYouWish).
 
 In the meantime, one might use the ["tabs" module](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/tabs.html#pin%28%29)
@@ -427,10 +427,10 @@ restart) without an XPI file and without needing to write one's own
 complex loading code.
 3. Blacklists might be a nice addition when whitelists are off.
 4. Add localizations (i18n is done)
-5. Addons store(s): let sites register themselves as stores, integrating
+5. Addon website store(s): let sites register themselves as stores, integrating
 with receipts, licenses, etc., and allowing, e.g., searching and display of
-featured "addons" within AsYouWish's "addons" manager via an open
-API (and not limited to even just one store at a time) and perhaps
+featured "addon" websites within AsYouWish's "addon" websites manager via an
+open API (and not limited to even just one store at a time) and perhaps
 allowing a whole site to be deemed trustworthy upon
 initial permissions if the user agrees to permit such a store.
 6. Allow a means of forking a website which indicated its content could

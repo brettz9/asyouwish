@@ -178,18 +178,16 @@ $('#removeApprovedWebsites').addEventListener('click', function (e) {
     );
 });
 
-// WORKER RELATED
-
-/*$('#removeWorker').addEventListener('click', function (e) {
+$('#removeAddonWebsites').addEventListener('click', function (e) {
     self.port.emit(
-        'removeAllowedWebsites', // Responses will be in removedAllowedWebsite
-        Array.from($('#allowedWebsites').options).filter(function (option) {
+        'removeAddonWebsites', // Responses will be in removedAllowedWebsite
+        Array.from($('#addonWebsites').options).filter(function (option) {
             return option.selected;
         }).map(function (option) {
             return option.value;
         })
     );
-});*/
+});
 
 
 
@@ -229,6 +227,12 @@ self.port.on('setWebsitesApproved', function (websites, approvedPrivs) { // Orig
         insertOption('#websitesApproved', makeOption(website + ' (' + approvedPrivs[i].join(', ') + ')', website));
     });
 });
+self.port.on('setAddonWebsites', function (websites, approvedPrivs) { // Originates from main.js (dynamically)
+    emptyElement('#addonWebsites');
+    websites.forEach(function (website, i) {
+        insertOption('#addonWebsites', makeOption(website + ' (' + approvedPrivs[i].join(', ') + ')', website));
+    });
+});
 
 // Activated (like a callback) by event initiated here
 self.port.on('addedCurrentWebsite', function (website) { // Originates from addCurrentWebsite
@@ -236,13 +240,6 @@ self.port.on('addedCurrentWebsite', function (website) { // Originates from addC
 });
 self.port.on('addedLocalWebsite', function (website) { // Originates from addLocalWebsite
     $('#websiteToAllow').value = website;
-});
-
-// Activated from main.js
-self.port.on('setWebsiteApproved', function (websiteAndPrivs) { // Originates from main.js (dynamically)
-    var website = websiteAndPrivs[0],
-        approvedPrivs = websiteAndPrivs[1];
-    insertOption('#websitesApproved', makeOption(website + ' (' + approvedPrivs.join(', ') + ')', website));
 });
 
 
