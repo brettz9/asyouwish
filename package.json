@@ -34,12 +34,19 @@
             "description": "Boolean of whether to allow privilege requests to be made from all websites with approved protocols",
             "value": false,
             "title": "Allow all websites whose protocols are approved"
+        },
+        {
+            "name": "addons",
+            "type": "string",
+            "description": "Object (as string) whose keys are the websites which are permitted to launch in a hidden window on browser restart with privileges and whose values are meta-data about the 'addon'.",
+            "value": "{\\\"http://127.0.0.1/ayw/demos/requestPrivs-addon-demo.html\\\":{}",
+            "title": "Addons"
         }
     ],
     "name": "asyouwish",
     "license": "MPL 2.0/MIT/New BSD",
     "author": "Brett Zamir",
-    "version": "0.3.1",
+    "version": "0.4",
     "fullName": "As You Wish",
     "id": "jid1-9Ddk7IgYYaBCAw",
     "description": "Inject AsYouWish global with requestPrivs() method as a wrapper for require() of SDK modules (and in the future, possibly custom modules) to provide a uniform means to website authors of requesting escalated privileges from users."

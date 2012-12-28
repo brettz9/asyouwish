@@ -1,5 +1,5 @@
 For the future: "Addons" version:
-* Support restartless "addons" including ability to access privileges
+* Support restartless "addons" (URLs invoked at startup in hidden DOM windows) including ability to request and access privileges
 
 Version notes:
 

@@ -1,8 +1,9 @@
 /*
 General styling
 */
-body {width:885px;}
-fieldset {float:left;max-width:30%}
+body {width:1235px;}
+input[type=file] {display:none;}
+fieldset:not(.internal) {float:left;max-width:22%}
 label {font-weight:bold;display:block;}
 select {
     min-width: 100px;
@@ -15,7 +16,7 @@ select {
 /**
 * Allow enough space to view whole URL inside select menus since default tooltips not working here
 */
-option[title]:hover:before {
+*[title]:hover:before {
   content: attr(title);
   padding:5px 6px;
   margin-top: 20px;

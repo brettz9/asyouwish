@@ -12,32 +12,36 @@
             <label>Allow privilege requests<br />from all protocols<br /><span class="dangerous">(DANGEROUS)</span>
                 <input type="checkbox" id="allowAllProtocols"/>
             </label>
-            <br /><br />
+            <br />
             <label>Protocol to allow<br /><span class="dangerous">(DANGEROUS)</span>:<br /> 
-                <input id="protocolToAllow" type="text" size="10" />
+                <input id="protocolToAllow" type="text" size="15" />
                 <button id="addAllowedProtocol">Add</button>
                 <button id="addCurrentProtocol">Grab current website's protocol</button>
             </label>
             <br />
             <label>Allowed protocols:<br />
-                <select id="allowedProtocols" multiple="multiple" size="3">
-                </select>
+                <select id="allowedProtocols" multiple="multiple" size="8"></select>
             </label>
             <br />
             <button id="removeAllowedProtocols">Remove selected allowed protocols</button>
         </div>
     </fieldset>
-    <fieldset><legend>Websites from which privileges may be requested</legend><br />
+    <fieldset><legend>Websites from which privileges may be requested</legend>
         <div class="focus">
             <label>Allow privilege requests from all websites whose protocols are allowed (only HTTPS by default)<br />
                 <span class="risky">(RISKY)</span><input type="checkbox" id="allowAllWebsites"/>
             </label>
             <br />
-            <label>Website to allow (<span class="risky">potentially risky</span> if site not trustworthy or properly secured): 
-                <input id="websiteToAllow" type="url" size="25" />
-                <button id="addAllowedWebsite">Add</button>
+            <fieldset class="internal">
+                <label>Website to allow (<span class="risky">potentially risky</span> if site not trustworthy or properly secured): 
+                    <input id="websiteToAllow" type="url" size="25" />
+                </label>
                 <button id="addCurrentWebsite">Grab current website</button>
-            </label>
+                <button id="addLocalWebsite">Select local file</button>
+                <hr />
+                <button id="addAllowedWebsite" title="Will only be executed when site is visited (though still potentially dangerous)">Allow</button>
+                <button id="addAddonWebsite" title="Requires app to work when executed in hidden window on each restart">Allow as "addon"</button>
+            </fieldset>
             <br />
             <label>Allowed websites:<br />
                 <select id="allowedWebsites" multiple="multiple" size="3"></select>
@@ -49,10 +53,19 @@
     <fieldset><legend>Websites from which specific privileges have already been requested by the site and approved</legend>
         <div class="focus">
             <label>Allowed and approved websites:<br />
-                <select id="websitesApproved" multiple="multiple" size="16"></select>
+                <select id="websitesApproved" multiple="multiple" size="20"></select>
             </label>
             <br />
             <button id="removeApprovedWebsites">Remove selected approved websites</button>
+        </div>
+    </fieldset>
+    <fieldset><legend>Websites which will be executed (in hidden windows) on browser restart</legend><br />
+        <div class="focus">
+            <label>"Addon" websites:<br />
+                <select id="addonWebsites" multiple="multiple" size="20"></select>
+            </label>
+            <br />
+            <button id="removeAddonWebsites">Remove selected "addon" websites</button>
         </div>
     </fieldset>
 </body>

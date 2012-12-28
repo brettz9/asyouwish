@@ -135,6 +135,11 @@ $('#allowAllProtocols').addEventListener('click', function (e) {
 $('#addCurrentWebsite').addEventListener('click', function (e) {
     self.port.emit('addCurrentWebsite'); // Response will be in addedCurrentWebsite
 });
+$('#addLocalWebsite').addEventListener('click', function (e) { // Response will be in addedLocalWebsite
+    self.port.emit('addLocalWebsite');
+});
+
+
 $('#addAllowedWebsite').addEventListener('click', function (e) {
     var website = $('#websiteToAllow').value.replace(/\s+/, '');
     if (website) {
@@ -172,6 +177,21 @@ $('#removeApprovedWebsites').addEventListener('click', function (e) {
         })
     );
 });
+
+// WORKER RELATED
+
+/*$('#removeWorker').addEventListener('click', function (e) {
+    self.port.emit(
+        'removeAllowedWebsites', // Responses will be in removedAllowedWebsite
+        Array.from($('#allowedWebsites').options).filter(function (option) {
+            return option.selected;
+        }).map(function (option) {
+            return option.value;
+        })
+    );
+});*/
+
+
 
 // EXTERNAL EVENTS
 
@@ -211,7 +231,10 @@ self.port.on('setWebsitesApproved', function (websites, approvedPrivs) { // Orig
 });
 
 // Activated (like a callback) by event initiated here
-self.port.on('addedCurrentWebsite', function (website) { // Originates from allowWebsite
+self.port.on('addedCurrentWebsite', function (website) { // Originates from addCurrentWebsite
+    $('#websiteToAllow').value = website;
+});
+self.port.on('addedLocalWebsite', function (website) { // Originates from addLocalWebsite
     $('#websiteToAllow').value = website;
 });
 
