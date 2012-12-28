@@ -434,7 +434,8 @@ API (and not limited to even just one store at a time) and perhaps
 allowing a whole site to be deemed trustworthy upon
 initial permissions if the user agrees to permit such a store.
 6. Allow a means of forking a website which indicated its content could
-be installed under given licenses.
+be installed under given licenses (or even if not, could allow client-side
+forking).
 
 Some additional intended use cases
 ==================================
