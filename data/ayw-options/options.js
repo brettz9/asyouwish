@@ -193,7 +193,7 @@ $('#removeAddonWebsites').addEventListener('click', function (e) {
 $('#addAddonWebsite').addEventListener('click', function (e) {
     var website = $('#websiteToAllow').value.replace(/\s+/, '');
     if (website) {
-        self.port.emit('addAddonWebsite', website); // Response will be in addedAllowedWebsite
+        self.port.emit('addAddonWebsite', website); // Response will be in setAddonWebsites
     }
 });
 
@@ -236,16 +236,16 @@ self.port.on('setWebsitesApproved', function (websites, approvedPrivs) { // Orig
 
 function addonConfigTooltip (obj) {
     return function (prev, key) {
-        prev += '\n' + key + ': ' + obj[key];
+        prev += '\n' + key + ': ' + ((obj && obj[key]) || '(none)');
     };
 }
-self.port.on('setAddonWebsites', function (config, approvedPrivs) { // Originates from main.js (dynamically)
+self.port.on('setAddonWebsites', function (config) { // Originates from main.js (dynamically)
     var websites = Object.keys(config);
     emptyElement('#addonWebsites');
     websites.forEach(function (website) {
         var tooltip = ['name', 'description', 'version', 'license'].reduce(
             addonConfigTooltip(config[website]),
-            ['name', 'url'].reduce(addonConfigTooltip(config[website].developer), text)
+            ['name', 'url'].reduce(addonConfigTooltip(config[website].developer), website)
         );
         insertOption('#addonWebsites', makeOption(website, null, tooltip));
     });
