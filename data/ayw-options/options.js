@@ -82,12 +82,13 @@ function insertOption (selectSelector, option) {
     $(selectSelector).appendChild(option);
 }
 
-function makeOption(text, value) {
+function makeOption(text, value, tooltip) {
     var option = document.createElement('option');
     if (value) {
         option.value = value;
     }
-    option.title = option.text = text; // Adding tooltip without CSS doesn't work
+    option.text = text;
+    option.title = tooltip || text; // Adding tooltip without CSS doesn't work
     return option;
 }
 
@@ -227,10 +228,21 @@ self.port.on('setWebsitesApproved', function (websites, approvedPrivs) { // Orig
         insertOption('#websitesApproved', makeOption(website + ' (' + approvedPrivs[i].join(', ') + ')', website));
     });
 });
-self.port.on('setAddonWebsites', function (websites, approvedPrivs) { // Originates from main.js (dynamically)
+
+function addonConfigTooltip (obj) {
+    return function (prev, key) {
+        prev += key + ': ' + obj[key];
+    };
+}
+self.port.on('setAddonWebsites', function (config, approvedPrivs) { // Originates from main.js (dynamically)
+    var websites = Object.keys(config);
     emptyElement('#addonWebsites');
     websites.forEach(function (website) {
-        insertOption('#addonWebsites', makeOption(website));
+        var tooltip = ['name', 'description', 'version', 'license'].reduce(
+            addonConfigTooltip(config[website]),
+            ['name', 'url'].reduce(addonConfigTooltip(config[website].developer), '')
+        );
+        insertOption('#addonWebsites', makeOption(website, null, tooltip));
     });
 });
 
