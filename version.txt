@@ -1,5 +1,6 @@
 For the future: "Addons" version:
 * Support restartless "addon" websites (URLs invoked at startup in hidden DOM windows) including ability to request and access privileges
+* Add file picker for choosing site (usable for visited or "addon" websites)
 
 Version notes:
 

@@ -1,17 +1,20 @@
 AsYouWish Options
 1) "Grab current website's protocol"
 2) "Grab current website"
-3) "Allow privilege requests from all protocols"
-4) "Protocol to allow"
-5) "Remove selected allowed protocols"
-6) "Allow privilege requests from all websites whose protocols are allowed"
-7) "Website to allow"
-8) "Remove selected allowed websites"
-9) "Remove selected approved websites"
+3) "Select local file"
+4) "Allow privilege requests from all protocols"
+5) "Protocol to allow"
+6) "Remove selected allowed protocols"
+7) "Allow privilege requests from all websites whose protocols are allowed"
+8) "Allow on visit"
+9) "Allow as 'addon'"
+10) "Remove selected allowed websites"
+11) "Remove selected approved websites"
+12) "Remove selected 'addon' websites"
 
 AsYouWish Testing Script
-1) Ensure protocol or website (#1, #2) does not add to list, but does add correct protocol or website to input box
-2) Ensure removal options (#5, #8, #9) works for single and multiple
-3) Ensure changes to options #3-#9 are all changed after restart
-4) Ensure no discrepancy with query strings as far as allowed and approved sites (#7, #8, #9)
-5) Ensure options #3-#9 are all tried in in combination and tested on both interval, reload, and other page load, and options #3 and #6 are tested for enabling and disabling
+1) Ensure protocol or website (#1-#3) does not add to list, but does add correct protocol or website to input box
+2) Ensure removal options (#6, #10-#12) works for single and multiple
+3) Ensure changes to options #4-#12 are all changed after restart
+4) Ensure no discrepancy with query strings as far as allowed, approved, and "addon" sites (#8-#12)
+5) Ensure options #4-#12 are all tried in in combination and tested on both interval, reload, and other page load, and options #3 and #7 are tested for enabling and disabling

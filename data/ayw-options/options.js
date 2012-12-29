@@ -115,7 +115,7 @@ $('#addAllowedProtocol').addEventListener('click', function (e) {
 });
 $('#removeAllowedProtocols').addEventListener('click', function (e) {
     self.port.emit(
-        'removeAllowedProtocols', // Responses will be in removedAllowedProtocol
+        'removeAllowedProtocols', // Responses will be in setAllowedProtocols
         /*Array.from($('#allowedProtocols').selectedOptions).map(function (option) {
             return option.value;
         })*/
@@ -148,7 +148,7 @@ $('#addAllowedWebsite').addEventListener('click', function (e) {
 });
 $('#removeAllowedWebsites').addEventListener('click', function (e) {
     self.port.emit(
-        'removeAllowedWebsites', // Responses will be in removedAllowedWebsite
+        'removeAllowedWebsites', // Responses will be in setAllowedWebsites
         /*Array.from($('#allowedWebsites').selectedOptions).map(function (option) {
             return option.value;
         })*/
@@ -166,7 +166,7 @@ $('#allowAllWebsites').addEventListener('click', function (e) {
 
 $('#removeApprovedWebsites').addEventListener('click', function (e) {
     self.port.emit(
-        'removeApprovedWebsites', // Responses will be in removedWebsiteApproved
+        'removeApprovedWebsites', // Responses will be in setWebsitesApproved
         /*Array.from($('#websitesApproved').selectedOptions).map(function (option) {
             return option.value;
         })*/
@@ -180,7 +180,7 @@ $('#removeApprovedWebsites').addEventListener('click', function (e) {
 
 $('#removeAddonWebsites').addEventListener('click', function (e) {
     self.port.emit(
-        'removeAddonWebsites', // Responses will be in removedAllowedWebsite
+        'removeAddonWebsites', // Responses will be in setAddonWebsites
         Array.from($('#addonWebsites').options).filter(function (option) {
             return option.selected;
         }).map(function (option) {
@@ -229,8 +229,8 @@ self.port.on('setWebsitesApproved', function (websites, approvedPrivs) { // Orig
 });
 self.port.on('setAddonWebsites', function (websites, approvedPrivs) { // Originates from main.js (dynamically)
     emptyElement('#addonWebsites');
-    websites.forEach(function (website, i) {
-        insertOption('#addonWebsites', makeOption(website + ' (' + approvedPrivs[i].join(', ') + ')', website));
+    websites.forEach(function (website) {
+        insertOption('#addonWebsites', makeOption(website));
     });
 });
 
