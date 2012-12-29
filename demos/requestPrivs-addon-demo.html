@@ -28,9 +28,22 @@ var Panel,
             appendChild(document.createElement('br'));
     };
 
-window.addEventListener('unload', function () {
+window.addEventListener('x-unload', function () {
     console.log('unloaded addon demo');
-    Panel.postMessage('unloaded');
+    AsYouWish.requestPrivs(['chrome', 'windows'], function (chrome, windows) {
+        try {
+            windows.browserWindows.open("http://www.example.com"); // worked
+
+            // Didn't work
+            var Cc = chrome.Cc,
+                Ci = chrome.Ci;
+            mainWindow = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator).getMostRecentWindow(null);
+            mainWindow.alert('unloading');
+        }
+        catch(e) {
+            alert('Unload callback error' + e + e.lineNumber + e.fileName);
+        }
+    });
 });
     
 window.addEventListener('DOMContentLoaded', function () {
@@ -40,7 +53,7 @@ window.addEventListener('DOMContentLoaded', function () {
     // errBack = false; // Try default (only alerts when refused)
     function clipboard () {
     
-    AsYouWish.requestPrivs(['clipboard', 'windows'], function (clip, win) {
+    AsYouWish.requestPrivs(['clipboard'], function (clip) {
         try {
             console.log('ok1');
             Panel.postMessage(
