@@ -144,7 +144,7 @@ $('#addLocalWebsite').addEventListener('click', function (e) { // Response will 
 $('#addAllowedWebsite').addEventListener('click', function (e) {
     var website = $('#websiteToAllow').value.replace(/\s+/, '');
     if (website) {
-        self.port.emit('addAllowedWebsite', website); // Response will be in addedAllowedWebsite
+        self.port.emit('addAllowedWebsite', website); // Response will be in setAllowedWebsites
     }
 });
 $('#removeAllowedWebsites').addEventListener('click', function (e) {
@@ -190,7 +190,12 @@ $('#removeAddonWebsites').addEventListener('click', function (e) {
     );
 });
 
-
+$('#addAddonWebsite').addEventListener('click', function (e) {
+    var website = $('#websiteToAllow').value.replace(/\s+/, '');
+    if (website) {
+        self.port.emit('addAddonWebsite', website); // Response will be in addedAllowedWebsite
+    }
+});
 
 // EXTERNAL EVENTS
 
