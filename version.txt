@@ -1,11 +1,12 @@
-For the future: "Addons" version:
-* Support restartless "addon" websites (URLs invoked at startup in hidden DOM windows) including ability to request and access privileges
-* Add file picker for choosing site (usable for visited or "addon" websites)
-
 Version notes:
 
+0.4
+* Major feature: Support restartless "addon" websites (URLs invoked at startup in hidden DOM windows) including ability to request and access privileges
+* Feature: Add file picker for choosing site (usable for visited or "addon" websites)
+* Feature: Added privilege whitelist as an additional option to restricting request types
+
 0.3.1
-* Force allow all protocols to also allow all websites, and disabling of allow all websites to disable allow all protocols (radio button-like behavior)
+* Usability bug: Force allow all protocols to also allow all websites, and disabling of allow all websites to disable allow all protocols (radio button-like behavior)
 
 0.3
 * SDK-interaction Bug fix: Adapt SDK code to allow widget API to accept wrapped panels
