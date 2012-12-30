@@ -11,6 +11,8 @@ AsYouWish Options
 10) "Remove selected allowed websites"
 11) "Remove selected approved websites"
 12) "Remove selected 'addon' websites"
+13) "Enforce privilege whitelist"
+14) "Whitelisted privileges"
 
 AsYouWish Testing Script
 1) Ensure protocol or website (#1-#3) does not add to list, but does add correct protocol or website to input box
@@ -18,3 +20,5 @@ AsYouWish Testing Script
 3) Ensure changes to options #4-#12 are all changed after restart
 4) Ensure no discrepancy with query strings as far as allowed, approved, and "addon" sites (#8-#12)
 5) Ensure options #4-#12 are all tried in in combination and tested on both interval, reload, and other page load, and options #3 and #7 are tested for enabling and disabling
+6) Ensure enabling #13 will enable #14 (and disabling will disable it).
+7) Ensure changes in #14 will affect what privileges are allowed

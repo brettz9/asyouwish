@@ -59,14 +59,24 @@
             <button id="removeApprovedWebsites">Remove selected approved websites</button>
         </div>
     </fieldset>
-    <fieldset><legend>Websites which will be executed (in hidden windows) on browser restart</legend><br />
-        <div class="focus">
-            <label>"Addon" websites:<br />
-                <select id="addonWebsites" multiple="multiple" size="20"></select>
-            </label>
-            <br />
-            <button id="removeAddonWebsites">Remove selected "addon" websites</button>
-        </div>
-    </fieldset>
+    <div class="fieldset-container">
+        <fieldset class="internal"><legend>Websites which will be executed (in hidden windows) on browser restart</legend>
+            <div class="focus">
+                <label>"Addon" websites:<br />
+                    <select id="addonWebsites" multiple="multiple" size="7"></select>
+                </label>
+                <br />
+                <button id="removeAddonWebsites">Remove selected "addon" websites</button>
+            </div>
+        </fieldset>
+        <fieldset class="internal"><legend>Whitelisting specific privileges</legend>
+            <div class="focus">
+                <label><span title="In addition to protocol/website restrictions, one can choose to allow only specific privileges from being requested">Enforce privilege whitelist</span><input type="checkbox" id="enforcePrivilegeWhitelist" /></label>
+                <label>Whitelisted privileges:<br />
+                    <select id="whitelistedPrivileges" multiple="multiple" size="8" disabled="disabled"></select>
+                </label>
+            </div>
+        </fieldset>
+    </div>
 </body>
 </html>

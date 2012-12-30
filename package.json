@@ -41,6 +41,20 @@
             "description": "Object (as string) whose keys are the websites which are permitted to launch in a hidden window on browser restart with privileges and whose values are meta-data about the 'addon'.",
             "value": "{}",
             "title": "'Addon' websites"
+        },
+        {
+            "name": "enforcePrivilegeWhitelist",
+            "type": "bool",
+            "description": "Whether or not to enforce a privilege whitelist (will disallow new sites from even requesting privileges if the requested privilege type is not whitelisted).",
+            "value": false,
+            "title": "'Enforce privilege whitelist"
+        },
+        {
+            "name": "whitelistedPrivileges",
+            "type": "string",
+            "description": "Array (as string) which will delimit those privileges can be requested (so long as the whitelist is being enforced).",
+            "value": "[]",
+            "title": "Whitelisted privileges"
         }
     ],
     "name": "asyouwish",

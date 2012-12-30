@@ -3,7 +3,7 @@ General styling
 */
 body {width:1235px;}
 input[type=file] {display:none;}
-fieldset:not(.internal) {float:left;max-width:22%}
+fieldset:not(.internal),div.fieldset-container {float:left;max-width:22%}
 label {font-weight:bold;display:block;}
 select {
     min-width: 100px;

@@ -197,6 +197,22 @@ $('#addAddonWebsite').addEventListener('click', function (e) {
     }
 });
 
+$('#enforcePrivilegeWhitelist').addEventListener('click', function (e) {
+    self.port.emit('enforcePrivilegeWhitelist', e.target.checked); // Response will be in enforcedPrivilegeWhitelist
+});
+
+$('#whitelistedPrivileges').addEventListener('change', function (e) {
+    self.port.emit(
+        'whitelistedPrivileges', // Responses will be in setWhitelistedPrivileges
+        Array.from($('#whitelistedPrivileges').options).filter(function (option) {
+            return option.selected;
+        }).map(function (option) {
+            return option.value;
+        })
+    );
+});
+
+
 // EXTERNAL EVENTS
 
 // ..........PROTOCOL-RELATED..............
@@ -259,5 +275,26 @@ self.port.on('addedLocalWebsite', function (website) { // Originates from addLoc
     $('#websiteToAllow').value = website;
 });
 
+self.port.on('enforcedPrivilegeWhitelist', function (value) {
+    $('#whitelistedPrivileges').disabled = !value;
+    $('#enforcePrivilegeWhitelist').checked = value;
+});
+self.port.on('setWhitelistedPrivileges', function (privilegeInfo) { // Originates from main.js (on load)
+    var possiblePrivs = privilegeInfo[0],
+        localizedPrivs = privilegeInfo[1],
+        chosenPrivs = privilegeInfo[2];
+
+    emptyElement('#whitelistedPrivileges');
+    possiblePrivs.forEach(function (possiblePriv, i) {
+        insertOption('#whitelistedPrivileges', makeOption(possiblePriv, null, localizedPrivs[i]));
+    });
+    chosenPrivs.forEach(function (chosenPriv) {
+        Array.from($('#whitelistedPrivileges').options).forEach(function (option) {
+            if (option.value === chosenPriv) {
+                option.selected = true;
+            }
+        });
+    });
+});
 
 }());
