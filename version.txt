@@ -1,5 +1,9 @@
 Version notes:
 
+0.4.1
+* Security Bug fix: Though it did not allow other privileges without permission, the code to first confirm the user wanted to install an addon was not present
+* Improvement: Avoid errors in addon unloading and isRegistered() checks
+
 0.4
 * Major feature: Support restartless "addon" websites (URLs invoked at startup in hidden DOM windows) including ability to request and access privileges
 * Feature: Add file picker for choosing site (usable for visited or "addon" websites)
