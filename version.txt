@@ -1,5 +1,8 @@
 Version notes:
 
+?
+* Remove undocumented getDefaultPrivs in favor of more functional getPossiblePrivs
+
 0.4.1
 * Security Bug fix: Though it did not allow other privileges without permission, the code to first confirm the user wanted to install an addon was not present
 * Improvement: Avoid errors in addon unloading and isRegistered() checks
