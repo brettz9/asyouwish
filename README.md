@@ -352,6 +352,7 @@ Comparison to [Microsoft HTA](http://en.wikipedia.org/wiki/HTML_Application) (HT
 ===========================================
 
 While the concepts are similar, AsYouWish differs in these regards:
+
 1. HTA files, when run from the browser, require user permission before
 loading; AsYouWish allows web applications to function normally while
 conditionally requesting support for higher privileges without being
@@ -512,11 +513,11 @@ Known Issues
 1. Privileges don't load on initial browser load as apparently not injected
 at that time with content-document-global-created event.
 2. instanceof issues with chrome content
-    a. e.g., the wrapping within AsYouWish (using specialPowers/proxies)
+    1. e.g., the wrapping within AsYouWish (using specialPowers/proxies)
     does not work with SDK Widget (/addon-sdk-1.12/lib/sdk/widget.js) which
     checks for instanceof Panel (resolved in AsYouWish by changing this
     code to duck type)
-    b. workarounds most likely needed for other instanceof usages within
+    2. workarounds most likely needed for other instanceof usages within
     the SDK (no way to get SDK to [use custom instanceOf function](https://bugzilla.mozilla.org/show_bug.cgi?id=823790)
     that can be overridden?)
 3. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
