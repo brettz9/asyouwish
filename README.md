@@ -9,7 +9,7 @@ to your data (not only browser data) so don't install--especially at this
 time--unless you are willing to take the risks. It is hoped this may go
 through a thorough security vetting as part of the process to get the
 add-on accepted at [AMO](https://addons.mozilla.org/). The current
-way this add-on may be tested is either thorugh the built XPI file
+way this add-on may be tested is either through the built XPI file
 included with the source, or by using the SDK cfx tool.***
 
 Obviously allowing privileges may be dangerous if used by a malicious
@@ -487,7 +487,7 @@ for this is that if the site included any untrusted 3rd party libraries within
 the directory, the user could be at risk (and would also require internal code
 changes as we are currently depending on site-specific preferences).
 
-2) There is no need to expose globals in the SDK of "self" (as it is only a
+2. There is no need to expose globals in the SDK of "self" (as it is only a
 part of content scripts, so page-mod can utilize within a string) or "addon"
 (which is for page-worker content scripts).
 
@@ -495,7 +495,7 @@ Unresolved
 =========
 1. Any security issues? Safety of wrappings, require() object wrapping?
 2. Exposing additional globals? unsafeWindow or others otherwise accessible
-in addon code--e.g., is XPCNativeWrapper available thorugh require('chrome')?
+in addon code--e.g., is XPCNativeWrapper available through require('chrome')?
 3. Settle on sync or async API (probably async)? If do sync, should we allow
 postMessage to notify site of approval or allow callback for continued
 execution when not set yet (or just errBack with a new mode)?
@@ -504,26 +504,26 @@ API the same (and handle non-plugin requiring) so additional script not
 needed. Use with [my shim plugin](https://github.com/brettz9/asyouwish/wiki),
 so every environment from addons to privileged HTML to the server and regular
 client-side code can write clean modules in uniform manner.
-5) Inject AsYouWish methods as functions instead? (if possible to overcome
+5. Inject AsYouWish methods as functions instead? (if possible to overcome
 __exposedProps__ requirement with functions).
 
 Known Issues
 ===========
-1) Privileges don't load on initial browser load as apparently not injected
+1. Privileges don't load on initial browser load as apparently not injected
 at that time with content-document-global-created event.
-2) instanceof issues with chrome content
-    a) e.g., the wrapping within AsYouWish (using specialPowers/proxies)
+2. instanceof issues with chrome content
+    a. e.g., the wrapping within AsYouWish (using specialPowers/proxies)
     does not work with SDK Widget (/addon-sdk-1.12/lib/sdk/widget.js) which
     checks for instanceof Panel (resolved in AsYouWish by changing this
     code to duck type)
-    b) workarounds most likely needed for other instanceof usages within
+    b. workarounds most likely needed for other instanceof usages within
     the SDK (no way to get SDK to [use custom instanceOf function](https://bugzilla.mozilla.org/show_bug.cgi?id=823790)
     that can be overridden?)
-3) XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
+3. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
 for a possible means around it (though probably better to move away from XUL
 unless supported by XBL).
-4) Memory leaks?; see https://github.com/brettz9/asyouwish/issues/3
-    a) Resources?
+4. Memory leaks?; see https://github.com/brettz9/asyouwish/issues/3
+    a. Resources?
         https://blog.mozilla.org/nnethercote/category/aboutmemory/
         https://wiki.mozilla.org/Performance/MemShrink
         https://wiki.mozilla.org/Performance:Leak_Tools
