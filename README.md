@@ -22,22 +22,8 @@ Privileges do not apply site or even folder wide to allow a greater sense
 of security and choice in case a website allows third party add-ons
 which may seek their own privileges.
 
-Addons
-======
-Even without creating an "addon" website, one can use regular privileged
-websites to create add-on-like features:
-
-1. Use the ["tabs" module](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/tabs.html#pin%28%29)
-to ask the user to permit the pinning of the current tab as an app tab.
-2. Create links to file:// URL websites on one's desktop
-
-But, beyond this, although there is still no API currently to register sites
-as 'addons' in the sense of appearing in the Addons dialog (unless one is
-delivering an XPI file in which case AsYouWish is not needed for Firefox),
-version 0.4 of AsYouWish has provided the ability for sites to register
-themselves as "addon" websites in the sense that, if approved by the user,
-their site can be launched in a hidden DOM
-window upon registration and upon browser restarts.
+"Addon" websites
+==============
 
 These "addon" websites do not automatically gain additional privileges,
 though they will be able to request additional privileges upon load. Note
@@ -49,13 +35,16 @@ One may use AsYouWish's options (its icon is in the add-on bar) to remove
 a site from being treated as an add-on, but if you have assigned privileges
 to an untrustworthy site, damages may have already been done.
 
+For developer information on "addon" websites, see [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites).
+
 IMPORTANT information for developers
 ===============================
 
-* Please see [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security) for
+* PLEASE READ [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security) for
 the very critical **security concerns** to take into account when making an application for your users.
 * See [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges) on the **specific privileges** you can request (as also documented at [https://addons.mozilla.org/en-US/developers/docs/sdk/latest/](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/)).
-* The **API* is documented at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api) and error listeners at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors).
+* The **API** is documented at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api) and error listeners at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors).
+* Creation of **"Addon" websites** is documented at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites)
 
 Advantages over custom add-ons
 ==============================
@@ -219,7 +208,7 @@ Possible future goals
 =================
 1. Expose custom APIs for nsIProcess and IndexedDB (if SDK does not do so)
 2. If at all possible, I would like to expose the ability to create genuine
-add-ons (which show up in the add-ons menu and are available at
+add-ons (which show up in the add-ons menu as well as being available at
 restart) without an XPI file and without needing to write one's own
 complex loading code.
 3. Blacklists might be a nice addition when whitelists are off.
