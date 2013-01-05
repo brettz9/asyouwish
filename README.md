@@ -25,8 +25,10 @@ which may seek their own privileges.
 "Addon" websites
 ==============
 
-These "addon" websites do not automatically gain additional privileges,
-though they will be able to request additional privileges upon load. Note
+AsYouWish allows websites to be run as "addons". While these "addon"
+websites do not automatically gain additional privileges,
+they will be able to request additional privileges upon load and they are
+loaded upon browser restart in a hidden window. Note
 that even if a site has only asked for "addon" privileges, one might still
 consider it as a privacy concern for a site to know when you are loading your
 browser and may add a performance load.
@@ -36,6 +38,10 @@ a site from being treated as an add-on, but if you have assigned privileges
 to an untrustworthy site, damages may have already been done.
 
 For developer information on "addon" websites, see [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites).
+
+For my concept of a Browser-in-Browser (to allow a regular website to
+function as the browser UI) and the idea for it to become itself extensible
+with addons, see the section "Some additional intended use cases" below.
 
 IMPORTANT information for developers
 ===============================
@@ -55,7 +61,7 @@ desktop apps, with offline storage, caching manifests, desktop
 notifications, so it is, I think, a natural step to allow HTML to gain
 access to the browser ecosystem in an ideally eventually standard
 way since it is ALREADY POSSIBLE to write privileged code with
-easy installation by users--they're called add-ons. :) 
+easy installation by users--they're called browser add-ons. :)
 
 For those who would accuse AsYouWish of introducing undue risks,
 I want to point out that third-party installation of addons is still possible
@@ -116,6 +122,10 @@ web-based IDEs to handle local development yet have access to rapid
 submission for review at AMO as with the builder site--without the cruft of
 downloading some custom non-JavaScript (i.e., Python) build environment.
 
+AsYouWish has also added its own support now for "addon" websites, thus
+allowing the benefits above to be available on each browser restart, with
+the user's permission.
+
 Comparison to Open Web apps
 =========================
 
@@ -164,10 +174,11 @@ browser feature), and the developer may use the "widget" API to make
 the application accessible via the add-on bar (though the contentScript
 may need to be expressed as an eval-able string currently since it may
 otherwise expect the script files to be stored within the AsYouWish
-addon). Note, however, that adding to the add-on bar will not be available
-on  browser restart; there is currently no means in AsYouWish allowed
-for genuine add-on registration (i.e., to appear within the Addons dialog
-and auto-load on browser restart), though it is planned for the future.
+addon). Adding to the add-on bar so that it is available on browser restart
+is also possible as long as one registers it as an "addon" website. There
+is currently no formal means in AsYouWish to allow genuine add-on
+registration (i.e., to cause "addon" websites to appear within the Addons
+dialog), though it is a possible todo for the future.
 4. HTA files apparently provide, once the user has permitted their
 execution, full access to privileged APIs such as `ActiveXObject`,
 `execCommand`, and `window.clipboardData`. While it should be
@@ -251,7 +262,8 @@ srcdoc feature to see if our (x-namespaced-)simple-storage
 module for shared APIs could be used along with privileged DOM access
 using [proxies](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/content/content-proxy.html)?
 to listen for events within iframes to be able to track frame history (for
-the sake of backward/forward buttons).
+the sake of backward/forward buttons). These browsers might even
+be able to support their own "addons".
 
 3. Ability to distribute web utility apps which read or write to files, so
 web apps which, for example, build configuration files, do not need to
@@ -309,7 +321,7 @@ at that time with content-document-global-created event.
 2. instanceof issues with chrome content
     1. e.g., the wrapping within AsYouWish (using specialPowers/proxies)
     does not work with SDK Widget (/addon-sdk-1.12/lib/sdk/widget.js) which
-    checks for instanceof Panel (resolved in AsYouWish by changing this
+    checks for instanceof Panel (resolved within AsYouWish by changing this
     code to duck type)
     2. workarounds most likely needed for other instanceof usages within
     the SDK (no way to get SDK to [use custom instanceOf function](https://bugzilla.mozilla.org/show_bug.cgi?id=823790)
