@@ -16,7 +16,7 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     try {
-        require(['priv!file'], function (fileObj) {
+        require(['priv!sdk/io/file'], function (fileObj) {
             alert(
                 fileObj.read('C:\\Program Files (x86)\\Mozilla Firefox\\application.ini')
             );

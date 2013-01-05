@@ -17,7 +17,7 @@ window.addEventListener('DOMContentLoaded', function () {
     // errBack = false;
 
     function runSync1 () {
-        var xhr = AsYouWish.requestPrivs('xhr');
+        var xhr = AsYouWish.requestPrivs('sdk/net/xhr');
         if (!xhr) {
             var c = confirm('I have approved the XHR request');
             window.location.reload();

@@ -71,43 +71,43 @@ path becomes deprecated or required); for documentation of low-level APIs (as
 well as high-level ones), see https://addons.mozilla.org/en-US/developers/docs/sdk/latest/ ):
 * **toolkit/loader**: 
 * **sdk/console/plain-text**: 
-* **traceback**: 
-* **content**: 
+* **sdk/console/traceback**: 
+* **sdk/content/content**: 
 * **sdk/content/content-proxy**: 
 * **sdk/content/loader**: 
 * **sdk/content/symbiont**: 
 * **sdk/content/worker**: 
 * **sdk/core/heritage**: 
-* **namespace**: 
-* **promise**: 
-* **event/core**: 
+* **sdk/core/namespace**: 
+* **sdk/core/promise**: 
+* **sdk/event/core**: 
 * **sdk/event/target**: 
-* **hidden-frame**: 
+* **sdk/frame/hidden-frame**: 
 * **sdk/frame/utils**: 
 * **sdk/io/byte-streams**: 
-* **file**: Reading, removing, or writing files and directories on the user's desktop
-* **text-streams**: 
+* **sdk/io/file**: Reading, removing, or writing files and directories on the user's desktop
+* **sdk/io/text-streams**: 
 * **sdk/loader/cuddlefish**: 
 * **sdk/loader/sandbox**: 
 * **sdk/net/url**: 
-* **xhr**: Making cross-domain browser requests (accessing a remote website
+* **sdk/net/xhr**: Making cross-domain browser requests (accessing a remote website
 using the user's credentials)
-* **match-pattern**: 
-* **xpcom**: 
+* **sdk/page-mod/match-pattern**: 
+* **sdk/platform/xpcom**: 
 * **sdk/preferences/service**: 
-* **environment**: 
-* **runtime**: 
-* **unload**: 
-* **xul-app**: 
-* **test/assert**: 
-* **harness**: 
+* **sdk/system/environment**: 
+* **sdk/system/runtime**: 
+* **sdk/system/unload**: 
+* **sdk/system/xul-app**: 
+* **sdk/test/assert**: 
+* **sdk/test/harness**: 
 * **sdk/test/httpd**: Usable for creating server for user where they can serve evaluated files to the requesting server?
 * **sdk/test/runner**: 
-* **collection**: 
-* **deprecate**: 
-* **list**: 
+* **sdk/util/collection**: 
+* **sdk/util/deprecate**: 
+* **sdk/util/list**: 
 * **sdk/util/uuid**: 
-* **window/utils**: 
+* **sdk/window/utils**: 
 
 Requiring the chrome object (for access to most XPCOM functionality) is
 currently also possible, though this Mozilla-oriented API may be removed
@@ -185,7 +185,7 @@ use the API, but in the meantime, feel free to experiment with the examples
 (see the repo's HTML files for more):
 
 ```javascript
-  AsYouWish.requestPrivs(['xhr', 'url'], function (xhr, URLObj) {
+  AsYouWish.requestPrivs(['sdk/net/xhr', 'url'], function (xhr, URLObj) {
     var x = new xhr.XMLHttpRequest();
     x.open('GET', 'http://mozilla.org/', false);
     x.send(null);
@@ -225,7 +225,7 @@ harmony with RequireJS which can make non-privileged
 module inclusions as well which do not require a prefix):
 
 ```javascript
-require(['priv!xhr', 'priv!url'], function (xhr, URLObj) {
+require(['priv!sdk/net/xhr', 'priv!url'], function (xhr, URLObj) {
 
     // e.g., same as above...
 
@@ -464,7 +464,7 @@ handled by the browsers. I am awaiting the landing of the
 [Bug 802895](https://bugzilla.mozilla.org/show_bug.cgi?id=802895)
 srcdoc feature to see if our (x-namespaced-)simple-storage
 module for shared APIs could be used along with privileged DOM access
-using [proxies](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/packages/api-utils/content/proxy.html)?
+using [proxies](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/content/content-proxy.html)?
 to listen for events within iframes to be able to track frame history (for
 the sake of backward/forward buttons).
 
@@ -491,6 +491,11 @@ changes as we are currently depending on site-specific preferences).
 2. There is no need to expose globals in the SDK of "self" (as it is only a
 part of content scripts, so page-mod can utilize within a string) or "addon"
 (which is for page-worker content scripts).
+
+3. While it would be convenient to drop it, I decided to require the full "sdk/"
+path for consumers of low-level APIs since usage without it is to be
+deprecated (and perhaps low-level APIs may be more subject to
+change (and be browser-specific) anyways).
 
 Unresolved
 =========

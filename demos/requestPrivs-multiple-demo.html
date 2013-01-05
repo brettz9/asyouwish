@@ -20,7 +20,7 @@ setInterval(function () {
 
     try {
 
-        AsYouWish.requestPrivs(['xhr', 'url'], function (xhr, URLObj) {
+        AsYouWish.requestPrivs(['sdk/net/xhr', 'url'], function (xhr, URLObj) {
             try {
                 var x = new xhr.XMLHttpRequest();
                 x.open('GET', 'http://mozilla.org/', false);

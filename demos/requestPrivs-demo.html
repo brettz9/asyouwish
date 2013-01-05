@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     try {
 
-        AsYouWish.requestPrivs('xhr', function (xhr) {
+        AsYouWish.requestPrivs('sdk/net/xhr', function (xhr) {
             try {
                 var x = new xhr.XMLHttpRequest();
                 x.open('GET', 'http://mozilla.org/', false);
