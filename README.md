@@ -377,6 +377,8 @@ be installed under given licenses (or even if not, could allow client-side
 forking).
 7. Allow websites to register their own modules for possible inclusion
 by other sites.
+8. Allow additional refuse option to remove a site from allowed sites so
+it can't request privileges again.
 
 Some additional intended use cases
 ==================================
