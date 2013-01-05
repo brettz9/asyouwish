@@ -18,6 +18,7 @@ select {
 */
 *[title]:hover:before {
   content: attr(title);
+  white-space: pre;
   padding:5px 6px;
   margin-top: 20px;
   margin-left: -230px;

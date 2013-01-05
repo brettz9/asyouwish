@@ -264,7 +264,17 @@ self.port.on('setWebsitesApproved', function (websites, approvedPrivs) { // Orig
 
 function addonConfigTooltip (obj) {
     return function (prev, key) {
-        prev += _("addonConfigTooltip", key, (obj && obj[key]) || none);
+        var p, k = key;
+        if (typeof key === 'object') {
+            for (p in key) {
+                if (key.hasOwnProperty(p)) {
+                    k = key[p];
+                    key = p;
+                    break;
+                }
+            }
+        }
+        return prev + _("addonConfigTooltip", _(k), (obj && obj[key]) || none);
     };
 }
 self.port.on('setAddonWebsites', function (config) { // Originates from main.js (dynamically)
@@ -273,11 +283,11 @@ self.port.on('setAddonWebsites', function (config) { // Originates from main.js 
     websites.forEach(function (website) {
         var tooltip = ['name', 'description', 'version', 'license'].reduce(
             addonConfigTooltip(config[website]),
-            ['name', 'url'].reduce(
+            [{name: 'developer name'}, {url: 'developer url'}].reduce(
                 addonConfigTooltip(config[website].developer),
                 website
             )
-        );
+        ).slice(0, -1);
         insertOption('#addonWebsites', makeOption(website, null, tooltip));
     });
 });
