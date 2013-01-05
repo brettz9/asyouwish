@@ -497,6 +497,10 @@ path for consumers of low-level APIs since usage without it is to be
 deprecated (and perhaps low-level APIs may be more subject to
 change (and be browser-specific) anyways).
 
+4. Although we could potentially i18n-ize short priv names (and sort
+accordingly), since the tooltip gives the description, and since these
+are actual APIs, I felt it best to stay with the English for these.
+
 Unresolved
 =========
 1. Any security issues? Safety of wrappings, require() object wrapping?
