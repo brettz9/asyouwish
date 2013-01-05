@@ -131,8 +131,10 @@ from being requested or granted (even if the site is otherwise allowed
 to request privileges). Tooltips are available to explain the APIs at
 some level, but these are only my layman's understanding of the API
 so if in doubt, please see the [SDK documentation](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/).
-Note that requests to act as an addon are not handled (or prevented)
-by this whitelist.
+Note that (when the checklist is enforced), requests to act as an addon
+can be enabled or prevented via the presence or absence of the
+"x-register" privilege in the whitelist (but this item will not disable or prevent
+already approved addons or explicitly added ones).
 
 "Addon" websites
 ==============

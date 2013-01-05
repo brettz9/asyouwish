@@ -5,6 +5,7 @@ Version notes:
 
 0.5
 * Security improvement: Require register() calls to first be allowed to ask to serve as an addon.
+* Security improvement: Allow "x-register" to be added to the enforced whitelist to allow prevention of addon registration requests
 * API change: Require full paths for low-level APIs (as shorter versions are deprecated in the SDK)
 * Usability bug fix: Ensure addon registration always enables ability to request privileges
 * Usability bug fix: Ensure that allowed websites are updated whenever approved websites are updated (e.g., if user disallows a site which is an addon, causing it to trigger its unload event which can request privileges again)
