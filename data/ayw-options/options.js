@@ -273,7 +273,10 @@ self.port.on('setAddonWebsites', function (config) { // Originates from main.js 
     websites.forEach(function (website) {
         var tooltip = ['name', 'description', 'version', 'license'].reduce(
             addonConfigTooltip(config[website]),
-            ['name', 'url'].reduce(addonConfigTooltip(config[website].developer), website)
+            ['name', 'url'].reduce(
+                addonConfigTooltip(config[website].developer),
+                website
+            )
         );
         insertOption('#addonWebsites', makeOption(website, null, tooltip));
     });

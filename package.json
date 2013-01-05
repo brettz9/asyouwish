@@ -4,7 +4,7 @@
             "name": "allowedProtocols",
             "type": "string",
             "description": "Array (as string) of schemes which are permitted to request privileges.",
-            "value": "[\\\"https\\\"]",
+            "value": "[\\\"https\\\", \\\"file\\\"]",
             "title": "Allowed protocols"
         },
         {

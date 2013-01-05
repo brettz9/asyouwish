@@ -2,6 +2,7 @@ Version notes:
 
 ?
 * Remove undocumented getDefaultPrivs in favor of more functional getPossiblePrivs
+* Allow 'file' protocol by default along with 'https' (because there should not be the same risk of man-in-the-middle (and it will still need to request privileges to get them))
 
 0.4.1
 * Security Bug fix: Though it did not allow other privileges without permission, the code to first confirm the user wanted to install an addon was not present
