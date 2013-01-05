@@ -1,4 +1,4 @@
-/*globals self*/
+/*globals self, localeObj*/
 (function () {
 'use strict';
 { // Shim block
@@ -64,6 +64,15 @@ Object.defineProperty(HTMLSelectElement.prototype, 'selectedOptions', {get: func
 */
 } // end shim block
 
+// We supply our own localization function until (synchronous) localization of the locale file is possible
+function _ (key) {
+    var args = arguments;
+    return localeObj[key].replace(/%(\d)s/g, function (n0, digit) {
+        return args[digit];
+    });
+}
+
+var approvedPrivJoiner = _("approvedPrivJoiner"), none = _("none");
 
 // UTILITIES
 function $ (sel) {
@@ -246,13 +255,16 @@ self.port.on('setAllowedWebsites', function (websites) { // Originates from main
 self.port.on('setWebsitesApproved', function (websites, approvedPrivs) { // Originates from main.js (on load)
     emptyElement('#websitesApproved');
     websites.forEach(function (website, i) {
-        insertOption('#websitesApproved', makeOption(website + ' (' + approvedPrivs[i].join(', ') + ')', website));
+        insertOption('#websitesApproved', makeOption(
+            _("approvedPrivOption", website, approvedPrivs[i].join(approvedPrivJoiner)),
+            website
+        ));
     });
 });
 
 function addonConfigTooltip (obj) {
     return function (prev, key) {
-        prev += '\n' + key + ': ' + ((obj && obj[key]) || '(none)');
+        prev += _("addonConfigTooltip", key, (obj && obj[key]) || none);
     };
 }
 self.port.on('setAddonWebsites', function (config) { // Originates from main.js (dynamically)
