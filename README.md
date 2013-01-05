@@ -22,234 +22,40 @@ Privileges do not apply site or even folder wide to allow a greater sense
 of security and choice in case a website allows third party add-ons
 which may seek their own privileges.
 
-Exposed privileges
-====================
+Addons
+======
+Even without creating an "addon" website, one can use regular privileged
+websites to create add-on-like features:
 
-At present, all [high-level APIs](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/)
-are exposed.
+1. Use the ["tabs" module](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/tabs.html#pin%28%29)
+to ask the user to permit the pinning of the current tab as an app tab.
+2. Create links to file:// URL websites on one's desktop
 
-Requests at this point can therefore be made of the user for:
-* **clipboard**: Accessing or setting the clipboard
-* **context-menu**: Accessing or adding to the browser's own context menu
-* **hotkeys**: Creating new browser-wide keyboard shortcuts
-* **page-mod**: Modifying any web content the user loads in the browser
-* **page-worker**: Performing hidden loads of cross-domain web content
-* **panel**: Loading HTML into a dialog
-* **passwords**: Reading or removing user's site passwords or store new passwords
-* **private-browsing**: Detecting of when user is in private browsing mode.
-* **request**: Making cross-domain browser requests (accessing a remote website
-using the user's credentials)
-* **selection**: Accessing user highlighted selections made within the browser
-* **simple-storage**: Accessing SHARED simple storage to store data accessible to any
-other AsYouWish-enabled website approved by the user without needing one site to act
-as gate-keeper of the data.
-* **tabs**: Listening to changes in user tabs, controlling tabs, opening new tabs, or accessing any other opened browser tab content
-* **widget**: Creating an addon user interface (widget) to be hosted in the add-on bar
-* **windows**: Listening to changes in user's browser tabs, controlling tabs, opening new tabs, or accessing any other opened browser tab content
+But, beyond this, although there is still no API currently to register sites
+as 'addons' in the sense of appearing in the Addons dialog (unless one is
+delivering an XPI file in which case AsYouWish is not needed for Firefox),
+version 0.4 of AsYouWish has provided the ability for sites to register
+themselves as "addon" websites in the sense that, if approved by the user,
+their site can be launched in a hidden DOM
+window upon registration and upon browser restarts.
 
-The following, apparently fully safe libraries made available by the Addons SDK
-and which can perhaps be allowed without permissions in the future (if not standardized):
-* **url**: URL parsing/retrieval utilities
-* **base64**: Character-set-aware base64 encoding and decoding
-* **querystring**: Serializing/deserializing of URL query strings
+These "addon" websites do not automatically gain additional privileges,
+though they will be able to request additional privileges upon load. Note
+that even if a site has only asked for "addon" privileges, one might still
+consider it as a privacy concern for a site to know when you are loading your
+browser and may add a performance load.
 
-The following other high-level APIs have currently been allowed, but they are
-apparently of limited to no use because they are either already available to
-regular websites or they are specific to the AsYouWish addon:
-* **notifications**: Creating Toaster-style notifications; use Web Notifications instead?
-* **console**: Accessing addon console object (including 'exception' method)
-* **addon-page**: Opening AsYouWish's data/index.html in a bare type of tab (doesn't exist currenty)
-* **l10n**: Acccesing AsYouWish's localization strings
-* **self**: Accessing data of the AsYouWish addon
-* **simple-prefs**: Storing and setting non-site-specific preferences for AsYouWish if stored using this preference
-* **timers**: Accessing web-like timing
+One may use AsYouWish's options (its icon is in the add-on bar) to remove
+a site from being treated as an add-on, but if you have assigned privileges
+to an untrustworthy site, damages may have already been done.
 
-The following low-level APIs are also available (although summaries are
-provided of those which may be of special interest, it is preferable to use
-the high-level APIs where possible (the paths may change if the full "sdk/"
-path becomes deprecated or required); for documentation of low-level APIs (as
-well as high-level ones), see https://addons.mozilla.org/en-US/developers/docs/sdk/latest/ ):
-* **toolkit/loader**: 
-* **sdk/console/plain-text**: 
-* **sdk/console/traceback**: 
-* **sdk/content/content**: 
-* **sdk/content/content-proxy**: 
-* **sdk/content/loader**: 
-* **sdk/content/symbiont**: 
-* **sdk/content/worker**: 
-* **sdk/core/heritage**: 
-* **sdk/core/namespace**: 
-* **sdk/core/promise**: 
-* **sdk/event/core**: 
-* **sdk/event/target**: 
-* **sdk/frame/hidden-frame**: 
-* **sdk/frame/utils**: 
-* **sdk/io/byte-streams**: 
-* **sdk/io/file**: Reading, removing, or writing files and directories on the user's desktop
-* **sdk/io/text-streams**: 
-* **sdk/loader/cuddlefish**: 
-* **sdk/loader/sandbox**: 
-* **sdk/net/url**: 
-* **sdk/net/xhr**: Making cross-domain browser requests (accessing a remote website
-using the user's credentials)
-* **sdk/page-mod/match-pattern**: 
-* **sdk/platform/xpcom**: 
-* **sdk/preferences/service**: 
-* **sdk/system/environment**: 
-* **sdk/system/runtime**: 
-* **sdk/system/unload**: 
-* **sdk/system/xul-app**: 
-* **sdk/test/assert**: 
-* **sdk/test/harness**: 
-* **sdk/test/httpd**: Usable for creating server for user where they can serve evaluated files to the requesting server?
-* **sdk/test/runner**: 
-* **sdk/util/collection**: 
-* **sdk/util/deprecate**: 
-* **sdk/util/list**: 
-* **sdk/util/uuid**: 
-* **sdk/window/utils**: 
+IMPORTANT information for developers
+===============================
 
-Requiring the chrome object (for access to most XPCOM functionality) is
-currently also possible, though this Mozilla-oriented API may be removed
-in the future, especially if existing functionality becomes available through
-other means.
-
-The following custom API has also been added:
-* **x-namespaced-simple-storage**: Simple storage applied to a particular
-namespaced subobject; allows sites to only request privileges for shared
-storage on a particular namespace without needing any particular site to
-be the sole owner/manager of the data.
-
-(Custom APIs should normally only be added if they offer some functionality
-that is particularly suited to the web environment; otherwise, we will defer to
-the SDK APIs.)
-
-Once the initial testing phase is complete (now maybe "beta" for functionality,
-though "alpha" as far as potential for security risks since I am not so familiar
-with the security model in Firefox), it should be easy to add more low-level
-APIs (where relevant), mostly just needing some warning text for users which
-adequately warns them of risks to that API.
-
-Security concerns
-==============
-
-If you visit a site which doesn't practice good security and you approve
-AsYouWish for that site, your own data can be at risk. If you are a
-developer, you have a responsibility to avoid security holes.
-"With power comes great responsibility", and AsYouWish undeniably
-gives developers great power if the user allows it. In a normal website,
-unless there is a browser or plugin exploit in use, the typically worst thing
-that can happen if the site is not secure is that the user's password at
-your site can be stolen, and bad guys can gain access to your account
-at the site and the data the user enters there. Of course this can be serious
-if the site is a bank, has stored your web history or other private data.
-But it is potentially even more serious--even much more serious--with
-AsYouWish if you give permission to an untrusted site. A similar risk
-is present with add-ons (see the section on "Advantages over custom add-ons"),
-but this section will focus on AsYouWish.
-
-With AsYouWish, if you as a developer are not careful, a hacker could
-present links to your user that when clicked will bring the user to a page
-at your site which will cause the user's bank passwords to be read,
-their files to be read, sent, or deleted, visits to other sites made while
-logged in--taking advantage of any information which the user has input
-into their browser (not just for your site) such as open tabs or history,
-etc., and potentially using their browser to spam or try hacking other
-sites, etc. Besides the harm to your users, creating such a risk opens
-yourself up to loss of trust and legal dangers if not criminal sanctions.
-This danger exists for unreviewed Firefox addons as well, so it is
-nothing new.
-
-I unfortunately do not know of a good single-stop location for learning
-about web application security, but I can at least say that perhaps
-the most important rule is to validate all untrusted data or code--e.g.,
-if you are reading data from window.location or from a web request
-to access database content which had been saved by users, or even
-letting the user add content (in case the data they insert is untrusted),
-you are putting the user at risk by inserting that data unescaped within
-your page (e.g., by using `innerHTML`) as with including a script tag
-pointing to an untrusted site. This is not an exhaustive list, but it may
-help avoid the most common problems.
-
-API
-===
-
-The API is subject to change. Although it technically allows synchronous usage
-when the user has already approved the privileges, this is not a frozen syntax
-and may be removed in the future.
-
-I would like to ensure the provided RequireJS plugin is consistent, so I'd
-like to consult further to consider the best way to do this for all environments.
-Once that is decided, I think that might end up as the recommended way to
-use the API, but in the meantime, feel free to experiment with the examples
-(see the repo's HTML files for more):
-
-```javascript
-  AsYouWish.requestPrivs(['sdk/net/xhr', 'url'], function (xhr, URLObj) {
-    var x = new xhr.XMLHttpRequest();
-    x.open('GET', 'http://mozilla.org/', false);
-    x.send(null);
-    alert(x.responseText);
-            
-    var url = URLObj.URL('http://example.com/');
-            
-    alert(url);
-    alert(url.scheme);
-            
-  }, function (errorState, info1, info2) {
-    alert(errorState);
-  });
-```
-
-The following will remove privileges for the current site.
-
-```javascript
-AsYouWish.removePrivs(); // Only usable on current site
-```
-
-To get an object whose keys indicate all available privileges,
-and whose alues are the localized text warnings that will be
-shown to the user, the following is currently exposed for
-debugging or detection purposes (but may be removed
-or changed in the future):
-
-```javascript
-AsYouWish.getDefaultPrivs();
-```
-
-Using the provided priv plugin for RequireJS (which also
-of course requires RequireJS itself), the API is similar,
-with a difference with errors and a need to prefix each
-requested privilege with `priv!` (this is for the sake of
-harmony with RequireJS which can make non-privileged
-module inclusions as well which do not require a prefix):
-
-```javascript
-require(['priv!sdk/net/xhr', 'priv!url'], function (xhr, URLObj) {
-
-    // e.g., same as above...
-
-}, function (errorObj) {
-    alert(errorObj.state + '::' + errorObj.args);
-});
-```
-
-RequireJS also always requires an array, so I may settle on that
-for AsYouWish as well as perhaps harmonize the errBack argument
-format if not the name of the function itself.
-
-Further details (e.g., possible error types) should hopefully
-be provided eventually on
-the [wiki](https://github.com/brettz9/asyouwish/wiki).
-
-Again, please do not get too comfortable with the current API, as details
-may change.
-
-I am strongly leaning toward the RequireJS API, so I recommend use
-of the plugin API for now; it should also be easier to keep that stable if the
-built-in API changes (e.g., to auto-inject our own require() function which
-supports the plugin and replicates existing functionality, avoiding the
-need for an additional file inclusion).
+* Please see [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security) for
+the very critical **security concerns** to take into account when making an application for your users.
+* See [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges) on the **specific privileges** you can request (as also documented at [https://addons.mozilla.org/en-US/developers/docs/sdk/latest/](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/)).
+* The **API* is documented at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api) and error listeners at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors).
 
 Advantages over custom add-ons
 ==============================
@@ -404,20 +210,10 @@ copyrighted work) and thanks to the
 
 ![Molecule Man being given his insights](https://raw.github.com/brettz9/asyouwish/master/copyrighted/Marvel%20Super%20Heroes%20Secret%20Wars%20Vol%201%2011%20p6.jpg "Molecule Man gaining insights")
 
-Addons
-======
-Though planned for version 0.4, there is no easy way currently to register
-sites as 'addon' websites (unless adding XPI files which can be done without
-AsYouWish).
-
-In the meantime, one might use the ["tabs" module](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/tabs.html#pin%28%29)
-to ask the user to permit the pinning of the current tab as an app tab.
-
 Future goals (scheduled)
 ====================
-Version 0.4: 
-* Allow websites to at least launch websites on browser start-up in perhaps
-a hidden window if approved by the user.
+Version 0.5: 
+* More precise control by the user or site over namespaced shared storage.
 
 Possible future goals
 =================
