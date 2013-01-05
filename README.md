@@ -17,14 +17,113 @@ site (as with addons), so there needs to be a way to inform the user that
 there is a request and allow them to refuse or accept. AsYouWish tries
 to provide this.
 
-Access is granted to specific URLs, not including the query string/hash.
-Privileges do not apply site or even folder wide to allow a greater sense
-of security and choice in case a website allows third party add-ons
-which may seek their own privileges.
+No site can even ask for privileges until the user configures AsYouWish
+to allow requests from their site (or type of site). (See the "Usage of the
+options dialog" section below for more details.) So if the user effectively
+says through their options, "Go ahead and let any HTTPS site ask
+me for privileges", the addon will allow that, but the default is to require
+the site to be added to a whitelist before it can even ask the user for
+permission and then the user will need to agree.
 
-The API mirrors the Mozilla Add-ons SDK API, so there is little for
+While this makes it harder
+for developers to get users set up (as the users will first need to learn
+how to configure the addon to let the site even ask them), this is intended
+to provide some means of protecting users from themselves, especially
+those users who just click "ok"
+to dismiss warnings without first reading them. The privileges that can
+be granted to sites are as dangerous as being able to read the user's
+bank passwords, read and control what tabs they have open, visit other
+sites in their name, read or destroy their local files, etc. etc. Yes, this
+is dangerous stuff, but that capability is also available to regular addons,
+and can be used to provide useful functionality to users (e.g., a password
+manager, a file browser, etc.). This addon just makes it all explicit and
+slightly easier for developers to create.
+
+The API mirrors the Mozilla Add-ons SDK API, so there is little new for
 developers to learn who are familiar with this API. It is also hoped
 that this API might be mirrored in other browsers in the future.
+
+Access is granted to specific URLs, not including the query string/hash.
+Privileges do not apply site or even folder wide (to allow a greater sense
+of security and choice in case a website allows third party add-ons
+which may seek their own privileges).
+
+Usage of the options dialog
+=====================
+
+![Options dialog](https://raw.github.com/brettz9/asyouwish/master/data/ayw-options/options-screenshot.png "Options dialog")
+
+While I hope to simplify the dialog in the future for the average user,
+AsYouWish currently offers a rather high degree of
+control over exactly what privileges can be approved or even requested
+and from what sites or types of sites privileges may be requested.
+
+A site can be allowed the ability to REQUEST a privilege (though
+you will still have to approve the request) by one of the following means:
+
+1. Enable "Allow privilege requests from all protocols" (which will also enable
+"Allow privilege requests from all websites whose protocols are allowed"). This
+is the most dangerous option as it can cause a security risk if you approve
+privileges even to trusted sites (if a hacker can get between you and the
+site). This is not recommended.
+2. "Allow privilege requests from all websites whose protocols are allowed"
+with the particular protocol, added to the "Allowed protocols" list. This is less
+risky than #1, but can still face the same danger as #1 if non-secure protocols
+like "http" are allowed. By default only "https" and "file" protocols are allowed,
+as they should hopefully not be subject to any kind of man-in-the-middle
+attack (though they can still be dangerous if the originating site is malicious
+or itself subject to exploits).
+3. Add a specific website to "Allowed websites" via "Grab current website" or
+"Select local file" and then select "Allow on visit" ("Allow as addon" will
+also do so, but not all sites will work as addons, and for the
+ones that can, it may not be necessary since the site can itself request
+"addon" privileges once the site is granted the right to make requests
+via "Allow on visit"; see the '"Addon" websites' section below for more).
+This option is normally more secure than #1 or #2
+because arbitrary sites cannot request privileges, but if you whitelist
+an unsafe site or protocol, you may still be subject to danger.
+
+If none of the above are enabled, the site cannot even ask you for privileges,
+let alone be granted them, but if any one of them is enabled, the site can at
+least ask for privileges.
+
+If you want to live a little dangerously (you are not afraid of accidentally
+or mindlessly pulling the approval pulldown to say grant any site
+very dangerous privileges), you can select #2 and then any website can
+immediately request privileges without any extra hassle for you or the
+website; you can still disapprove, but it puts you a little closer to danger,
+so it is not allowed by default.
+
+You could also select #1 to allow even sites like "http" websites to ask
+you for privileges, but this is inherently dangerous because non-secure
+protocols like "http" allow hackers to potentially get between your
+browser and even a trustworthy site. This is not recommended.
+
+As far as the specific lists of websites shown in the options dialog:
+1. "Allowed websites" refers to sites which are explicitly allowed to
+REQUEST privileges. That's all.
+2. "Websites from which specific privileges have already been
+requested by the site and approved" refers to sites which can
+request and have requested privileges, AND for which the user
+has already approved privileges. These sites will also be shown in #1,
+but not all of #1 will necessarily be here.
+3. "Websites which will be executed (in hidden windows) on browser
+restart" refers to sites which have been requested by the site (or
+designated by the user) to run anytime the browser restarts (and when
+first added by the user). Such sites are also allowed to request
+privileges (so they will also appear in #1), but the user must still
+explicitly approve any other privileges that such "addon" sites
+request (before they can appear with the specifically
+approved privileges in #2).
+
+Removing an item from the allowed list, will remove it from the allowed,
+approved, and addons lists (if present).
+
+Removing from the approved list will only remove it from that list
+(since the user may still wish to allow sites the ability to request other
+privileges). Similarly, removing from the addon list, will only remove it
+there since the user may wish to still allow the site to request privileges
+without running on browser restart.
 
 "Addon" websites
 ==============
@@ -32,10 +131,30 @@ that this API might be mirrored in other browsers in the future.
 AsYouWish allows websites to be run as "addons". While these "addon"
 websites do not automatically gain additional privileges,
 they will be able to request additional privileges upon load and they are
-loaded upon browser restart in a hidden window. Note
-that even if a site has only asked for "addon" privileges, one might still
-consider it as a privacy concern for a site to know when you are loading your
-browser and may add a performance load.
+loaded in a hidden window immediately upon approval and upon
+each browser restart.
+
+This could be used, for example, to add a widget/panel to the add-on bar
+(or say add to the context menu, etc.) to function similarly to normal
+addons--except that you never need to zip up your HTML file (though the
+site can take advantage of HTML5 features for offline caching).
+
+Currently, "Allow as addon" does not automatically give privileges--though
+it can request them; it simply means it will be launched in a hidden window
+on each restart (and when first chosen).
+
+Note however that even if a site has only asked for "addon" privileges,
+one might still consider it as a privacy concern for a site to know when
+you are loading your browser and may add a performance load.
+
+Regarding the distinction between an addon and regular privileged site,
+normally the site will determine which way it will run. However, one can
+install from a local file, for example, and the file could be designed to be
+usable either as an addon and/or as a regular site, so that choice is
+made available (e.g., if you only want a global context menu to appear when
+you are ready to work on such a project, you can bookmark the page
+without adding the page as an "addon", while other users might wish
+to always see the functionality upon browser restarts).
 
 One may use AsYouWish's options (its icon is in the add-on bar) to remove
 a site from being treated as an add-on, but if you have assigned privileges
@@ -157,6 +276,13 @@ This is similar to these technologies, but the aim is to be potentially
 cross-browser (and
 enablePrivilege is [out the door](https://bugzilla.mozilla.org/show_bug.cgi?id=546848) now in Firefox).
 
+While this addon does not allow you to use the same old API, a similar level of trust with
+sites being able to request privileges if from a signed script, can be
+enforced by enabling the options checkbox "Allow privilege requests from all
+websites whose protocols are allowed". Then
+you will not need to first add sites to the allowed whitelist (see the "Usage
+of the options dialog" section though on security concerns).
+
 Comparison to [Microsoft HTA](http://en.wikipedia.org/wiki/HTML_Application) (HTML Application) files
 ===========================================
 
@@ -209,14 +335,15 @@ formats, etc., as well as a helpless attidue that "The web is the web,
 the browser is the browser, and never the twain shall meet".
 
 (Thanks to Marvel for great comic fun (the low-res image is from Marvel's
-copyrighted work) and thanks to the
-[Marvel Database](http://forums.marveldatabase.com) for scanning the image!)
+copyrighted work) and thanks to the folks (Supermorff and m1shawhan) at the
+[Marvel Database](http://forums.marveldatabase.com) for finding and
+scanning the image!)
 
-![Molecule Man being given his insights](https://raw.github.com/brettz9/asyouwish/master/copyrighted/Marvel%20Super%20Heroes%20Secret%20Wars%20Vol%201%2011%20p6.jpg "Molecule Man gaining insights")
+![Molecule Man being given his insights](https://raw.github.com/brettz9/asyouwish/master/restricted-copyright/Marvel%20Super%20Heroes%20Secret%20Wars%20Vol%201%2011%20p6.jpg "Molecule Man gaining insights")
 
 Future goals (scheduled)
 ====================
-Version 0.5: 
+Version 0.6:
 * More precise control by the user or site over namespaced shared storage.
 
 Possible future goals
