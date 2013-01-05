@@ -37,8 +37,8 @@ window.addEventListener('x-unload', function () {
 
             // Didn't work
             var Cc = chrome.Cc,
-                Ci = chrome.Ci;
-            mainWindow = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator).getMostRecentWindow(null);
+                Ci = chrome.Ci,
+                mainWindow = Cc['@mozilla.org/appshell/window-mediator;1'].getService(Ci.nsIWindowMediator).getMostRecentWindow(null);
             mainWindow.alert('unloading');
         }
         catch(e) {
@@ -47,6 +47,7 @@ window.addEventListener('x-unload', function () {
     });
 });
     
+// throw alert(AsYouWish.isRegistered({version: '0.1', license: 'BSD'}));
 
 if (!AsYouWish.isRegistered()) {
     try {
@@ -102,7 +103,7 @@ else {
                         'window.addEventListener("click", function () {self.postMessage();});' +
                         'self.on("message", function (msg) {alert(msg);});' + // we add events here, as adding in the HTML in the next line does not allow privileged access
                         '\nwindow.addEventListener("load", function () {document.body.innerHTML= "' + document.body.innerHTML.replace(/"/g, '\\"').replace(/\r?\n/g, ' ') + '"});'
-                    })
+                    });
                     testWidget = widget.Widget({
                         id: "brettz9test",
                         label: "My testing Widget",
