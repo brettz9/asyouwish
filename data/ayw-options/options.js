@@ -64,11 +64,23 @@ Object.defineProperty(HTMLSelectElement.prototype, 'selectedOptions', {get: func
 */
 } // end shim block
 
+var localeHolders = {};
 
 // UTILITIES
 function $ (sel) {
     var results = document.querySelectorAll(sel);
     return results.length === 1 ? results[0] : results;
+}
+
+/**
+* Localization helper; passed locale key, additional parameters,
+*  and finally the callback to be executed when the info is retrieved.
+* @param {String} The key of the locale string to find
+*/
+function _ (key) {
+    var args = arguments;
+    localeHolders[key] = args[args.length - 1];
+    self.port.emit('_', Array.prototype.slice.call(args, 0, -1));
 }
 
 function emptyElement (selector) {
@@ -92,6 +104,9 @@ function makeOption(text, value, tooltip) {
     return option;
 }
 
+/**
+* Not in use
+*/
 function optionFromSelectByValueRemover (sel) {
     return function (value) {
         Array.from($(sel).options).forEach(function (item) {
@@ -164,7 +179,6 @@ $('#allowAllWebsites').addEventListener('click', function (e) {
     var checked =e.target.checked;
     self.port.emit('allowAllWebsites', checked); // Response would be in allowedAllWebsites (not in use)
 });
-
 $('#removeApprovedWebsites').addEventListener('click', function (e) {
     self.port.emit(
         'removeApprovedWebsites', // Responses will be in setWebsitesApproved
@@ -215,6 +229,11 @@ $('#whitelistedPrivileges').addEventListener('change', function (e) {
 
 // EXTERNAL EVENTS
 
+self.port.on('_', function (args) { // Originates from '_' event in this page
+    var key = args[0], str = args[1];
+    localeHolders[key](str);
+});
+
 // ..........PROTOCOL-RELATED..............
 // Setup
 self.port.on('setAllowAllProtocols', function (setting) { // Originates from main.js (on load)
@@ -245,25 +264,43 @@ self.port.on('setAllowedWebsites', function (websites) { // Originates from main
 });
 self.port.on('setWebsitesApproved', function (websites, approvedPrivs) { // Originates from main.js (on load)
     emptyElement('#websitesApproved');
-    websites.forEach(function (website, i) {
-        insertOption('#websitesApproved', makeOption(website + ' (' + approvedPrivs[i].join(', ') + ')', website));
+    _("approvedPrivJoiner", function (joiner) {
+        websites.forEach(function (website, i) {
+            _("approvedPrivOption", website, approvedPrivs[i].join(joiner), function (optionStr) {
+                insertOption('#websitesApproved', makeOption(optionStr, website));
+            });
+        });
     });
 });
 
-function addonConfigTooltip (obj) {
-    return function (prev, key) {
-        prev += '\n' + key + ': ' + ((obj && obj[key]) || '(none)');
-    };
+function addonConfigTooltip (arr, obj, cb) {
+    var arrayFinal = arr.length - 1;
+    arr.forEach(function (key, i) {
+        _("(none)", (function (key, i) {
+            return function (none) {
+                _("addonConfigTooltip", key, (obj && obj[key]) || none, function (tooltip) {
+                    cb(tooltip, i === arrayFinal);
+                });
+            };
+        }(key, i)));
+    });
 }
 self.port.on('setAddonWebsites', function (config) { // Originates from main.js (dynamically)
     var websites = Object.keys(config);
     emptyElement('#addonWebsites');
     websites.forEach(function (website) {
-        var tooltip = ['name', 'description', 'version', 'license'].reduce(
-            addonConfigTooltip(config[website]),
-            ['name', 'url'].reduce(addonConfigTooltip(config[website].developer), website)
-        );
-        insertOption('#addonWebsites', makeOption(website, null, tooltip));
+        var tooltip = website;
+        addonConfigTooltip(['name', 'url'], config[website].developer, function (t, arrayFinal) {
+            tooltip += t;
+            if (arrayFinal) {
+                addonConfigTooltip(['name', 'description', 'version', 'license'], config[website], function (t, arrayFinal) {
+                    tooltip += t;
+                    if (arrayFinal) {
+                        insertOption('#addonWebsites', makeOption(website, null, tooltip));
+                    }
+                });
+            }
+        });
     });
 });
 
