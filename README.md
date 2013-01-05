@@ -125,6 +125,15 @@ privileges). Similarly, removing from the addon list, will only remove it
 there since the user may wish to still allow the site to request privileges
 without running on browser restart.
 
+Finally, the whitelisting of specific privileges (if the checklist is enabled
+to enforce the whitelist) will prevent any privileges
+from being requested or granted (even if the site is otherwise allowed
+to request privileges). Tooltips are available to explain the APIs at
+some level, but these are only my layman's understanding of the API
+so if in doubt, please see the [SDK documentation](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/).
+Note that requests to act as an addon are not handled (or prevented)
+by this whitelist.
+
 "Addon" websites
 ==============
 
