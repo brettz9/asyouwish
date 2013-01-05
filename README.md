@@ -150,7 +150,7 @@ but this section will focus on AsYouWish.
 
 With AsYouWish, if you as a developer are not careful, a hacker could
 present links to your user that when clicked will bring the user to a page
-at your site which will cause the user's  bank passwords to be read,
+at your site which will cause the user's bank passwords to be read,
 their files to be read, sent, or deleted, visits to other sites made while
 logged in--taking advantage of any information which the user has input
 into their browser (not just for your site) such as open tabs or history,
