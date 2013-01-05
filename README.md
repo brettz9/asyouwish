@@ -22,6 +22,10 @@ Privileges do not apply site or even folder wide to allow a greater sense
 of security and choice in case a website allows third party add-ons
 which may seek their own privileges.
 
+The API mirrors the Mozilla Add-ons SDK API, so there is little for
+developers to learn who are familiar with this API. It is also hoped
+that this API might be mirrored in other browsers in the future.
+
 "Addon" websites
 ==============
 
@@ -233,6 +237,8 @@ initial permissions if the user agrees to permit such a store.
 6. Allow a means of forking a website which indicated its content could
 be installed under given licenses (or even if not, could allow client-side
 forking).
+7. Allow websites to register their own modules for possible inclusion
+by other sites.
 
 Some additional intended use cases
 ==================================
