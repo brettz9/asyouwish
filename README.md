@@ -364,7 +364,9 @@ Possible future goals
 add-ons (which show up in the add-ons menu as well as being available at
 restart) without an XPI file and without needing to write one's own
 complex loading code.
-3. Blacklists might be a nice addition when whitelists are off.
+3. Blacklists might be a nice addition when whitelists are off (and allow
+additional refuse option to remove a site from allowed sites so
+it can't request privileges again, and/or to blacklist it).
 4. Add localizations (i18n is done)
 5. Addon website store(s): let sites register themselves as stores, integrating
 with receipts, licenses, etc., and allowing, e.g., searching and display of
@@ -377,8 +379,6 @@ be installed under given licenses (or even if not, could allow client-side
 forking).
 7. Allow websites to register their own modules for possible inclusion
 by other sites.
-8. Allow additional refuse option to remove a site from allowed sites so
-it can't request privileges again.
 
 Some additional intended use cases
 ==================================
