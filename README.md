@@ -53,6 +53,10 @@ Usage of the options dialog
 
 ![Options dialog](https://raw.github.com/brettz9/asyouwish/master/data/ayw-options/options-screenshot.png "Options dialog")
 
+To see the options dialog icon (which must be clicked to see the options),
+you will need to open the Add-on Bar (View->Toolbars->Add-on Bar (or
+Options->Add-on Bar).
+
 While I hope to simplify the dialog in the future for the average user,
 AsYouWish currently offers a rather high degree of
 control over exactly what privileges can be approved or even requested
