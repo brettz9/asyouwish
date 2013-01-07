@@ -356,34 +356,6 @@ scanning the image!)
 
 ![Molecule Man being given his insights](https://raw.github.com/brettz9/asyouwish/master/restricted-copyright/Marvel%20Super%20Heroes%20Secret%20Wars%20Vol%201%2011%20p6.jpg "Molecule Man gaining insights")
 
-Future goals (scheduled)
-====================
-Version 0.6:
-* More precise control by the user or site over namespaced shared storage.
-
-Possible future goals
-=================
-1. Expose custom APIs for nsIProcess and IndexedDB (if SDK does not do so)
-2. If at all possible, I would like to expose the ability to create genuine
-add-ons (which show up in the add-ons menu as well as being available at
-restart) without an XPI file and without needing to write one's own
-complex loading code.
-3. Blacklists might be a nice addition when whitelists are off (and allow
-additional refuse option to remove a site from allowed sites so
-it can't request privileges again, and/or to blacklist it).
-4. Add localizations (i18n is done)
-5. Addon website store(s): let sites register themselves as stores, integrating
-with receipts, licenses, etc., and allowing, e.g., searching and display of
-featured "addon" websites within AsYouWish's "addon" websites manager via an
-open API (and not limited to even just one store at a time) and perhaps
-allowing a whole site to be deemed trustworthy upon
-initial permissions if the user agrees to permit such a store.
-6. Allow a means of forking a website which indicated its content could
-be installed under given licenses (or even if not, could allow client-side
-forking).
-7. Allow websites to register their own modules for possible inclusion
-by other sites.
-
 Some additional intended use cases
 ==================================
 
@@ -486,6 +458,34 @@ at that time with content-document-global-created event.
 5. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
 for a possible means around it (though probably better to move away from XUL
 unless supported by XBL).
+
+Future goals (scheduled)
+====================
+Version 0.6:
+* More precise control by the user or site over namespaced shared storage.
+
+Possible future goals
+=================
+1. Expose custom APIs for nsIProcess and IndexedDB (if SDK does not do so)
+2. If at all possible, I would like to expose the ability to create genuine
+add-ons (which show up in the add-ons menu as well as being available at
+restart) without an XPI file and without needing to write one's own
+complex loading code.
+3. Blacklists might be a nice addition when whitelists are off (and allow
+additional refuse option to remove a site from allowed sites so
+it can't request privileges again, and/or to blacklist it).
+4. Add localizations (i18n is done)
+5. Addon website store(s): let sites register themselves as stores, integrating
+with receipts, licenses, etc., and allowing, e.g., searching and display of
+featured "addon" websites within AsYouWish's "addon" websites manager via an
+open API (and not limited to even just one store at a time) and perhaps
+allowing a whole site to be deemed trustworthy upon
+initial permissions if the user agrees to permit such a store.
+6. Allow a means of forking a website which indicated its content could
+be installed under given licenses (or even if not, could allow client-side
+forking).
+7. Allow websites to register their own modules for possible inclusion
+by other sites.
 
 Name
 ====
