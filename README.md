@@ -2,7 +2,8 @@ asyouwish
 =========
 
 AsYouWish is a browser add-on (currently Firefox only) to allow requests for browser
-privileges to be made from regular HTML.
+privileges to be made from regular HTML. The latest release should be at
+https://addons.mozilla.org/en-US/addon/as-you-wish/ .
 
 ***Using this add-on is at this point still potentially quite dangerous, e.g.,
 to your data (not only browser data) so don't install--especially at this
@@ -457,7 +458,7 @@ at that time with content-document-global-created event.
     that can be overridden?)
 5. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
 for a possible means around it (though probably better to move away from XUL
-unless supported by XBL).
+unless standard support is added in the future for XBL).
 
 Future goals (scheduled)
 ====================
