@@ -488,6 +488,8 @@ be installed under given licenses (or even if not, could allow client-side
 forking).
 7. Allow websites to register their own modules for possible inclusion
 by other sites.
+8. Allow x-unload event for event about removal of privileges for normal
+privileged sites.
 
 Name
 ====
