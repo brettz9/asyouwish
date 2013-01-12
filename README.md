@@ -459,6 +459,7 @@ at that time with content-document-global-created event.
 5. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
 for a possible means around it (though probably better to move away from XUL
 unless standard support is added in the future for XBL).
+6. The sync API can only be used currently to return one privileged object
 
 Future goals (scheduled)
 ====================
