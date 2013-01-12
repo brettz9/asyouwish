@@ -20,7 +20,7 @@ This same page:
     a) mainWindow = getMainWindowFromChildWindow(subject);
 */
 
-var Panel,
+var Panel, testWidget,
     errBack = function errBack (error, error2, error3) {
         document.getElementById('errs').
             appendChild(document.createTextNode('Error type: ' + error + (error2 ? ' ' + error2 : '') + (error3 ? ' ' + error3 : '') + '\n'));
@@ -29,6 +29,7 @@ var Panel,
     };
 
 window.addEventListener('x-unload', function () {
+    testWidget.destroy();
     console.log('unloaded addon demo');
     AsYouWish.requestPrivs(['chrome', 'windows'], function (chrome, windows) {
         try {
@@ -85,7 +86,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     'self.on("message", function (msg) {alert(msg);});' + // we add events here, as adding in the HTML in the next line does not allow privileged access
                     '\nwindow.addEventListener("load", function () {document.body.innerHTML= "' + document.body.innerHTML.replace(/"/g, '\\"').replace(/\r?\n/g, ' ') + '"});'
                 });
-                widget.Widget({
+                testWidget = widget.Widget({
                     id: "brettz9test",
                     label: "My testing Widget",
                     contentURL: "http://www.mozilla.org/favicon.ico",
