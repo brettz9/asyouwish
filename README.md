@@ -440,11 +440,11 @@ __exposedProps__ requirement with functions).
 Known Issues
 ===========
 1. Memory leaks?; see https://github.com/brettz9/asyouwish/issues/3
-    a. Resources?
-        https://blog.mozilla.org/nnethercote/category/aboutmemory/
-        https://wiki.mozilla.org/Performance/MemShrink
-        https://wiki.mozilla.org/Performance:Leak_Tools
-    b. "can't access dead object" errors
+    1. Resources?
+        * https://blog.mozilla.org/nnethercote/category/aboutmemory/
+        * https://wiki.mozilla.org/Performance/MemShrink
+        * https://wiki.mozilla.org/Performance:Leak_Tools
+    2. "can't access dead object" errors
 2. FF 19/20 compatibility (including privacy mode support)
 3. Privileges don't load on initial browser load as apparently not injected
 at that time with content-document-global-created event.
