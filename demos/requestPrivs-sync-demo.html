@@ -20,7 +20,9 @@ window.addEventListener('DOMContentLoaded', function () {
         var xhr = AsYouWish.requestPrivs('sdk/net/xhr');
         if (!xhr) {
             var c = confirm('I have approved the XHR request');
-            window.location.reload();
+            if (c) {
+                window.location.reload();
+            }
             return;
         }
         var x = new xhr.XMLHttpRequest();
