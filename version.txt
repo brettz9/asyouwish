@@ -3,6 +3,10 @@ Planned for 0.6:
 
 Version notes:
 
+0.5.1
+* Support up to Firefox 20a1
+* Internal code improvement: attempt to address some can't access dead object errors (missing windows)
+
 0.5
 * Security improvement: Require register() calls to first be allowed to ask to serve as an addon.
 * Security improvement: Allow "x-register" to be added to the enforced whitelist to allow prevention of addon registration requests
