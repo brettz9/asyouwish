@@ -73,7 +73,7 @@ window.addEventListener('DOMContentLoaded', function () {
             return document.querySelector(sel);
         },
         // errBack = false; // Try default (only alerts when refused)
-        clipboard = function () {
+        clipboard = function clipboard () {
         
             AsYouWish.requestPrivs(['clipboard'], function (clip) {
                 try {
@@ -111,7 +111,7 @@ window.addEventListener('DOMContentLoaded', function () {
                         id: "brettz9test",
                         label: "My testing Widget",
                         contentURL: "http://www.mozilla.org/favicon.ico",
-                        //content: document.body.innerHTML // This didn't work well, as this provides HTML to show ON add-on bar--we instead want panel and panel only support contentURL, not content (though as below, contentScript can be used to inject content)
+                        //content: document.body.innerHTML // This will provide HTML to show ON add-on bar--we instead want panel and panel only support contentURL, not content (though as below, contentScript can be used to inject content)
                         panel: Panel
                     });
                 }
@@ -124,8 +124,6 @@ window.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
-
-
 </script>
 </head><body>
 <div id="errs"></div>
