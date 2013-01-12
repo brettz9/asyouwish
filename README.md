@@ -439,13 +439,14 @@ __exposedProps__ requirement with functions).
 
 Known Issues
 ===========
+0. FF 19/20 compatibility
 1. Memory leaks?; see https://github.com/brettz9/asyouwish/issues/3
     1. Resources?
         * https://blog.mozilla.org/nnethercote/category/aboutmemory/
         * https://wiki.mozilla.org/Performance/MemShrink
         * https://wiki.mozilla.org/Performance:Leak_Tools
     2. "can't access dead object" errors
-2. FF 19/20 compatibility (including privacy mode support)
+2. The sync API can only be used currently to return one privileged object
 3. Privileges don't load on initial browser load as apparently not injected
 at that time with content-document-global-created event.
 4. instanceof issues with chrome content
@@ -459,7 +460,6 @@ at that time with content-document-global-created event.
 5. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
 for a possible means around it (though probably better to move away from XUL
 unless standard support is added in the future for XBL).
-6. The sync API can only be used currently to return one privileged object
 
 Future goals (scheduled)
 ====================
