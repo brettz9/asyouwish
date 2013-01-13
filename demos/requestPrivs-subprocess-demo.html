@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<script>
+/*globals alert, document, window, AsYouWish*/
+
+window.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+
+    var errBack = function (error) {
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error type: ' + error + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+    
+    var test = {
+        assert: function (value, msg) {
+            if (!value) {
+                alert(msg);
+            }
+        },
+        assertEqual: function (n1, n2, msg) {
+            if (n1 !== n2) {
+                alert(msg);
+            }
+        },
+        fail: function (msg) {
+            alert(msg);
+            throw msg;
+        },
+        done: function () {
+            alert('Done!');
+        }
+    };
+
+    try {
+        AsYouWish.requestPrivs(['chrome', 'x-subprocess'], function (chrome, subprocess) {
+            var Cc = chrome.Cc, Ci = chrome.Ci,
+                env = Cc["@mozilla.org/process/environment;1"].getService(Ci.nsIEnvironment),
+                envTestValue = "OK",
+                gotStdout = false;
+
+            try {
+  var p = subprocess.call({
+    // Retrieve windows cmd.exe path from env
+    command: env.get('ComSpec'),
+    // In order to execute a simple "echo" function
+    arguments: ['/C', 'echo %ENV_TEST%'], // ' & type CON' should display stdin, but doesn't work
+    // Printing an environnement variable set here by the parent process
+    environment: ['ENV_TEST='+envTestValue],
+    
+    stdin: function(stdin) {
+      // Win32 command line is not really made for stdin
+      // So it doesn't seems to work as it's hard to retrieve stdin
+      stdin.write("stdin");
+      stdin.close();
+    },
+    stdout: function(data) {
+      test.assert(!gotStdout,"don't get stdout twice");
+      test.assertEqual(data,envTestValue+"\r\n","stdout contains the environment variable");
+      gotStdout = true;
+    },
+    stderr: function(data) {
+      test.fail("shouldn't get stderr");
+    },
+    done: function(d) {
+      alert(d.exitCode + '::' + d.stdout + '::' + d.stderr);
+      test.assert(gotStdout, "got stdout before finished");
+      test.done();
+    },
+    mergeStderr: false
+  });
+            }
+            catch (e) {
+                alert('Page callback error' + e);
+            }
+        }, errBack);
+
+    } catch (e) {
+        alert('page error: ' + e);
+    }
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+</body></html>

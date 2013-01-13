@@ -445,7 +445,7 @@ Known Issues
         * https://wiki.mozilla.org/Performance/MemShrink
         * https://wiki.mozilla.org/Performance:Leak_Tools
     2. "can't access dead object" errors
-2. FF 19/20 compatibility (including privacy mode support)
+2. The sync API can only be used currently to return one privileged object
 3. Privileges don't load on initial browser load as apparently not injected
 at that time with content-document-global-created event.
 4. instanceof issues with chrome content
@@ -459,7 +459,6 @@ at that time with content-document-global-created event.
 5. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
 for a possible means around it (though probably better to move away from XUL
 unless standard support is added in the future for XBL).
-6. The sync API can only be used currently to return one privileged object
 
 Future goals (scheduled)
 ====================
@@ -468,7 +467,7 @@ Version 0.6:
 
 Possible future goals
 =================
-1. Expose custom APIs for nsIProcess and IndexedDB (if SDK does not do so)
+1. Expose custom APIs for (shareable) IndexedDB (if SDK does not do so)
 2. If at all possible, I would like to expose the ability to create genuine
 add-ons (which show up in the add-ons menu as well as being available at
 restart) without an XPI file and without needing to write one's own
@@ -488,6 +487,8 @@ be installed under given licenses (or even if not, could allow client-side
 forking).
 7. Allow websites to register their own modules for possible inclusion
 by other sites.
+8. Allow x-unload event for event about removal of privileges for normal
+privileged sites.
 
 Name
 ====

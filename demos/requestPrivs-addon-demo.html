@@ -20,7 +20,7 @@ This same page:
     a) mainWindow = getMainWindowFromChildWindow(subject);
 */
 
-var Panel,
+var Panel, testWidget,
     errBack = function errBack (error, error2, error3) {
         document.getElementById('errs').
             appendChild(document.createTextNode('Error type: ' + error + (error2 ? ' ' + error2 : '') + (error3 ? ' ' + error3 : '') + '\n'));
@@ -29,6 +29,7 @@ var Panel,
     };
 
 window.addEventListener('x-unload', function () {
+    testWidget.destroy();
     console.log('unloaded addon demo');
     AsYouWish.requestPrivs(['chrome', 'windows'], function (chrome, windows) {
         try {
@@ -45,7 +46,10 @@ window.addEventListener('x-unload', function () {
         }
     });
 });
-    
+
+// throw alert(AsYouWish.getPossiblePrivs());
+// throw alert(AsYouWish.isRegistered({version: '0.1', license: 'BSD'}));
+
 window.addEventListener('DOMContentLoaded', function () {
     var $ = function (sel) {
         return document.querySelector(sel);
@@ -80,16 +84,21 @@ window.addEventListener('DOMContentLoaded', function () {
                         console.log('inside onMessage');
                         clipboard();
                     },
-                    contentScript: errBack.toString() + '\n' + clipboard.toString() + 
-                    'window.addEventListener("click", function () {self.postMessage();});' +
-                    'self.on("message", function (msg) {alert(msg);});' + // we add events here, as adding in the HTML in the next line does not allow privileged access
-                    '\nwindow.addEventListener("load", function () {document.body.innerHTML= "' + document.body.innerHTML.replace(/"/g, '\\"').replace(/\r?\n/g, ' ') + '"});'
+                    // This property had not been required earlier as we
+                    //   could use contentScript instead, but this has the
+                    //   bonus of separating concerns anyhow
+                    contentURL: 'data:text/html;charset=utf-8,' + encodeURIComponent(
+                        document.body.innerHTML
+                    ),
+                    contentScript:
+                        'window.addEventListener("click", function () {self.postMessage();});' +
+                        'self.on("message", function (msg) {alert(msg);});' // we add events here, as adding in the HTML in the next line does not allow privileged access
                 });
-                widget.Widget({
+                testWidget = widget.Widget({
                     id: "brettz9test",
                     label: "My testing Widget",
                     contentURL: "http://www.mozilla.org/favicon.ico",
-                    //content: document.body.innerHTML // This didn't work well, as this provides HTML to show ON add-on bar--we instead want panel and panel only support contentURL, not content (though as below, contentScript can be used to inject content)
+                    //content: document.body.innerHTML // This will provide HTML to show ON add-on bar--we instead want panel and panel only support contentURL, not content (though as below, contentScript can be used to inject content)
                     panel: Panel
                 });
             }

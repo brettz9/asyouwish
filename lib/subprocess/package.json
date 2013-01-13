@@ -1,0 +1,1 @@
+{"license": "", "description": "Fork of jetpack-subprocess for use within Add-on builder site", "contributors": [], "author": "brettz9", "url": "", "dependencies": ["api-utils"], "version": "initial.rev14", "lib": "lib", "fullName": "subprocess", "main": "lib/index", "id": 158632, "name": "subprocess"}
