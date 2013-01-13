@@ -94,7 +94,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 alert('Page callback error' + e);
             }
         },
-        execute = function (cmd) {
+        execute = function () {
             var value = $('#command').value;
             if (value) {
                 executeCommand(value);
@@ -111,12 +111,18 @@ window.addEventListener('DOMContentLoaded', function () {
                 var Cc = chrome.Cc, Ci = chrome.Ci;
                 // For values to get on env, see http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/ntcmds_shelloverview.mspx?mfr=true
                 env = Cc["@mozilla.org/process/environment;1"].getService(Ci.nsIEnvironment);
-                subprocess = subprocessObj;
 
+                if (!env.get('OS') || !env.get('OS').match(/Windows/)) {
+                    alert('This command line demo currently only works in Windows.');
+                    return;
+                }
+
+                subprocess = subprocessObj;
                 $('#execute').addEventListener('click', function () {
                     execute();
                 });
                 $('#command').addEventListener('keypress', function (e) {
+                    // More keyboard events documented at https://developer.mozilla.org/en-US/docs/DOM/KeyboardEvent
                     switch(e.keyCode) {
                         case KeyboardEvent.DOM_VK_RETURN:
                             execute();
