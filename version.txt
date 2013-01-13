@@ -11,6 +11,8 @@ Version notes:
 utilize within subprocess and command line demos
 * API fix: Restore sync API (but only allows one object to be returned)
 * Other coding improvements
+* Allow x-unload event for event about removal of privileges for normal
+privileged sites.
 
 0.5
 * Security improvement: Require register() calls to first be allowed to ask to serve as an addon.
