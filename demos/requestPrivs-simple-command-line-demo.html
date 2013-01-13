@@ -12,9 +12,13 @@ textarea {
 /**
 Possible todos:
 1) Store command history and index in localStorage?
-2) Allow for user specification of other command executable or arguments? See http://www.computerhope.com/cmd.htm
+2) Allow for user specification of other command executable or arguments?
+    See:
+        http://www.computerhope.com/cmd.htm
+        http://www.computerhope.com/msdos.htm#02
+        http://www.computerhope.com/overview.htm
 3) Option to make as real command-line
-4) Parse COLOR or any other commands pertaining to the console window
+4) Parse other commands pertaining solely to the console window (as COLOR)
 */
 
 window.addEventListener('DOMContentLoaded', function () {
@@ -32,15 +36,87 @@ window.addEventListener('DOMContentLoaded', function () {
         envObj = {},
         cmdArr = [],
         cmdIndex = 0,
-        executeCommand = function (cmd, skipHistory) {
-            if (!skipHistory && (!lastCommand || cmd !== lastCommand)) {
-                cmdIndex = cmdArr.push(cmd);
-                lastCommand = cmd;
+        defaultBackgroundColor = '0',
+        defaultTextColor = '7',
+        commands = {
+            'COLOR': {
+                expression: '([\\da-f])?([\\da-f])?',
+                empty: true, // We will use same handler if the command is completely empty (not even any whitespace afterward needed)
+                validator: function (match, matches) {
+                        // Check that foreground and background color are not the same
+                    return (!matches[3] && (!matches[2] || matches[2] !== defaultBackgroundColor)) || 
+                                    (matches[3] && (matches[2] !== matches[3]));
+                },
+                behavior: function (match, matches) {
+                    function getColor (color) {
+                        return ['black', 'blue', 'green', 'aqua',
+                                        'DarkRed', // 'red',
+                                        'purple',
+                                        'olive', // 'yellow'
+                                        'white', 'gray',
+                                        'lightblue', 'lightgreen',
+                                        'aquamarine', // '#6FFFC3', // 'light aqua',
+                                        'red', // 'light red',
+                                        'Violet', // 'light purple',
+                                        'yellow', // 'LightYellow',
+                                        'WhiteSmoke', // 'bright white'
+                                    ][parseInt(color, 16)];
+                    }
+                    function setColors (foregroundNumber, backgroundNumber) {
+                        var style = $('#command-line-output').style;
+                        style.color = getColor(foregroundNumber);
+                        style.backgroundColor = getColor(backgroundNumber);
+                    }
+                    if (!matches[2]) { // If no colors are given, just revert to defaults
+                        matches[3] = defaultTextColor;
+                        matches[2] = defaultBackgroundColor;
+                    }
+                    else if (!matches[3]) {
+                        matches[3] = matches[2];
+                        matches[2] = defaultBackgroundColor;
+                    }
+                    setColors(matches[3], matches[2]);
+                    return true; // DIscontinues need for submission to real command line for output
+                }
+            }
+        },
+        buildCommandRegex = function (command, valExp, flags, emptyPossible) {
+            return new RegExp('\\s*' + command + '\\s' + (emptyPossible ? '*' : '+') +'(' + valExp + ')$', flags || 'i'); 
+        },
+        matchCommandRegex = function (userCommand, command, valExp, flags, emptyPossible) {
+            return userCommand.match(buildCommandRegex(command, valExp, flags, emptyPossible));
+        },
+        executeHandlerOnMatch = function () {
+            var args = [].slice.call(arguments),
+                argl = args.length,
+                matches = matchCommandRegex.apply(null, args.slice(0, -2)),
+                validator = args[argl - 2],
+                behavior = args[argl - 1];
+            if (matches && (!validator || validator(matches[1], matches))) {
+                return behavior(matches[1], matches); // Will always be at least one match per our definition in buildCommandRegex
+            }
+        },
+        handleCommands = function (userCommand, commands) {
+            return Object.keys(commands).some(function (command) {
+                var obj = commands[command];
+                return executeHandlerOnMatch.apply(null, [userCommand, command].concat(obj.expression, obj.expressionFlags, obj.empty, obj.validator, obj.behavior));
+            });
+        },
+        processCommands = function (cmd) {
+            return handleCommands(cmd, commands);
+        },
+        executeCommand = function (userCommand, skipHistory) {
+            if (!skipHistory && (!lastCommand || userCommand !== lastCommand)) {
+                cmdIndex = cmdArr.push(userCommand);
+                lastCommand = userCommand;
             }
             try {
                 // Maintain any user environmental variables to resubmit to subsequent process calls
+                if (processCommands(userCommand)) {
+                    return;
+                }
                 var p, envKey, envArr = [],
-                    matches = cmd.match(/\s*SET\s+(([^=\s][^=]*)=(.*))$/i);
+                    matches = matchCommandRegex(userCommand, 'SET', '([^=\\s][^=]*)=(.*)');
                 if (matches) {
                     envObj[matches[2]] = matches[1];
                     return;
@@ -53,7 +129,7 @@ window.addEventListener('DOMContentLoaded', function () {
                 // alert(JSON.stringify(envArr));
                 p = subprocess.call({
                     command: env.get('ComSpec'), // Retrieve windows cmd.exe path from env
-                    'arguments': ['/C', cmd + '&&CD'], // ' & type CON' should display stdin, but doesn't work
+                    'arguments': ['/C', userCommand + '&&CD'], // ' & type CON' should display stdin, but doesn't work
                     environment: envArr,
                     workdir: workdir || (env.get('HOMEDRIVE') + env.get('HOMEPATH')),
                     /*stdout: function(data) {
@@ -67,7 +143,7 @@ window.addEventListener('DOMContentLoaded', function () {
                         }
                         var data = d.stdout.slice(0, -2),
                             newlinePos = data.lastIndexOf('\r\n');
-                        if (cmd.match(/\s*(cd|chkdir)\s+\S/i)) { // Changing directory, not another command or just asking for the current directory
+                        if (matchCommandRegex(userCommand, 'cd|chdir', '\\S')) { // Changing directory, not another command or just asking for the current directory
                             workdir = data;
                             data = '\n';
                         }
@@ -107,6 +183,7 @@ window.addEventListener('DOMContentLoaded', function () {
         };
 
     try {
+        commands.COLOR.behavior(0, []); // Set default colors for console
         AsYouWish.requestPrivs(['chrome', 'x-subprocess'], function (chrome, subprocessObj) {
             try {
                 var Cc = chrome.Cc, Ci = chrome.Ci;
