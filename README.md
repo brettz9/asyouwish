@@ -397,7 +397,8 @@ server!
 
 4. Last but not least, a Git-accessible client-side web-based
 IDE... (Firefox can execute files and processes, so if
-nothing else, some kind of command-line interface).
+nothing else, some kind of command-line interface, along the
+lines of the included command line demo).
 
 Rejected ideas
 ============
