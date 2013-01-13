@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<style>
+textarea {
+    width: 500px;
+    height: 400px;
+}
+</style>
+<script>
+/*globals alert, document, window, AsYouWish, KeyboardEvent*/
+
+/**
+Possible todos:
+1) Store command history and index in localStorage?
+2) Allow for user specification of other command executable or arguments? See http://www.computerhope.com/cmd.htm
+3) Option to make as real command-line
+*/
+
+window.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+    var env, subprocess, workdir, lastCommand,
+        $ = function (sel) {
+            return document.querySelector(sel);
+        },
+        errBack = function (error) {
+            document.getElementById('errs').
+                appendChild(document.createTextNode('Error type: ' + error + '\n'));
+            document.getElementById('errs').
+                appendChild(document.createElement('br'));
+        },
+        envObj = {},
+        cmdArr = [],
+        cmdIndex = 0,
+        executeCommand = function (cmd, skipHistory) {
+            if (!skipHistory && (!lastCommand || cmd !== lastCommand)) {
+                cmdIndex = cmdArr.push(cmd);
+                lastCommand = cmd;
+            }
+            try {
+                // Maintain any user environmental variables to resubmit to subsequent process calls
+                var p, envKey, envArr = [],
+                    matches = cmd.match(/\s*SET\s+(([^=\s][^=]*)=(.*))$/i);
+                if (matches) {
+                    envObj[matches[2]] = matches[1];
+                    return;
+                }
+                for (envKey in envObj) {
+                    if (envObj.hasOwnProperty(envKey)) {
+                        envArr.push(envObj[envKey]);
+                    }
+                }
+                // alert(JSON.stringify(envArr));
+                p = subprocess.call({
+                    command: env.get('ComSpec'), // Retrieve windows cmd.exe path from env
+                    'arguments': ['/C', cmd + '&&CD'], // ' & type CON' should display stdin, but doesn't work
+                    environment: envArr,
+                    workdir: workdir || (env.get('HOMEDRIVE') + env.get('HOMEPATH')),
+                    /*stdout: function(data) {
+                    },*/
+                    stderr: function(data) {
+                        throw alert("stderr " + data);
+                    },
+                    done: function(d) {
+                        if (!d.stdout.length) { // We return if called empty (e.g., done() gets invoked after a file is closed that was opened by the command line)
+                            return;
+                        }
+                        var data = d.stdout.slice(0, -2),
+                            newlinePos = data.lastIndexOf('\r\n');
+                        if (cmd.match(/\s*(cd|chkdir)\s+\S/i)) { // Changing directory, not another command or just asking for the current directory
+                            workdir = data;
+                            data = '\n';
+                        }
+                        else {
+                            workdir = data.slice(newlinePos + 2);
+                            data = data.slice(0, newlinePos) + '\n';                        
+                        }
+
+                        switch ($('#output-type').value) {
+                            case 'append':
+                                $('#command-line-output').value += data;
+                                break;
+                            case 'prepend':
+                                $('#command-line-output').value = data + $('#command-line-output').value;
+                                break;
+                            case 'replace':
+                                $('#command-line-output').value = data;
+                                break;
+                        }
+                    },
+                    mergeStderr: false
+                });
+            }
+            catch (e) {
+                alert('Page callback error' + e);
+            }
+        },
+        execute = function (cmd) {
+            var value = $('#command').value;
+            if (value) {
+                executeCommand(value);
+                $('#command').value = '';
+            }
+            else {
+                executeCommand('echo.', true);
+            }
+        };
+
+    try {
+        AsYouWish.requestPrivs(['chrome', 'x-subprocess'], function (chrome, subprocessObj) {
+            try {
+                var Cc = chrome.Cc, Ci = chrome.Ci;
+                // For values to get on env, see http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/ntcmds_shelloverview.mspx?mfr=true
+                env = Cc["@mozilla.org/process/environment;1"].getService(Ci.nsIEnvironment);
+                subprocess = subprocessObj;
+
+                $('#execute').addEventListener('click', function () {
+                    execute();
+                });
+                $('#command').addEventListener('keypress', function (e) {
+                    switch(e.keyCode) {
+                        case KeyboardEvent.DOM_VK_RETURN:
+                            execute();
+                            break;
+                        case KeyboardEvent.DOM_VK_UP:
+                            if (!cmdArr.length) { // Blank out if no stack yet (and nothing more)
+                                e.target.value = '';
+                                return;
+                            }
+                            if (cmdIndex > 0) { // Don't decrement below 0
+                                cmdIndex--;
+                            }
+                            e.target.value = cmdArr[cmdIndex];
+                            break;
+                        case KeyboardEvent.DOM_VK_DOWN:
+                            if (!cmdArr.length) { // Don't change value if no stack yet
+                                return;
+                            }
+                            if (cmdIndex < cmdArr.length - 1) { // Don't increment past array length
+                                cmdIndex++;
+                            }
+                            e.target.value = cmdArr[cmdIndex];
+                            break;
+                    }
+                });
+                $('#command-line').style.display = 'block';
+                $('#command').select();
+             }
+            catch (e) {
+                alert('Page callback error' + e);
+            }
+        }, errBack);
+
+    } catch (e) {
+        alert('page error: ' + e);
+    }
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+<div id="command-line" style="display:none;">
+
+Command <input size="100" type="text" id="command" placeholder="echo Hello World!" />
+<button id="execute">Execute</button>
+<textarea id="command-line-output"></textarea>
+<label>Output type
+    <select id="output-type">
+        <option value="append">Append</option>
+        <option value="prepend" selected="selected">Prepend</option>
+        <option value="replace">Replace</option>
+    </select>
+</label>
+</div>
+
+</body></html>

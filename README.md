@@ -468,7 +468,7 @@ Version 0.6:
 
 Possible future goals
 =================
-1. Expose custom APIs for nsIProcess and IndexedDB (if SDK does not do so)
+1. Expose custom APIs for IndexedDB (if SDK does not do so)
 2. If at all possible, I would like to expose the ability to create genuine
 add-ons (which show up in the add-ons menu as well as being available at
 restart) without an XPI file and without needing to write one's own
