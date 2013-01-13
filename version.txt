@@ -4,9 +4,13 @@ Planned for 0.6:
 Version notes:
 
 0.5.2
-* Support up to Firefox 20a1
+* FF Update: Support up to Firefox 20a1
 * Internal code improvement: attempt to address some can't access dead object errors (missing windows)
-* Include (non-localized) privileged name in request notifications along with localized message
+* Usability improvement: Include (non-localized) privileged name in request notifications along with localized message
+* Add x-subprocess library (courtesty https://github.com/ochameau/jetpack-subprocess/ ) as available privilege and
+utilize within subprocess and command line demos
+* API fix: Restore sync API (but only allows one object to be returned)
+* Other coding improvements
 
 0.5
 * Security improvement: Require register() calls to first be allowed to ask to serve as an addon.

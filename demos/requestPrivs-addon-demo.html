@@ -84,10 +84,15 @@ window.addEventListener('DOMContentLoaded', function () {
                         console.log('inside onMessage');
                         clipboard();
                     },
-                    contentScript: errBack.toString() + '\n' + clipboard.toString() + 
-                    'window.addEventListener("click", function () {self.postMessage();});' +
-                    'self.on("message", function (msg) {alert(msg);});' + // we add events here, as adding in the HTML in the next line does not allow privileged access
-                    '\nwindow.addEventListener("load", function () {document.body.innerHTML= "' + document.body.innerHTML.replace(/"/g, '\\"').replace(/\r?\n/g, ' ') + '"});'
+                    // This property had not been required earlier as we
+                    //   could use contentScript instead, but this has the
+                    //   bonus of separating concerns anyhow
+                    contentURL: 'data:text/html;charset=utf-8,' + encodeURIComponent(
+                        document.body.innerHTML
+                    ),
+                    contentScript:
+                        'window.addEventListener("click", function () {self.postMessage();});' +
+                        'self.on("message", function (msg) {alert(msg);});' // we add events here, as adding in the HTML in the next line does not allow privileged access
                 });
                 testWidget = widget.Widget({
                     id: "brettz9test",

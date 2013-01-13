@@ -439,7 +439,6 @@ __exposedProps__ requirement with functions).
 
 Known Issues
 ===========
-0. FF 19/20 compatibility
 1. Memory leaks?; see https://github.com/brettz9/asyouwish/issues/3
     1. Resources?
         * https://blog.mozilla.org/nnethercote/category/aboutmemory/
