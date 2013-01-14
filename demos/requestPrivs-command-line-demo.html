@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<style>
+textarea {
+    width: 100%;
+    height: 400px;
+}
+</style>
+<script>
+/*globals alert, document, window, AsYouWish, KeyboardEvent*/
+
+/**
+Possible todos:
+1) Store command history and index in localStorage?
+2) Allow for user specification of other command
+executable or arguments (e.g., pertaining solely
+to the console window (as COLOR))?
+    See:
+        http://www.computerhope.com/cmd.htm
+        http://www.computerhope.com/msdos.htm#02
+        http://www.computerhope.com/overview.htm
+3) Option to make as real command-line
+*/
+
+window.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+    var env, subprocess, workdir, lastCommand,
+        $ = function (sel) {
+            return document.querySelector(sel);
+        },
+        errBack = function (error) {
+            document.getElementById('errs').
+                appendChild(document.createTextNode('Error type: ' + error + '\n'));
+            document.getElementById('errs').
+                appendChild(document.createElement('br'));
+        },
+        envObj = {},
+        cmdArr = [],
+        cmdIndex = 0,
+        defaultBackgroundColor = '0',
+        defaultTextColor = '7',
+        commands = {
+            'COLOR': {
+                expression: '([\\da-f])?([\\da-f])?',
+                empty: true, // We will use same handler if the command is completely empty (not even any whitespace afterward needed)
+                validator: function (match, matches) {
+                        // Check that foreground and background color are not the same
+                    return (!matches[3] && (!matches[2] || matches[2] !== defaultBackgroundColor)) || 
+                                    (matches[3] && (matches[2] !== matches[3]));
+                },
+                behavior: function (match, matches) {
+                    function getColor (color) {
+                        return ['black', 'blue', 'green', 'aqua',
+                                        'DarkRed', // 'red',
+                                        'purple',
+                                        'olive', // 'yellow'
+                                        'white', 'gray',
+                                        'lightblue', 'lightgreen',
+                                        'aquamarine', // '#6FFFC3', // 'light aqua',
+                                        'red', // 'light red',
+                                        'Violet', // 'light purple',
+                                        'yellow', // 'LightYellow',
+                                        'WhiteSmoke', // 'bright white'
+                                    ][parseInt(color, 16)];
+                    }
+                    function setColors (foregroundNumber, backgroundNumber) {
+                        var style = $('#command-line-output').style;
+                        style.color = getColor(foregroundNumber);
+                        style.backgroundColor = getColor(backgroundNumber);
+                    }
+                    if (!matches[2]) { // If no colors are given, just revert to defaults
+                        matches[3] = defaultTextColor;
+                        matches[2] = defaultBackgroundColor;
+                    }
+                    else if (!matches[3]) {
+                        matches[3] = matches[2];
+                        matches[2] = defaultBackgroundColor;
+                    }
+                    setColors(matches[3], matches[2]);
+                    return true; // DIscontinues need for submission to real command line for output
+                }
+            }
+        },
+        buildCommandRegex = function (command, valExp, flags, emptyPossible) {
+            return new RegExp('\\s*' + command + '\\s' + (emptyPossible ? '*' : '+') +'(' + valExp + ')$', flags || 'i'); 
+        },
+        matchCommandRegex = function (userCommand, command, valExp, flags, emptyPossible) {
+            return userCommand.match(buildCommandRegex(command, valExp, flags, emptyPossible));
+        },
+        executeHandlerOnMatch = function () {
+            var args = [].slice.call(arguments),
+                argl = args.length,
+                matches = matchCommandRegex.apply(null, args.slice(0, -2)),
+                validator = args[argl - 2],
+                behavior = args[argl - 1];
+            if (matches && (!validator || validator(matches[1], matches))) {
+                return behavior(matches[1], matches); // Will always be at least one match per our definition in buildCommandRegex
+            }
+        },
+        handleCommands = function (userCommand, commands) {
+            return Object.keys(commands).some(function (command) {
+                var obj = commands[command];
+                return executeHandlerOnMatch.apply(null, [userCommand, command].concat(obj.expression, obj.expressionFlags, obj.empty, obj.validator, obj.behavior));
+            });
+        },
+        processCommands = function (cmd) {
+            return handleCommands(cmd, commands);
+        },
+        executeCommand = function (userCommand, skipHistory) {
+            if (!skipHistory && (!lastCommand || userCommand !== lastCommand)) {
+                cmdIndex = cmdArr.push(userCommand);
+                lastCommand = userCommand;
+            }
+            try {
+                // Maintain any user environmental variables to resubmit to subsequent process calls
+                if (processCommands(userCommand)) {
+                    return;
+                }
+                var p, envKey, envArr = [],
+                    matches = matchCommandRegex(userCommand, 'SET', '([^=\\s][^=]*)=(.*)');
+                if (matches) {
+                    envObj[matches[2]] = matches[1];
+                    return;
+                }
+                for (envKey in envObj) {
+                    if (envObj.hasOwnProperty(envKey)) {
+                        envArr.push(envObj[envKey]);
+                    }
+                }
+                // alert(JSON.stringify(envArr));
+                p = subprocess.call({
+                    command: env.get('ComSpec'), // Retrieve windows cmd.exe path from env
+                    'arguments': ['/C', userCommand + '&&CD'], // ' & type CON' should display stdin, but doesn't work
+                    environment: envArr,
+                    workdir: workdir || (env.get('HOMEDRIVE') + env.get('HOMEPATH')),
+                    /*stdout: function(data) {
+                    },*/
+                    stderr: function(data) {
+                        throw alert("stderr " + data);
+                    },
+                    done: function(d) {
+                        if (!d.stdout.length) { // We return if called empty (e.g., done() gets invoked after a file is closed that was opened by the command line)
+                            return;
+                        }
+                        var data = d.stdout.slice(0, -2),
+                            newlinePos = data.lastIndexOf('\r\n');
+                        if (matchCommandRegex(userCommand, 'cd|chdir', '\\S')) { // Changing directory, not another command or just asking for the current directory
+                            workdir = data;
+                            data = '\n';
+                        }
+                        else {
+                            workdir = data.slice(newlinePos + 2);
+                            data = data.slice(0, newlinePos) + '\n';                        
+                        }
+
+                        switch ($('#output-type').value) {
+                            case 'append':
+                                $('#command-line-output').value += data;
+                                break;
+                            case 'prepend':
+                                $('#command-line-output').value = data + $('#command-line-output').value;
+                                break;
+                            case 'replace':
+                                $('#command-line-output').value = data;
+                                break;
+                        }
+                    },
+                    mergeStderr: false
+                });
+            }
+            catch (e) {
+                alert('Page callback error' + e);
+            }
+        },
+        execute = function () {
+            var value = $('#command').value;
+            if (value) {
+                executeCommand(value);
+                $('#command').value = '';
+            }
+            else {
+                executeCommand('echo.', true);
+            }
+        };
+
+    try {
+        commands.COLOR.behavior(0, []); // Set default colors for console
+        AsYouWish.requestPrivs(['chrome', 'x-subprocess'], function (chrome, subprocessObj) {
+            try {
+                var Cc = chrome.Cc, Ci = chrome.Ci;
+                // For values to get on env, see http://www.microsoft.com/resources/documentation/windows/xp/all/proddocs/en-us/ntcmds_shelloverview.mspx?mfr=true
+                env = Cc["@mozilla.org/process/environment;1"].getService(Ci.nsIEnvironment);
+
+                if (!env.get('OS') || !env.get('OS').match(/Windows/)) {
+                    alert('This command line demo currently only works in Windows.');
+                    return;
+                }
+
+                subprocess = subprocessObj;
+                $('#execute').addEventListener('click', function () {
+                    execute();
+                });
+                $('#command').addEventListener('keypress', function (e) {
+                    // More keyboard events documented at https://developer.mozilla.org/en-US/docs/DOM/KeyboardEvent
+                    switch(e.keyCode) {
+                        case KeyboardEvent.DOM_VK_RETURN:
+                            execute();
+                            break;
+                        case KeyboardEvent.DOM_VK_UP:
+                            if (!cmdArr.length) { // Blank out if no stack yet (and nothing more)
+                                e.target.value = '';
+                                return;
+                            }
+                            if (cmdIndex > 0) { // Don't decrement below 0
+                                cmdIndex--;
+                            }
+                            e.target.value = cmdArr[cmdIndex];
+                            break;
+                        case KeyboardEvent.DOM_VK_DOWN:
+                            if (!cmdArr.length) { // Don't change value if no stack yet
+                                return;
+                            }
+                            if (cmdIndex >= cmdArr.length) {
+                                return;
+                            }
+                            else if (cmdIndex < cmdArr.length - 1) { // Don't increment past array length
+                                cmdIndex++;
+                            }
+                            e.target.value = cmdArr[cmdIndex];
+                            break;
+                    }
+                });
+                $('#command-line').style.display = 'block';
+                $('#command').select();
+             }
+            catch (e) {
+                alert('Page callback error' + e);
+            }
+        }, errBack);
+
+    } catch (e) {
+        alert('page error: ' + e);
+    }
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+<div id="command-line" style="display:none;">
+
+Command <input size="100" type="text" id="command" placeholder="echo Hello World!" />
+<button id="execute">Execute</button>
+<textarea id="command-line-output"></textarea>
+<label>Output type
+    <select id="output-type">
+        <option value="append">Append</option>
+        <option value="prepend" selected="selected">Prepend</option>
+        <option value="replace">Replace</option>
+    </select>
+</label>
+</div>
+
+</body></html>
