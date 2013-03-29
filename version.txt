@@ -4,7 +4,8 @@ Planned for 0.6:
 Version notes:
 
 0.5.2
-* FF Update: Support up to Firefox 20a1
+* FF Update: Support up to Firefox 20a1 (tested also with 22.0a1 nightly, though panel/widget combo is not currently working)
+* Utilize SDK 1.14 including adding new SDK APIs: indexed-db, sdk/system/events, sdk/tabs/utils and removing no longer present SDK API: sdk/content/content-proxy
 * Usability improvement: Include (non-localized) privileged name in request notifications along with localized message
 * API addition: x-subprocess library (courtesy https://github.com/ochameau/jetpack-subprocess/ ) as available privilege and
 utilize within subprocess and command line demos
