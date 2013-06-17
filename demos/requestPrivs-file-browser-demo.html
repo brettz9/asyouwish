@@ -2,12 +2,11 @@
 <html><head><meta charset="utf-8" />
 <script src="jquery-2.0.2.min.js"></script>
 <script>
-/*globals $, alert, document, window, AsYouWish*/
+/*globals $, alert, window, AsYouWish*/
 
 // This must be run on a server as protocols cannot be registered from the file protocol
 $(function () {
     'use strict';
-
     function openFile (url, launch) {
         try {
             AsYouWish.requestPrivs(['sdk/io/file', 'chrome'], function (f, chrome) {
@@ -42,10 +41,7 @@ $(function () {
                     }
                 }
             }, function errBack (error) {
-                document.getElementById('errs').
-                    appendChild(document.createTextNode('Error type: ' + error + '\n'));
-                document.getElementById('errs').
-                    appendChild(document.createElement('br'));
+                $('#errs').text('Error type: ' + error).append('<br />');
             });
 
         } catch (e) {
@@ -61,7 +57,7 @@ $(function () {
         e.preventDefault();
     });
 
-    var launch, curr = window.location.href, // .replace(/date%3D(.*?)$/, ''),
+    var curr = window.location.href,
         url = curr.match(/\?uri=xfile%3A(.*)$/);
     if (!url) {
         navigator.registerProtocolHandler(
