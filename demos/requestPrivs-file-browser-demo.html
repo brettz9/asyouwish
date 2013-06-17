@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<script src="jquery-2.0.2.min.js"></script>
+<script>
+/*globals alert, document, window, AsYouWish*/
+
+// This must be run on a server as protocols cannot be registered from the file protocol
+$(function () {
+    'use strict';
+    
+    $('body').on('click', 'a', function (e) {
+        window.location = $(this).attr('data-href') + (e.ctrlKey ? '|launchHack' : '')  + 'date=' + new Date(); // prevent caching
+        e.preventDefault();
+    });
+
+    var launch, lh = /\|launchHack/, curr = window.location.href.replace(/date%3D(.*?)$/, ''),
+        url = curr.match(/\?uri=xfile%3A(.*)$/);
+    if (!url) {
+        navigator.registerProtocolHandler(
+            'xfile',
+            curr.replace(/\?.*$/, '') + '?uri=%s',
+            "Desktop file protocol"
+        );
+        return;
+    }
+    url = decodeURIComponent(url[1]).replace(/%20/g, ' ');
+    if (url.match(lh)) {
+        url = url.replace(lh, '');
+        launch = true;
+    }
+
+    var errBack = function (error) {
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error type: ' + error + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+
+    try {
+        AsYouWish.requestPrivs(['sdk/io/file', 'chrome'], function (f, chrome) {
+            var Cc = chrome.Cc, Ci = chrome.Ci;
+
+            if (!f.exists(url)) {
+                alert('The specified file or directory does not exist');
+                return;
+            }
+            if (!url.match(/\./)) { //if (f.dirname(url) === url) { // A directory
+                $('#register').hide();
+                $('#desktop').html(f.list(url).reduce(function (prev, fileOrDir) {
+                    var path = f.join(url, fileOrDir);
+                    return prev + '<li><a href="#" data-href="xfile:' + path + '">' + fileOrDir + '</a></li>';
+                }, '<ul>') + '</ul>');
+            }
+            else {
+                var openYes = confirm("Are you sure you wish to open the file at " + url + "?");
+                if (openYes && launch) {
+                    var localFile = Cc['@mozilla.org/file/local;1'].createInstance(Ci.nsILocalFile);
+                    localFile.initWithPath(url);
+                    localFile.launch();
+                }
+                else if (openYes) { // Todo: also allow editing!
+                    try {
+                        $('#fileContents').val(f.read('C:\\Program Files (x86)\\Mozilla Firefox\\application.ini'));
+                    }
+                    catch (e) {
+                        alert('Page callback error' + e);
+                    }
+                }
+            }
+        }, errBack);
+
+    } catch (e) {
+        alert('page error: ' + e);
+    }
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+<div id="register">
+<p>Once you register for the protocol, try one of these links. Normal licking will load file contents into a textbox, while clicking with the control key pressed will launch the file.
+</p>
+<ul id="linkArea">
+    <li><a href="#" data-href="xfile:C:\">C:\</a></li>
+    <li><a href="#" data-href="xfile:D:\">D:\</a></li>
+    <li><a href="#" data-href="xfile:C:\Program Files (x86)\Mozilla Firefox\application.ini">C:\Program Files (x86)\Mozilla Firefox\application.ini</a></li>
+</ul>
+</div>
+<div id="desktop"></div>
+
+<textarea id="fileContents" rows="10" cols="80"></textarea>
+
+</body></html>
