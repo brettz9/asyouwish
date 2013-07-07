@@ -144,6 +144,9 @@ already approved addons or explicitly added ones).
 "Addon" websites
 ==============
 
+**Note that as of recent Firefox versions, AsYouWish is not able to work**
+** with adding a panel to a widget as needed by an add-on bar extension.**
+
 AsYouWish allows websites to be run as "addons". While these "addon"
 websites do not automatically gain additional privileges,
 they will be able to request additional privileges upon load and they are
@@ -440,16 +443,17 @@ __exposedProps__ requirement with functions).
 
 Known Issues
 ===========
-1. Memory leaks?; see https://github.com/brettz9/asyouwish/issues/3
+1. Adding a panel to a widget has problems as of recent versions of Firefox
+2. Memory leaks?; see https://github.com/brettz9/asyouwish/issues/3
     1. Resources?
         * https://blog.mozilla.org/nnethercote/category/aboutmemory/
         * https://wiki.mozilla.org/Performance/MemShrink
         * https://wiki.mozilla.org/Performance:Leak_Tools
     2. "can't access dead object" errors
-2. The sync API can only be used currently to return one privileged object
-3. Privileges don't load on initial browser load as apparently not injected
+3. The sync API can only be used currently to return one privileged object
+4. Privileges don't load on initial browser load as apparently not injected
 at that time with content-document-global-created event.
-4. instanceof issues with chrome content
+5. instanceof issues with chrome content
     1. e.g., the wrapping within AsYouWish (using specialPowers/proxies)
     does not work with SDK Widget (/addon-sdk-1.12/lib/sdk/widget.js) which
     checks for instanceof Panel (resolved within AsYouWish by changing this
