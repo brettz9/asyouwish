@@ -18,11 +18,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     function runSync1 () {
         var xhr = AsYouWish.requestPrivs('sdk/net/xhr');
-        if (!xhr) {
-            var c = confirm('I have approved the XHR request');
-            if (c) {
-                window.location.reload();
-            }
+        if (!xhr) { // AsYouWish will now auto-reload once approved
+            alert('Waiting for your approval of the XHR request privilege');
             return;
         }
         var x = new xhr.XMLHttpRequest();
@@ -33,9 +30,8 @@ window.addEventListener('DOMContentLoaded', function () {
     }
     function runSync2 () {
         var URLObj = AsYouWish.requestPrivs('url');
-        if (!URLObj) {
-            var c = confirm('I have approved the URL request');
-            window.location.reload();
+        if (!URLObj) { // AsYouWish will now auto-reload once approved
+            alert('Waiting for your approval of the url privilege');
             return;
         }
         alert(

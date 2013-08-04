@@ -432,7 +432,10 @@ Unresolved
 in addon code--e.g., is XPCNativeWrapper available through require('chrome')?
 3. Settle on sync or async API (probably async)? If do sync, should we allow
 postMessage to notify site of approval or allow callback for continued
-execution when not set yet (or just errBack with a new mode)?
+execution when not set yet (or just errBack with a new mode)? Or do as
+we currently do and refresh the window when the user approves. Should we
+allow the first required object to be returned synchronously in asynchronous
+calls?
 4. Integrate with [requireJS](http://requirejs.org/) as plugin or even make
 API the same (and handle non-plugin requiring) so additional script not
 needed. Use with [my shim plugin](https://github.com/brettz9/asyouwish/wiki),
@@ -450,10 +453,9 @@ Known Issues
         * https://wiki.mozilla.org/Performance/MemShrink
         * https://wiki.mozilla.org/Performance:Leak_Tools
     2. "can't access dead object" errors
-3. The sync API can only be used currently to return one privileged object
-4. Privileges don't load on initial browser load as apparently not injected
+3. Privileges don't load on initial browser load as apparently not injected
 at that time with content-document-global-created event.
-5. instanceof issues with chrome content
+4. instanceof issues with chrome content
     1. e.g., the wrapping within AsYouWish (using specialPowers/proxies)
     does not work with SDK Widget (/addon-sdk-1.12/lib/sdk/widget.js) which
     checks for instanceof Panel (resolved within AsYouWish by changing this
