@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     try {
 
-        AsYouWish.requestPrivs('sdk/net/xhr', function (xhr) {
+        AsYouWish.requestPrivs(['sdk/net/xhr'], function (xhr) {
             try {
                 var x = new xhr.XMLHttpRequest();
                 x.open('GET', 'http://mozilla.org/', false);
@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
                 // We don't want to trigger request twice, so we wait until callback returns.
-                AsYouWish.requestPrivs('url', function (URLObj) {
+                AsYouWish.requestPrivs(['url'], function (URLObj) {
                     try {
                         alert(
                             URLObj.fromFilename('C:\\')
