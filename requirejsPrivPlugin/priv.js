@@ -19,7 +19,7 @@ define({
             });
             return;
         }
-        AsYouWish.requestPrivs(name, function (requestedObject) {
+        AsYouWish.requestPrivs([name], function (requestedObject) {
             load(requestedObject);
         }, function (state) {
             load.error(
