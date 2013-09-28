@@ -263,6 +263,10 @@ for the add-on (or delete itself, etc.). This would also allow alternative
 web-based IDEs to handle local development yet have access to rapid
 submission for review at AMO as with the builder site--without the cruft of
 downloading some custom non-JavaScript (i.e., Python) build environment.
+8. Allows user to leverage browser features of their choice such as
+bookmarking, history, tabs, pinned tabs, Panorama groups, etc. when accessing
+privileged web apps.
+9. Allows use within any iframe of any web app on the web.
 
 AsYouWish has also added its own support now for "addon" websites, thus
 allowing the benefits above to be available on each browser restart, with
