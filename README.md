@@ -389,16 +389,29 @@ module for shared APIs could be used along with privileged DOM access
 using [proxies](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/content/content-proxy.html)?
 to listen for events within iframes to be able to track frame history (for
 the sake of backward/forward buttons). These browsers might even
-be able to support their own "addons".
+be able to support their own "addons", e.g., via `postMessage()`, have
+their own "add-on bar", toolbar, pinned tabs, Panorama groups, etc.
 
-3. Ability to distribute web utility apps which read or write to files, so
+3. While the likes of [Loomo](https://github.com/FunkMonkey/Loomo)
+or my [Filebrowser-enhanced add-on](https://addons.mozilla.org/en-US/firefox/addon/filebrowser-enhanced/)
+are written as Firefox add-ons to provide file browsing within Firefox,
+AsYouWish also allows this possibility (see the file browser demo
+included in this AsYouWish repository). While users of web apps might not wish
+to replace their desktops ([WebAppFind](https://github.com/brettz9/webappfind)
+is designed for such users), such a HTML-based file browser could provide
+its own task bar for launching other AYW apps (and if run as an AsYouWish
+"add-on website", it could even as with a Browser-in-Browser mentioned
+above, accept its own add-ons available on start-up). See
+the README of "Filebrowser-enhanced" for some possible todos here.
+
+4. Ability to distribute web utility apps which read or write to files, so
 web apps which, for example, build configuration files, do not need to
 force the user to copy paste from a text box or depend on downloading
 and installing some bulky server-side language interpreter (possibly
 in a non-JavaScript language). AsYouWish might even be used to make a
-server!
+server (given some support within Firefox for test servers).
 
-4. Last but not least, a Git-accessible client-side web-based
+5. Last but not least, a Git-accessible client-side web-based
 IDE... (Firefox can execute files and processes, so if
 nothing else, some kind of command-line interface, along the
 lines of the included command line demo).
