@@ -382,11 +382,12 @@ a neutral and familiar way.
 be done with privileges and shared databases (others have done a
 browser-in-browser using the Flash plugin, but I'd like to see it work
 without plugins--I'm hoping Mozilla may eventually come around to
-including AsYouWish by default since it now uses a whitelist, etc. by default).
-The advantage I see to this is that it may allow normal web developers
-the ability to use familiar and easier languages to innovate with
-user interfaces, while accessing the trickier and lower level plumbing
-handled by the browsers. I am awaiting the landing of the
+including something like AsYouWish by default since it now uses a
+whitelist, etc. by default). The advantage I see to this is that it may
+allow normal web developers the ability to use familiar and easier
+languages to innovate with user interfaces, while accessing the
+trickier and lower level plumbing handled by the browsers.
+I am awaiting the landing of the
 [Bug 802895](https://bugzilla.mozilla.org/show_bug.cgi?id=802895)
 srcdoc feature to see if our (x-namespaced-)simple-storage
 module for shared APIs could be used along with privileged DOM access
@@ -395,6 +396,9 @@ to listen for events within iframes to be able to track frame history (for
 the sake of backward/forward buttons). These browsers might even
 be able to support their own "addons", e.g., via `postMessage()`, have
 their own "add-on bar", toolbar, pinned tabs, Panorama groups, etc.
+The browser-in-browser could work with the [ExecuteBuilder](https://builder.addons.mozilla.org/package/204099/latest/)--when
+completed--as a separate executable (and accept its own command line
+args via [WebAppFind](https://github.com/brettz9/webappfind)).
 
 3. While the likes of [Loomo](https://github.com/FunkMonkey/Loomo)
 or my [Filebrowser-enhanced add-on](https://addons.mozilla.org/en-US/firefox/addon/filebrowser-enhanced/)
