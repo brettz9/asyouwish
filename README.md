@@ -511,6 +511,9 @@ be installed under given licenses (or even if not, could allow client-side
 forking).
 7. Allow websites to register their own modules for possible inclusion
 by other sites.
+8. Allow require_(['eval'], function () {}) which will toString() the
+function and eval() it with all privs (avoiding need to specify modules to load (pre-load
+chrome for convenience))? (but require expects static analysis)
 
 Name
 ====
