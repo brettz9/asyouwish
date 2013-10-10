@@ -518,6 +518,8 @@ by other sites.
 8. Allow require_(['eval'], function () {}) which will toString() the
 function and eval() it with all privs (avoiding need to specify modules to load (pre-load
 chrome for convenience))? (but require expects static analysis)
+9. Package AYW for use as addon-dependency only (e.g., for [ExecuteBuilder](https://builder.addons.mozilla.org/package/204099/latest/) using
+an icon handler without necessarily exposing all of AYW to sites)
 
 Name
 ====
