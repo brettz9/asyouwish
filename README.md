@@ -1,5 +1,4 @@
-asyouwish
-=========
+# asyouwish
 
 AsYouWish is a browser add-on (currently Firefox only) to allow requests for browser
 privileges to be made from regular HTML. The latest release should be at
@@ -49,8 +48,7 @@ Privileges do not apply site or even folder wide (to allow a greater sense
 of security and choice in case a website allows third party add-ons
 which may seek their own privileges).
 
-Usage of the options dialog
-=====================
+# Usage of the options dialog
 
 ![Options dialog](https://raw.github.com/brettz9/asyouwish/master/data/ayw-options/options-screenshot.png "Options dialog")
 
@@ -141,8 +139,7 @@ can be enabled or prevented via the presence or absence of the
 "x-register" privilege in the whitelist (but this item will not disable or prevent
 already approved addons or explicitly added ones).
 
-"Addon" websites
-==============
+# "Addon" websites
 
 **Note that as of recent Firefox versions, AsYouWish is not able to work**
 ** with adding a panel to a widget as needed by an add-on bar extension.**
@@ -185,8 +182,7 @@ For my concept of a Browser-in-Browser (to allow a regular website to
 function as the browser UI) and the idea for it to become itself extensible
 with addons, see the section "Some additional intended use cases" below.
 
-IMPORTANT information for developers
-===============================
+# IMPORTANT information for developers
 
 * PLEASE READ [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security) for
 the very critical **security concerns** to take into account when making an application for your users.
@@ -194,8 +190,7 @@ the very critical **security concerns** to take into account when making an appl
 * The **API** is documented at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api) and error listeners at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors).
 * Creation of **"Addon" websites** is documented at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites)
 
-Advantages over custom add-ons
-==============================
+# Advantages over custom add-ons
 
 Web applications already are gaining potential access to dangerous
 features (e.g., Geolocation) and are thankfully starting to work more like
@@ -272,8 +267,7 @@ AsYouWish has also added its own support now for "addon" websites, thus
 allowing the benefits above to be available on each browser restart, with
 the user's permission.
 
-Comparison to Open Web apps
-=========================
+# Comparison to Open Web apps
 
 While Open Web apps do have privileged potential, they currently do not
 appear open to exposing full addons privileges. Also, although
@@ -284,16 +278,14 @@ privileges for itself to be installed with higher-than-website privileges
 (though privileges which are still limited in comparison to addon
 privileges) without the user creating a specially packaged file.
 
-Comparison to Plugins like Flash
-================================
+# Comparison to Plugins like Flash
 
 I'm hoping this can really turn into an API agreed on by the browsers so
 available by default. The add-on itself is written in JavaScript, so
 hopefully accessible enough to easy introspection. AsYouWish has no
 need for special file formats, HTML object tags, etc.
 
-Comparison to ActiveX / netscape.security.PrivilegeManager.enablePrivilege
-==========================================================================
+# Comparison to ActiveX / netscape.security.PrivilegeManager.enablePrivilege
 
 This is similar to these technologies, but the aim is to be potentially
 cross-browser (and
@@ -306,8 +298,7 @@ websites whose protocols are allowed". Then
 you will not need to first add sites to the allowed whitelist (see the "Usage
 of the options dialog" section though on security concerns).
 
-Comparison to [Microsoft HTA](http://en.wikipedia.org/wiki/HTML_Application) (HTML Application) files
-===========================================
+# Comparison to [Microsoft HTA](http://en.wikipedia.org/wiki/HTML_Application) (HTML Application) files
 
 While the concepts are similar, AsYouWish differs in these regards:
 
@@ -342,8 +333,46 @@ extensibility of IE itself to support the APIs such as are being added
 now to Firefox. The same APIs would also not be mirrorable within
 regular websites using AsYouWish's asynchronous API.
 
-Comparison to ["Molecule Man"](http://en.wikipedia.org/wiki/Molecule_Man) in the Marvel Universe
-===================================================
+# Comparison to AppJS and node-webkit
+
+[AppJS](http://appjs.com/) and [node-webkit](https://github.com/rogerwang/node-webkit)
+offer a similar feature set to AsYouWish, i.e., client-side web
+language-based apps with privileged access. However, these
+operate as executables independent of the browser whereas
+AsYouWish operates within the browser.
+
+The node-based projects of course offer access to the feature set of
+[Node.js](http://nodejs.org/), while AsYouWish offers access to
+the Firefox Addon SDK (and through it, if necessary, to
+Firefox's XPCOM components). Both
+can be used for access to the file system (in fact, the SDK is
+moving to use the same API here as Node.js). Mozilla, moreover,
+is apparently [open to using the Node.js API on a case-by-case basis](https://bugzilla.mozilla.org/show_bug.cgi?id=855936#c4)
+so if one writes using the synchronous style, one may be able to
+write code which can readily be ported from AsYouWish (at least to node-webkit).
+The Addons SDK even has its own server API. AsYouWish,
+through the the Addons SDK, however, can, unlike Node.js, obtain
+potential access to privileged browser APIs (with user permission).
+
+By working within the browser, AsYouWish can avoid extra
+installations (beyond Firefox and the AsYouWish add-on); the
+user simply has to approve a site.
+
+As far as the use case for independent executables to allow such
+programs to operate independently of one's browser profile (e.g.,
+without having to open up Firefox with all of one's tabs, add-ons, etc.),
+Windows users might create shortcuts to cmd.exe which open
+a web app in Firefox under a new profile (optionally in conjunction with
+[WebAppFind](https://github.com/brettz9/webappfind) (currently
+Windows only) if one wishes to pass a desktop's file contents to the
+privileged web app instead of just opening it). But if one does wish
+privileged apps to be opened merely as new tabs or windows within
+Firefox, this is also possible (by avoiding the profile command line flag).
+
+Work is planned for [ExecuteBuilder](https://builder.addons.mozilla.org/package/204099/latest/) (work
+not yet ready for release) to assist in the creation of such shortcuts.
+
+# Comparison to ["Molecule Man"](http://en.wikipedia.org/wiki/Molecule_Man) in the Marvel Universe
 
 Sorry, I just love the analogy too much whereby the "Molecule Man" in Marvel
 comics discovers, courtesy of a God-like being, that it has only been a
@@ -364,8 +393,7 @@ scanning the image!)
 
 ![Molecule Man being given his insights](https://raw.github.com/brettz9/asyouwish/master/restricted-copyright/Marvel%20Super%20Heroes%20Secret%20Wars%20Vol%201%2011%20p6.jpg "Molecule Man gaining insights")
 
-Some additional intended use cases
-==================================
+# Some additional intended use cases
 
 1. One particular reason I am interested in this is that I feel it is
 unfortunate that for current web applications, different third parties cannot
@@ -424,8 +452,7 @@ IDE... (Firefox can execute files and processes, so if
 nothing else, some kind of command-line interface, along the
 lines of the included command line demo).
 
-Rejected ideas
-============
+# Rejected ideas
 
 1. For security reasons, I decided against allowing an entire folder hierarchy
 to gain privileges without the need to make additional requests. The reason
@@ -446,8 +473,8 @@ change (and be browser-specific) anyways).
 accordingly), since the tooltip gives the description, and since these
 are actual APIs, I felt it best to stay with the English for these.
 
-Unresolved
-=========
+# Unresolved
+
 1. Any security issues? Safety of wrappings, require() object wrapping?
 2. Exposing additional globals? unsafeWindow or others otherwise accessible
 in addon code--e.g., is XPCNativeWrapper available through require('chrome')?
@@ -465,8 +492,8 @@ client-side code can write clean modules in uniform manner.
 5. Inject AsYouWish methods as functions instead? (if possible to overcome
 __exposedProps__ requirement with functions).
 
-Known Issues
-===========
+# Known Issues
+
 1. Adding a panel to a widget has problems as of recent versions of Firefox
 2. Memory leaks?; see https://github.com/brettz9/asyouwish/issues/3
     1. Resources?
@@ -488,13 +515,13 @@ at that time with content-document-global-created event.
 for a possible means around it (though probably better to move away from XUL
 unless standard support is added in the future for XBL).
 
-Future goals (scheduled)
-====================
+# Future goals (planned)
+
 Version 0.6:
 * More precise control by the user or site over namespaced shared storage.
 
-Possible future goals
-=================
+# Possible future goals
+
 1. Expose custom APIs for (shareable) IndexedDB (if SDK does not do so)
 2. If at all possible, I would like to expose the ability to create genuine
 add-ons (which show up in the add-ons menu as well as being available at
@@ -521,8 +548,8 @@ chrome for convenience))? (but require expects static analysis)
 9. Package AYW for use as addon-dependency only (e.g., for [ExecuteBuilder](https://builder.addons.mozilla.org/package/204099/latest/) using
 an icon handler without necessarily exposing all of AYW to sites)
 
-Name
-====
+# Name
+
 The name dervies from what it allows (so users and developers can have
 convenience in apps not excessively circumscribed, even while taking into
 account security concerns) and is also a nod to the
