@@ -333,9 +333,10 @@ extensibility of IE itself to support the APIs such as are being added
 now to Firefox. The same APIs would also not be mirrorable within
 regular websites using AsYouWish's asynchronous API.
 
-# Comparison to AppJS and node-webkit
+# Comparison to AppJS/Deskshell and node-webkit
 
-[AppJS](http://appjs.com/) and [node-webkit](https://github.com/rogerwang/node-webkit)
+[AppJS](http://appjs.com/) (or [http://deskshell.org/](Deskshell))
+and [node-webkit](https://github.com/rogerwang/node-webkit)
 offer a similar feature set to AsYouWish, i.e., client-side web
 language-based apps with privileged access. However, these
 operate as executables independent of the browser whereas
@@ -357,6 +358,12 @@ potential access to privileged browser APIs (with user permission).
 By working within the browser, AsYouWish can avoid extra
 installations (beyond Firefox and the AsYouWish add-on); the
 user simply has to approve a site.
+
+AsYouWish allows HTML and will be treated as Firefox would treat
+any other HTML page with the exception of the privileged AsYouWish
+calls; it also does not require special packaging. The other projects
+do leverage Chromium, which may have some HTML5 features
+not present in Firefox (and vice versa): http://caniuse.com/
 
 As far as the use case for independent executables to allow such
 programs to operate independently of one's browser profile (e.g.,
