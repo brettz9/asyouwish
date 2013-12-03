@@ -377,7 +377,10 @@ privileged apps to be opened merely as new tabs or windows within
 Firefox, this is also possible (by avoiding the profile command line flag).
 
 Work is planned for [ExecuteBuilder](https://builder.addons.mozilla.org/package/204099/latest/) (work
-not yet ready for release) to assist in the creation of such shortcuts.
+not yet ready for release) to assist in the creation of such shortcuts (and
+it is hoped that AsYouWish can then allow a custom module to allow
+ExecuteBuilder functions such as associating desktop file extensions with
+web applications to be requested via the web).
 
 # Comparison to ["Molecule Man"](http://en.wikipedia.org/wiki/Molecule_Man) in the Marvel Universe
 
