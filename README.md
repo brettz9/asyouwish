@@ -376,7 +376,11 @@ privileged web app instead of just opening it). But if one does wish
 privileged apps to be opened merely as new tabs or windows within
 Firefox, this is also possible (by avoiding the profile command line flag).
 
+<<<<<<< HEAD
 Work is planned for [Executable Builder](https://github.com/brettz9/executable-builder) (work
+=======
+Work is planned for [ExecuteBuilder](https://github.com/brettz9/executable-builder) (work
+>>>>>>> origin/master
 not yet ready for release) to assist in the creation of such shortcuts (and
 it is hoped that AsYouWish can then allow a custom module to allow
 Executable Builder functions such as associating desktop file extensions with
@@ -434,7 +438,11 @@ to listen for events within iframes to be able to track frame history (for
 the sake of backward/forward buttons). These browsers might even
 be able to support their own "addons", e.g., via `postMessage()`, have
 their own "add-on bar", toolbar, pinned tabs, Panorama groups, etc.
+<<<<<<< HEAD
 The browser-in-browser could work with the [Executable Builder](https://github.com/brettz9/executable-builder)--when
+=======
+The browser-in-browser could work with the [ExecuteBuilder](https://github.com/brettz9/executable-builder)--when
+>>>>>>> origin/master
 completed--as a separate executable (and accept its own command line
 args via [WebAppFind](https://github.com/brettz9/webappfind)).
 
@@ -555,7 +563,11 @@ by other sites.
 8. Allow require_(['eval'], function () {}) which will toString() the
 function and eval() it with all privs (avoiding need to specify modules to load (pre-load
 chrome for convenience))? (but require expects static analysis)
+<<<<<<< HEAD
 9. Package AYW for use as addon-dependency only (e.g., for [Executable Builder](https://github.com/brettz9/executable-builder) using
+=======
+9. Package AYW for use as addon-dependency only (e.g., for [ExecuteBuilder](https://github.com/brettz9/executable-builder) using
+>>>>>>> origin/master
 an icon handler without necessarily exposing all of AYW to sites)
 
 # Name
