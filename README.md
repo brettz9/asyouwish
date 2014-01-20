@@ -382,6 +382,9 @@ right-click "Open with" functionality of desktop files as with [WebAppFind](http
 Executable Builder functions such as associating desktop file extensions with
 web applications to be requested via the web).
 
+XULRunner might also conceivably be used with WebAppFind instead of Firefox
+for a more light weight "executable" environment.
+
 # Comparison to ["Molecule Man"](http://en.wikipedia.org/wiki/Molecule_Man) in the Marvel Universe
 
 Sorry, I just love the analogy too much whereby the "Molecule Man" in Marvel
