@@ -369,16 +369,16 @@ As far as the use case for independent executables to allow such
 programs to operate independently of one's browser profile (e.g.,
 without having to open up Firefox with all of one's tabs, add-ons, etc.),
 Windows users might create shortcuts to cmd.exe which open
-a web app in Firefox under a new profile (optionally in conjunction with
-[WebAppFind](https://github.com/brettz9/webappfind) (currently
-Windows only) if one wishes to pass a desktop's file contents to the
-privileged web app instead of just opening it). But if one does wish
+a web app in Firefox under a new profile. But if one does wish
 privileged apps to be opened merely as new tabs or windows within
 Firefox, this is also possible (by avoiding the profile command line flag).
 
-Work is planned for [Executable Builder](https://github.com/brettz9/executable-builder) (work
-not yet ready for release) to assist in the creation of such shortcuts (and
-it is hoped that AsYouWish can then allow a custom module to allow
+Work is planned for [Executable Builder](https://github.com/brettz9/executable-builder)
+(work not yet ready for release) to assist in the creation of executables
+which can work in such a manner as well as be associated with the
+right-click "Open with" functionality of desktop files as with [WebAppFind](https://github.com/brettz9/webappfind)
+(and it is hoped that AsYouWish can then allow a custom module
+(or perhaps via command line instructions to Executable Builder) to allow
 Executable Builder functions such as associating desktop file extensions with
 web applications to be requested via the web).
 
