@@ -560,6 +560,11 @@ function and eval() it with all privs (avoiding need to specify modules to load 
 chrome for convenience))? (but require expects static analysis)
 9. Package AYW for use as addon-dependency only (e.g., for [Executable Builder](https://github.com/brettz9/executable-builder) using
 an icon handler without necessarily exposing all of AYW to sites)
+10. Expose AYW APIs to the command line (including preference and privilege
+over-ride); could be used with [WebAppFind](https://github.com/brettz9/webappfind)
+to open a file from the desktop into a web app in privileged mode
+([Executable Builder](https://github.com/brettz9/executable-builder)
+might facilitate this).
 
 # Name
 
