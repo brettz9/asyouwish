@@ -564,7 +564,8 @@ an icon handler without necessarily exposing all of AYW to sites)
 over-ride); could be used with [WebAppFind](https://github.com/brettz9/webappfind)
 to open a file from the desktop into a web app in privileged mode
 ([Executable Builder](https://github.com/brettz9/executable-builder)
-might facilitate this).
+might facilitate this), including being opened in hidden windows (and
+potentially with arguments) for batch-like processing.
 
 # Name
 
