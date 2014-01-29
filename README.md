@@ -566,6 +566,10 @@ to open a file from the desktop into a web app in privileged mode
 ([Executable Builder](https://github.com/brettz9/executable-builder)
 might facilitate this), including being opened in hidden windows (and
 potentially with arguments) for batch-like processing.
+11. Register a protocol which gets translated into AsYouWish requests, e.g.,
+especially for being able to override request or response headers (e.g., for
+[HTTPQuery](https://github.com/brettz9/httpquery) on a
+particular designated site (or file), perform XPath transformations, etc.
 
 # Name
 
