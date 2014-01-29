@@ -570,6 +570,9 @@ potentially with arguments) for batch-like processing.
 especially for being able to override request or response headers (e.g., for
 [HTTPQuery](https://github.com/brettz9/httpquery) on a
 particular designated site (or file), perform XPath transformations, etc.
+12. Create adapters to work with node-webkit, Deskshell, AppJS, etc.
+APIs? (See Mozilla bug [855936](https://bugzilla.mozilla.org/show_bug.cgi?id=855936) (and see also  [848647](https://bugzilla.mozilla.org/show_bug.cgi?id=848647) for a related idea) for work that would
+help facilitate this.)
 
 # Name
 
