@@ -457,15 +457,23 @@ the README of "Filebrowser-enhanced" for some possible todos here.
 web apps which, for example, build configuration files, do not need to
 force the user to copy paste from a text box or depend on downloading
 and installing some bulky server-side language interpreter (possibly
-in a non-JavaScript language). AsYouWish might even be used to make a
+in a non-JavaScript language).
+
+5. AsYouWish might even be used to make a
 server (given some support within Firefox for test servers) which could
 in turn be used in conjunction with WebAppFind (e.g., to pass privileged
 command instructions to the server) or to serve its own AsYouWish-privileged
 apps (which could listen for WebAppFind commands local to those visitors).
-A server with browser access might be useful for the likes of displaying the
-songs one has downloaded and is listening to in a web app.
+A server connected to the administrator's browser privileges (including if
+an AsYouWish Browser-in-Browser were built) might be
+useful for the likes of displaying the songs the admin has downloaded
+and is listening to in a web app. Allow anyone to publish and administer!
 
-5. Last but not least, a Git-accessible client-side web-based
+6. Make desktop file editing as interconnected as the Web (one can
+already make file:// links but create an AsYouWish tool for local WYSIWYG
+HTML editing which is new-page-wiki-linking friendly!
+
+7. Last but not least, a Git-accessible client-side web-based
 IDE... (Firefox can execute files and processes, so if
 nothing else, some kind of command-line interface, along the
 lines of the included command line demo).
@@ -578,6 +586,7 @@ particular designated site (or file), perform XPath transformations, etc.
 12. Create adapters to work with node-webkit, Deskshell, AppJS, etc.
 APIs? (See Mozilla bug [855936](https://bugzilla.mozilla.org/show_bug.cgi?id=855936) (and see also  [848647](https://bugzilla.mozilla.org/show_bug.cgi?id=848647) for a related idea) for work that would
 help facilitate this.)
+13. Change AsYouWish.requestPrivs injection to "require" (hoping that especially requirejs users will use another variable and that browserify can work with this!)
 
 # Name
 
