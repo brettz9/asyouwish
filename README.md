@@ -335,7 +335,7 @@ regular websites using AsYouWish's asynchronous API.
 
 # Comparison to AppJS/Deskshell and node-webkit
 
-[AppJS](http://appjs.com/) (or [http://deskshell.org/](Deskshell))
+[AppJS](http://appjs.com/) (or [Deskshell](http://deskshell.org/))
 and [node-webkit](https://github.com/rogerwang/node-webkit)
 offer a similar feature set to AsYouWish, i.e., client-side web
 language-based apps with privileged access. However, these
