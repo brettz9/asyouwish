@@ -458,7 +458,12 @@ web apps which, for example, build configuration files, do not need to
 force the user to copy paste from a text box or depend on downloading
 and installing some bulky server-side language interpreter (possibly
 in a non-JavaScript language). AsYouWish might even be used to make a
-server (given some support within Firefox for test servers).
+server (given some support within Firefox for test servers) which could
+in turn be used in conjunction with WebAppFind (e.g., to pass privileged
+command instructions to the server) or to serve its own AsYouWish-privileged
+apps (which could listen for WebAppFind commands local to those visitors).
+A server with browser access might be useful for the likes of displaying the
+songs one has downloaded and is listening to in a web app.
 
 5. Last but not least, a Git-accessible client-side web-based
 IDE... (Firefox can execute files and processes, so if
