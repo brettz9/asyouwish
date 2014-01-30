@@ -586,6 +586,7 @@ APIs? (See Mozilla bug [855936](https://bugzilla.mozilla.org/show_bug.cgi?id=855
 help facilitate this.)
 13. Change AsYouWish.requestPrivs injection to "require" (hoping that especially requirejs users will use another variable and that browserify can work with this!)
 14. Incorporate AMO suggestion to integrate site-specific preferences with *about:permissions* (via [nsIPermissionManager](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIPermissionManager) or [nsIContentPrefService2](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIContentPrefService2)?) and also move JSON preferences like whitelisted privs out of the simple preferences which expose this to users; being tracked in [issue 8](https://github.com/brettz9/asyouwish/issues/8).
+15. Optional, user-approved DOM/XUL escalation if possible: [issue 4](https://github.com/brettz9/asyouwish/issues/4)
 
 # Name
 
