@@ -1,7 +1,10 @@
-Planned for 1.1.0:
+Planned for 1.2.0:
 * More precise control by the user or site over namespaced shared storage.
 
 Version notes:
+
+1.1.0
+* Added beginnings of browser-in-browser demo
 
 1.0.0
 * Breaking change: Requires "sdk/" prefix on high-level APIs as per the SDK

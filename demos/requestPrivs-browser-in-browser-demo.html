@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<style>
+#browser {width: 100%; height: 350px;}
+</style>
+<script>
+
+/**
+AsYouWish.removePrivs(); // Only usable on current site
+alert("Privileges successfully reset!");
+throw '';
+//*/
+
+window.addEventListener('DOMContentLoaded', function () {
+    var errBack = function (error, error2, error3) {
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error type: ' + error + (error2 ? ' ' + error2 : '') + (error3 ? ' ' + error3 : '') + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+    var $ = function (sel) {
+        return document.querySelector(sel);
+    };
+    // errBack = false; // Try default (only alerts when refused)
+    
+    $('#url-bar').addEventListener('change', function (e) {
+        try {
+            AsYouWish.requestPrivs(['sdk/net/xhr', 'x-namespaced-simple-storage-http://brett-zamir.me'], function (xhr, nss) {
+                try {
+                    var x = new xhr.XMLHttpRequest();
+                    x.open('GET', e.target.value, false);
+                    x.send(null);
+                    // $('#browser').innerHTML = x.responseText; // works but dangerous
+                    $('#browser').srcdoc = x.responseText; // Permission denied
+
+                    // Todo: Use the nss object argument for remembering things like addon code requested by a visited site that we will ask for user permission to store (and later eval)
+                }
+                catch (e) {
+                    alert('Page callback error' + e);
+                }
+
+            }, errBack);
+
+        } catch (e) {
+            alert('page error: ' + e);
+        }
+    });
+});
+</script>
+</head><body>
+
+<input type="url" id="url-bar" placeholder="http://example.com" /><br />
+
+<iframe id="browser" sandbox="" srcdoc='<a href="http://bahai.org">Hello</a>'></iframe>
+
+<p>Future plans:</p>
+<ul>
+<li>Try <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/content/content-proxy.html">proxies</a> for privileged DOM access (in order to listen in and track our own browser (frame) history, e.g., for back/forward buttons).</li>
+<li>Support own "addons". This might be done by allowing visited sites in the frame to request via <code>postMessage()</code> that their code be evaluated upon user command, with our own "add-on bar", toolbar, pinned tabs, Panorama groups, etc. (Data could be stored via (x-namespaced-)simple-storage and then eval()'d when needed.)</li>
+</ul>
+<div id="errs"></div>
+
+</body></html>
