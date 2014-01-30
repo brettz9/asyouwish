@@ -3,6 +3,9 @@ Planned for 1.3.0:
 
 Version notes:
 
+1.2.1
+* Ensure version notes up to date, including missing breaking change for 1.0.0
+
 1.2.0
 * Rename internal namespace to better avoid chance for conflicts with those using simple-storage. Will be a breaking change for those relying on old namespaced storage being preserved (but this minor version is following very shortly after 1.0.0, so I am not upping the major version for it).
 
