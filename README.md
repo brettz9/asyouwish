@@ -521,6 +521,7 @@ __exposedProps__ requirement with functions).
 # Known Issues
 
 1. Adding a panel to a widget has problems as of recent versions of Firefox
+    1. This patch to widget.js within valid.panel had worked previously: `ok: function(v) !v || v instanceof panels.Panel || (v.show && typeof v.isShowing !== 'undefined') // Adding duck-typing to avoid wrapper complaining of instanceof`
 2. Memory leaks?; see https://github.com/brettz9/asyouwish/issues/3
     1. Resources?
         * https://blog.mozilla.org/nnethercote/category/aboutmemory/
