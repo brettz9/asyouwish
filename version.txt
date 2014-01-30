@@ -1,7 +1,10 @@
-Planned for 1.2.0:
+Planned for 1.3.0:
 * More precise control by the user or site over namespaced shared storage.
 
 Version notes:
+
+1.2.0
+* Rename internal namespace to better avoid chance for conflicts with those using simple-storage. Will be a breaking change for those relying on old namespaced storage being preserved (but this minor version is following very shortly after 1.0.0, so I am not upping the major version for it).
 
 1.1.0
 * Added beginnings of browser-in-browser demo

@@ -540,7 +540,6 @@ unless standard support is added in the future for XBL). Being tracked now in [i
 
 # Future goals (planned)
 
-Version 1.2.0:
 * More precise control by the user or site over namespaced shared storage.
 
 # Possible future goals
