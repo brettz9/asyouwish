@@ -521,26 +521,22 @@ __exposedProps__ requirement with functions).
 # Known Issues
 
 1. Adding a panel to a widget has problems as of recent versions of Firefox
-    1. This patch to widget.js within valid.panel had worked previously: `ok: function(v) !v || v instanceof panels.Panel || (v.show && typeof v.isShowing !== 'undefined') // Adding duck-typing to avoid wrapper complaining of instanceof`
-2. Memory leaks?; see https://github.com/brettz9/asyouwish/issues/3
-    1. Resources?
-        * https://blog.mozilla.org/nnethercote/category/aboutmemory/
-        * https://wiki.mozilla.org/Performance/MemShrink
-        * https://wiki.mozilla.org/Performance:Leak_Tools
-    2. "can't access dead object" errors
-3. Privileges don't load on initial browser load as apparently not injected
-at that time with content-document-global-created event.
-4. instanceof issues with chrome content
+    1. This patch to widget.js within valid.panel had previously been sufficient: `ok: function(v) !v || v instanceof panels.Panel || (v.show && typeof v.isShowing !== 'undefined') // Adding duck-typing to avoid wrapper complaining of instanceof`
+3. instanceof issues with chrome content
     1. e.g., the wrapping within AsYouWish (using specialPowers/proxies)
-    does not work with SDK Widget (/addon-sdk-1.12/lib/sdk/widget.js) which
+    does not work with SDK Widget (/addon-sdk-1.15/lib/sdk/widget.js) which
     checks for instanceof Panel (resolved within AsYouWish by changing this
     code to duck type)
     2. workarounds most likely needed for other instanceof usages within
     the SDK (no way to get SDK to [use custom instanceOf function](https://bugzilla.mozilla.org/show_bug.cgi?id=823790)
     that can be overridden?)
-5. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
+3. Privileges don't load on initial browser load as apparently not injected
+at that time with content-document-global-created event.
+4. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
 for a possible means around it (though probably better to move away from XUL
-unless standard support is added in the future for XBL).
+unless standard support is added in the future for XBL). Being tracked now in [issue 4](https://github.com/brettz9/asyouwish/issues/4).
+5. The exposure to users of the JSON-based preferences is clearly less than ideal
+(and the lack of incorporation of site-based prefs within about:permissions).
 
 # Future goals (planned)
 
