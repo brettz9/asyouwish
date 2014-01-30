@@ -11,6 +11,7 @@ Version notes:
 
 1.0.0
 * Breaking change: Requires "sdk/" prefix on high-level APIs as per the SDK
+* Breaking change: AsYouWish.requestPrivs() now requires an array for its first argument (of requested privs) even if only requesting a single privilege; the synchronous API should be a single string
 * Internal code improvement: Remove deprecated calls within code and demos (which will hopefully help prevent conflicts but keep compatibility if SDK uses Node APIs without putting them as "SDK"!)
 * Utilize SDK 1.15 (panel/widget combo is still not working, even with my mod, so using the non-modded version)
 
