@@ -25,14 +25,10 @@ window.addEventListener('DOMContentLoaded', function () {
     
     $('#url-bar').addEventListener('change', function (e) {
         try {
-            AsYouWish.requestPrivs(['sdk/net/xhr', 'x-namespaced-simple-storage-http://brett-zamir.me'], function (xhr, nss) {
+            AsYouWish.requestPrivs(['x-namespaced-simple-storage-http://brett-zamir.me'], function (nss) {
                 try {
-                    var x = new xhr.XMLHttpRequest();
-                    x.open('GET', e.target.value, false);
-                    x.send(null);
-                    // $('#browser').innerHTML = x.responseText; // works but dangerous
-                    $('#browser').srcdoc = x.responseText;
-
+                    $('#browser').src = e.target.value;
+alert($('#browser').contentDocument);
                     // Todo: Use the nss object argument for remembering things like addon code requested by a visited site that we will ask for user permission to store (and later eval)
                 }
                 catch (e) {
@@ -49,13 +45,13 @@ window.addEventListener('DOMContentLoaded', function () {
 </script>
 </head><body>
 
-<input type="url" id="url-bar" placeholder="http://example.com" /><br />
+<input type="url" id="url-bar" value="http://example.com" /><br />
 
-<iframe id="browser" sandbox="" srcdoc='<a href="http://bahai.org">Hello</a>'></iframe>
+<iframe id="browser" sandbox="" src="http://bahai.org"></iframe>
 
 <p>Future plans:</p>
 <ul>
-<li>Try content proxies (formerly at https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/content/content-proxy.html ) for privileged DOM access (in order to listen in and track our own browser (frame) history, e.g., for back/forward buttons).</li>
+<li>Try <a href="https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/content/content-proxy.html">content proxies</a> for privileged DOM access (in order to listen in and track our own browser (frame) history, e.g., for back/forward buttons).</li>
 <li>Support own "addons". This might be done by allowing visited sites in the frame to request via <code>postMessage()</code> that their code be evaluated upon user command, with our own "add-on bar", toolbar, pinned tabs, Panorama groups, etc. (Data could be stored via (x-namespaced-)simple-storage and then eval()'d when needed.)</li>
 </ul>
 <div id="errs"></div>
