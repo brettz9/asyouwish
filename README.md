@@ -446,8 +446,8 @@ included in this AsYouWish repository). While users of web apps might not wish
 to replace their desktops ([WebAppFind](https://github.com/brettz9/webappfind)
 is designed for such users), such a HTML-based file browser could provide
 its own task bar for launching other AYW apps (and if run as an AsYouWish
-"add-on website", it could even as with a Browser-in-Browser mentioned
-above, accept its own add-ons available on start-up). See
+"add-on website", it could even--as with a Browser-in-Browser mentioned
+above--accept its own add-ons available on start-up). See
 the README of "Filebrowser-enhanced" for some possible todos here.
 
 4. Ability to distribute web utility apps which read or write to files, so
