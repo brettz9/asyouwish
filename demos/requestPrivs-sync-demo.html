@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', function () {
         setTimeout(runSync2, 0);
     }
     function runSync2 () {
-        var URLObj = AsYouWish.requestPrivs('url');
+        var URLObj = AsYouWish.requestPrivs('sdk/url');
         if (!URLObj) { // AsYouWish will now auto-reload once approved
             alert('Waiting for your approval of the url privilege');
             return;

@@ -31,7 +31,7 @@ var Panel, testWidget,
 window.addEventListener('x-unload', function () {
     testWidget.destroy();
     console.log('unloaded addon demo');
-    AsYouWish.requestPrivs(['chrome', 'windows'], function (chrome, windows) {
+    AsYouWish.requestPrivs(['chrome', 'sdk/windows'], function (chrome, windows) {
         try {
             windows.browserWindows.open("http://www.example.com"); // worked
 
@@ -57,7 +57,7 @@ window.addEventListener('DOMContentLoaded', function () {
     // errBack = false; // Try default (only alerts when refused)
     function clipboard () {
     
-    AsYouWish.requestPrivs(['clipboard'], function (clip) {
+    AsYouWish.requestPrivs(['sdk/clipboard'], function (clip) {
         try {
             console.log('ok1');
             Panel.postMessage(
@@ -73,7 +73,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 //clipboard(); // Should ensure we have all permissions first, as otherwise, this will not work from a hidden window
     try {
-        AsYouWish.requestPrivs(['widget', 'panel'], function (widget, panel) {
+        AsYouWish.requestPrivs(['sdk/widget', 'sdk/panel'], function (widget, panel) {
             try {
                 Panel = panel.Panel({
                     width: 180,

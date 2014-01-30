@@ -543,7 +543,7 @@ unless standard support is added in the future for XBL).
 
 # Future goals (planned)
 
-Version 0.6:
+Version 1.1:
 * More precise control by the user or site over namespaced shared storage.
 
 # Possible future goals

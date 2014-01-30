@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
                 // We don't want to trigger request twice, so we wait until callback returns.
-                AsYouWish.requestPrivs(['url'], function (URLObj) {
+                AsYouWish.requestPrivs(['sdk/url'], function (URLObj) {
                     try {
                         alert(
                             URLObj.fromFilename('C:\\')

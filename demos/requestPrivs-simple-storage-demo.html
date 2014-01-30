@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     try {
-        AsYouWish.requestPrivs(['simple-storage'], function (ss) {
+        AsYouWish.requestPrivs(['sdk/simple-storage'], function (ss) {
             try {
                 if (!ss.storage.abc) {
                     ss.storage.abc = 3131;

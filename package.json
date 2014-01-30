@@ -1,4 +1,11 @@
 {
+    "name": "asyouwish",
+    "license": "MPL 2.0/MIT/New BSD",
+    "author": "Brett Zamir",
+    "version": "1.0.0",
+    "fullName": "As You Wish",
+    "id": "jid1-9Ddk7IgYYaBCAw",
+    "description": "Inject AsYouWish global with requestPrivs() method as a wrapper for require() of SDK modules (and in the future, possibly custom modules) to provide a uniform means to website authors of requesting escalated privileges from users.",
     "preferences": [
         {
             "name": "allowedProtocols",
@@ -56,12 +63,5 @@
             "value": "[]",
             "title": "Whitelisted privileges"
         }
-    ],
-    "name": "asyouwish",
-    "license": "MPL 2.0/MIT/New BSD",
-    "author": "Brett Zamir",
-    "version": "0.5.2",
-    "fullName": "As You Wish",
-    "id": "jid1-9Ddk7IgYYaBCAw",
-    "description": "Inject AsYouWish global with requestPrivs() method as a wrapper for require() of SDK modules (and in the future, possibly custom modules) to provide a uniform means to website authors of requesting escalated privileges from users."
+    ]
 }

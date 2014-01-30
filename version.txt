@@ -1,7 +1,12 @@
-Planned for 0.6:
+Planned for 1.1.0:
 * More precise control by the user or site over namespaced shared storage.
 
 Version notes:
+
+1.0.0
+* Breaking change: Requires "sdk/" prefix on high-level APIs as per the SDK
+* Internal code improvement: Remove deprecated calls within code and demos (which will hopefully help prevent conflicts but keep compatibility if SDK uses Node APIs without putting them as "SDK"!)
+* Utilize SDK 1.15 (panel/widget combo is still not working, even with my mod, so using the non-modded version)
 
 0.5.2
 * FF Update: Support up to Firefox 21 (panel/widget combo is not currently working)

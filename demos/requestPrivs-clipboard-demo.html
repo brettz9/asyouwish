@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     try {
-        AsYouWish.requestPrivs(['clipboard'], function (clip) {
+        AsYouWish.requestPrivs(['sdk/clipboard'], function (clip) {
             try {
                 alert(
                     'In the clipboard:' + clip.get()
