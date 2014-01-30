@@ -447,7 +447,9 @@ to replace their desktops ([WebAppFind](https://github.com/brettz9/webappfind)
 is designed for such users), such a HTML-based file browser could provide
 its own task bar for launching other AYW apps (and if run as an AsYouWish
 "add-on website", it could even--as with a Browser-in-Browser mentioned
-above--accept its own add-ons available on start-up). See
+above--accept its own add-ons available on start-up). If Node APIs are
+[brought over to the SDK](https://bugzilla.mozilla.org/show_bug.cgi?id=855936#c4),
+the same code base can be reused for a server-side file browser/editor. See
 the README of "Filebrowser-enhanced" for some possible todos here.
 
 4. Ability to distribute web utility apps which read or write to files, so
@@ -468,7 +470,8 @@ and is listening to in a web app. Allow anyone to publish and administer!
 
 6. Make desktop file editing as interconnected as the Web (one can
 already make file:// links but create an AsYouWish tool for local WYSIWYG
-HTML editing which is new-page-wiki-linking friendly!
+HTML editing which is new-page-wiki-linking friendly! Use the same code
+base for a server-side wiki (including a remote PUT-saving file-based one).
 
 7. Last but not least, a Git-accessible client-side web-based
 IDE... (Firefox can execute files and processes, so if
