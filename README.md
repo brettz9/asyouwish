@@ -133,7 +133,7 @@ to enforce the whitelist) will prevent any privileges
 from being requested or granted (even if the site is otherwise allowed
 to request privileges). Tooltips are available to explain the APIs at
 some level, but these are only my layman's understanding of the API
-so if in doubt, please see the [SDK documentation](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/).
+so if in doubt, please see the [SDK documentation](https://developer.mozilla.org/en-US/Add-ons/SDK).
 Note that (when the checklist is enforced), requests to act as an addon
 can be enabled or prevented via the presence or absence of the
 "x-register" privilege in the whitelist (but this item will not disable or prevent
@@ -186,7 +186,7 @@ with addons, see the section "Some additional intended use cases" below.
 
 * PLEASE READ [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security) for
 the very critical **security concerns** to take into account when making an application for your users.
-* See [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges) on the **specific privileges** you can request (as also documented at [https://addons.mozilla.org/en-US/developers/docs/sdk/latest/](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/)).
+* See [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges) on the **specific privileges** you can request (as also documented at [https://developer.mozilla.org/en-US/Add-ons/SDK](https://developer.mozilla.org/en-US/Add-ons/SDK)).
 * The **API** is documented at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api) and error listeners at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors).
 * Creation of **"Addon" websites** is documented at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites)
 
@@ -428,9 +428,15 @@ whitelist, etc. by default). The advantage I see to this is that it may
 allow normal web developers the ability to use familiar and easier
 languages to innovate with user interfaces, while accessing the
 trickier and lower level plumbing handled by the browsers.
-Can privileged DOM access using [proxies](https://addons.mozilla.org/en-US/developers/docs/sdk/latest/modules/sdk/content/content-proxy.html)
-allow us to listen for events within iframes to be able to track frame
-history (for the sake of backward/forward buttons)? These browsers might even
+
+If approach in https://github.com/brettz9/asyouwish/issues/4#issuecomment-11670998
+using nsIPermissionManager doesn't work, when an AYW x-DOM request is made,
+we might re-open the AsYouWish document in a chrome URL, gaining
+chrome privs thereby (as per  https://developer.mozilla.org/en-US/docs/Displaying_web_content_in_an_extension_without_security_issues ,
+thus allowing the AsYouWish app in an iframe to have full privileges (though
+also presumably any other child iframes unless there is a way around this),
+allowing us to listen for events within iframes to be able to track frame
+history (for the sake of backward/forward buttons); tracking in [issue 4](https://github.com/brettz9/asyouwish/issues/4)? These browsers might even
 be able to support their own "addons", e.g., via `postMessage()`, have
 their own "add-on bar", toolbar, pinned tabs, Panorama groups, etc.
 (via (x-namespaced-)simple-storage; see the incomplete demo).
