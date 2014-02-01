@@ -591,6 +591,10 @@ help facilitate this.)
 13. Change AsYouWish.requestPrivs injection to "require" (hoping that especially requirejs users will use another variable and that browserify can work with this!)
 14. Incorporate AMO suggestion to integrate site-specific preferences with *about:permissions* (via [nsIPermissionManager](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIPermissionManager), [nsIContentPrefService2](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIContentPrefService2) or [Services.jsm](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Services.jsm)?) and also move JSON preferences like whitelisted privs out of the simple preferences which expose this to users; being tracked in [issue 8](https://github.com/brettz9/asyouwish/issues/8).
 15. Optional, user-approved DOM/XUL escalation if possible: [issue 4](https://github.com/brettz9/asyouwish/issues/4)
+16. Add privileged file dialog saving as a custom module so websites do not need to ask for
+full chrome privileges to get this feature.
+17. Create a shared add-on dependency for WebAppFind and AsYouWish exposing perhaps at least for privilege escalation with some of the underlying non-SDK APIs (e.g., a privilege to save
+only to a specific directory if WebAppFind adds such a fundamental mode).
 
 # Name
 
