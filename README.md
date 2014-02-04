@@ -479,7 +479,9 @@ already make file:// links but create an AsYouWish tool for local WYSIWYG
 HTML editing which is new-page-wiki-linking friendly! Use the same code
 base for a server-side wiki (including a remote PUT-saving file-based one).
 
-7. A macro program with differing levels of potential privileges.
+7. A macro program with differing levels of potential privileges. Could make
+command line requests, etc. for potential scripting of, and interaction with,
+outside apps.
 
 8. Last but not least, a Git-accessible client-side web-based
 IDE... (Firefox can execute files and processes, so if
