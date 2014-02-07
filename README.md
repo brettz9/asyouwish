@@ -501,9 +501,8 @@ part of content scripts, so page-mod can utilize within a string) or "addon"
 (which is for page-worker content scripts).
 
 3. While it would be convenient to drop it, I decided to require the full "sdk/"
-path for consumers of low-level APIs since usage without it is to be
-deprecated (and perhaps low-level APIs may be more subject to
-change (and be browser-specific) anyways).
+path for consumers of all APIs since usage without it is to be
+deprecated.
 
 4. Although we could potentially i18n-ize short priv names (and sort
 accordingly), since the tooltip gives the description, and since these
@@ -519,10 +518,13 @@ postMessage to notify site of approval or allow callback for continued
 execution when not set yet (or just errBack with a new mode)? Or do as
 we currently do and refresh the window when the user approves. Should we
 allow the first required object to be returned synchronously in asynchronous
-calls?
-4. Integrate with [requireJS](http://requirejs.org/) as plugin or even make
-API the same (and handle non-plugin requiring) so additional script not
-needed. Use with [my shim plugin](https://github.com/brettz9/asyouwish/wiki),
+calls? Should we reallow a single string (instead of a string in an array) for
+asynchronous calls?
+4. Integrate with [ES6 modules](https://github.com/ModuleLoader/es6-module-loader/)
+and/or [requireJS](http://requirejs.org/)
+as plugin or even make API the same (and handle non-plugin
+requiring) so additional script not needed. Use with
+[my shim plugin](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-priv-plugin),
 so every environment from addons to privileged HTML to the server and regular
 client-side code can write clean modules in uniform manner.
 5. Inject AsYouWish methods as functions instead? (if possible to overcome
@@ -592,7 +594,10 @@ particular designated site (or file), perform XPath transformations, etc.
 12. Create adapters to work with node-webkit, Deskshell, AppJS, etc.
 APIs? (See Mozilla bug [855936](https://bugzilla.mozilla.org/show_bug.cgi?id=855936) (and see also  [848647](https://bugzilla.mozilla.org/show_bug.cgi?id=848647) for a related idea) for work that would
 help facilitate this.)
-13. Change AsYouWish.requestPrivs injection to "require" (hoping that especially requirejs users will use another variable and that browserify can work with this!)
+13. Change AsYouWish.requestPrivs injection to "require" (hoping that especially
+RequireJS users will use another variable and that browserify can work with this!),
+or, better yet (especially if Node and the
+SDK begin to use it), use `System.load()` ([ES6 modules](https://github.com/ModuleLoader/es6-module-loader/)).
 14. Incorporate AMO suggestion to integrate site-specific preferences with *about:permissions* (via [nsIPermissionManager](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIPermissionManager), [nsIContentPrefService2](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIContentPrefService2) or [Services.jsm](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Services.jsm)?) and also move JSON preferences like whitelisted privs out of the simple preferences which expose this to users; being tracked in [issue 8](https://github.com/brettz9/asyouwish/issues/8).
 15. Optional, user-approved DOM/XUL escalation if possible: [issue 4](https://github.com/brettz9/asyouwish/issues/4)
 16. Add privileged file dialog saving as a custom module so websites do not need to ask for
