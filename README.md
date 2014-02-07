@@ -597,7 +597,7 @@ help facilitate this.)
 13. Change AsYouWish.requestPrivs injection to "require" (hoping that especially
 RequireJS users will use another variable and that browserify can work with this!),
 or, better yet (especially if Node and the
-SDK begin to use it), use `System.load()` ([ES6 modules](https://github.com/ModuleLoader/es6-module-loader/)).
+SDK begin to use it), use `System.import()` ([ES6 modules](https://github.com/ModuleLoader/es6-module-loader/)).
 14. Incorporate AMO suggestion to integrate site-specific preferences with *about:permissions* (via [nsIPermissionManager](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIPermissionManager), [nsIContentPrefService2](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIContentPrefService2) or [Services.jsm](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Services.jsm)?) and also move JSON preferences like whitelisted privs out of the simple preferences which expose this to users; being tracked in [issue 8](https://github.com/brettz9/asyouwish/issues/8).
 15. Optional, user-approved DOM/XUL escalation if possible: [issue 4](https://github.com/brettz9/asyouwish/issues/4)
 16. Add privileged file dialog saving as a custom module so websites do not need to ask for
