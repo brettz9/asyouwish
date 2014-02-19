@@ -581,7 +581,8 @@ restart) without an XPI file and without needing to write one's own
 complex loading code.
 3. Blacklists might be a nice addition when whitelists are off (and allow
 additional refuse option to remove a site from allowed sites so
-it can't request privileges again, and/or to blacklist it).
+it can't request privileges again, and/or to blacklist it). Also allow version
+of privilege type whitelist that is site-specific?
 4. Add localizations (i18n is done)
 5. Addon website store(s): let sites register themselves as stores, integrating
 with receipts, licenses, etc., and allowing, e.g., searching and display of
