@@ -133,7 +133,8 @@ to enforce the whitelist) will prevent any privileges
 from being requested or granted (even if the site is otherwise allowed
 to request privileges). Tooltips are available to explain the APIs at
 some level, but these are only my layman's understanding of the API
-so if in doubt, please see the [SDK documentation](https://developer.mozilla.org/en-US/Add-ons/SDK).
+so if in doubt, please see the
+[SDK documentation](https://developer.mozilla.org/en-US/Add-ons/SDK).
 Note that (when the checklist is enforced), requests to act as an addon
 can be enabled or prevented via the presence or absence of the
 "x-register" privilege in the whitelist (but this item will not disable or prevent
@@ -176,7 +177,8 @@ One may use AsYouWish's options (its icon is in the add-on bar) to remove
 a site from being treated as an add-on, but if you have assigned privileges
 to an untrustworthy site, damages may have already been done.
 
-For developer information on "addon" websites, see [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites).
+For developer information on "addon" websites, see
+[https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites).
 
 For my concept of a Browser-in-Browser (to allow a regular website to
 function as the browser UI) and the idea for it to become itself extensible
@@ -184,11 +186,18 @@ with addons, see the section "Some additional intended use cases" below.
 
 # IMPORTANT information for developers
 
-* PLEASE READ [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security) for
-the very critical **security concerns** to take into account when making an application for your users.
-* See [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges) on the **specific privileges** you can request (as also documented at [https://developer.mozilla.org/en-US/Add-ons/SDK](https://developer.mozilla.org/en-US/Add-ons/SDK)).
-* The **API** is documented at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api) and error listeners at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors).
-* Creation of **"Addon" websites** is documented at [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites)
+* PLEASE READ
+[https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security)
+for the very critical **security concerns** to take into account when making an application for your users.
+* See [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges)
+on the **specific privileges** you can request (as also documented at
+[https://developer.mozilla.org/en-US/Add-ons/SDK](https://developer.mozilla.org/en-US/Add-ons/SDK)).
+* The **API** is documented at
+[https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api)
+and error listeners at
+[https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors).
+* Creation of **"Addon" websites** is documented at
+[https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites)
 
 # Advantages over custom add-ons
 
@@ -289,7 +298,8 @@ need for special file formats, HTML object tags, etc.
 
 This is similar to these technologies, but the aim is to be potentially
 cross-browser (and
-enablePrivilege is [out the door](https://bugzilla.mozilla.org/show_bug.cgi?id=546848) now in Firefox).
+enablePrivilege is [out the door](https://bugzilla.mozilla.org/show_bug.cgi?id=546848)
+now in Firefox).
 
 While this addon does not allow you to use the same old API, a similar level of trust with
 sites being able to request privileges if from a signed script, can be
@@ -348,7 +358,8 @@ the Firefox Addon SDK (and through it, if necessary, to
 Firefox's XPCOM components). Both
 can be used for access to the file system (in fact, the SDK is
 moving to use the same API here as Node.js). Mozilla, moreover,
-is apparently [open to using the Node.js API on a case-by-case basis](https://bugzilla.mozilla.org/show_bug.cgi?id=855936#c4)
+is apparently
+[open to using the Node.js API on a case-by-case basis](https://bugzilla.mozilla.org/show_bug.cgi?id=855936#c4)
 so if one writes using the synchronous style, one may be able to
 write code which can readily be ported from AsYouWish (at least to node-webkit).
 The Addons SDK even has its own server API. AsYouWish,
@@ -376,7 +387,8 @@ Firefox, this is also possible (by avoiding the profile command line flag).
 Work is planned for [Executable Builder](https://github.com/brettz9/executable-builder)
 (work not yet ready for release) to assist in the creation of executables
 which can work in such a manner as well as be associated with the
-right-click "Open with" functionality of desktop files as with [WebAppFind](https://github.com/brettz9/webappfind)
+right-click "Open with" functionality of desktop files as with
+[WebAppFind](https://github.com/brettz9/webappfind)
 (and it is hoped that AsYouWish can then allow a custom module
 (or perhaps via command line instructions to Executable Builder) to allow
 Executable Builder functions such as associating desktop file extensions with
@@ -432,20 +444,24 @@ trickier and lower level plumbing handled by the browsers.
 If approach in https://github.com/brettz9/asyouwish/issues/4#issuecomment-11670998
 using nsIPermissionManager doesn't work, when an AYW x-DOM request is made,
 we might re-open the AsYouWish document in a chrome URL, gaining
-chrome privs thereby (as per  https://developer.mozilla.org/en-US/docs/Displaying_web_content_in_an_extension_without_security_issues ,
+chrome privs thereby (as per
+<https://developer.mozilla.org/en-US/docs/Displaying_web_content_in_an_extension_without_security_issues>,
 thus allowing the AsYouWish app in an iframe to have full privileges (though
 also presumably any other child iframes unless there is a way around this),
 allowing us to listen for events within iframes to be able to track frame
-history (for the sake of backward/forward buttons); tracking in [issue 4](https://github.com/brettz9/asyouwish/issues/4)? These browsers might even
-be able to support their own "addons", e.g., via `postMessage()`, have
-their own "add-on bar", toolbar, pinned tabs, Panorama groups, etc.
+history (for the sake of backward/forward buttons); tracking in
+[issue 4](https://github.com/brettz9/asyouwish/issues/4)? These browsers
+might even be able to support their own "addons", e.g., via `postMessage()`,
+have their own "add-on bar", toolbar, pinned tabs, Panorama groups, etc.
 (via (x-namespaced-)simple-storage; see the incomplete demo).
-The browser-in-browser could work with the [Executable Builder](https://github.com/brettz9/executable-builder)--when
+The browser-in-browser could work with the
+[Executable Builder](https://github.com/brettz9/executable-builder)--when
 completed--as a separate executable (and accept its own command line
 args via [WebAppFind](https://github.com/brettz9/webappfind)).
 
 3. While the likes of [Loomo](https://github.com/FunkMonkey/Loomo)
-or my [Filebrowser-enhanced add-on](https://addons.mozilla.org/en-US/firefox/addon/filebrowser-enhanced/)
+or my
+[Filebrowser-enhanced add-on](https://addons.mozilla.org/en-US/firefox/addon/filebrowser-enhanced/)
 are written as Firefox add-ons to provide file browsing within Firefox,
 AsYouWish also allows this possibility (see the file browser demo
 included in this AsYouWish repository). While users of web apps might not wish
@@ -533,8 +549,9 @@ __exposedProps__ requirement with functions).
 # Known Issues
 
 1. Adding a panel to a widget has problems as of recent versions of Firefox
-    1. This patch to widget.js within valid.panel had previously been sufficient: `ok: function(v) !v || v instanceof panels.Panel || (v.show && typeof v.isShowing !== 'undefined') // Adding duck-typing to avoid wrapper complaining of instanceof`
-3. instanceof issues with chrome content
+    1. This patch to widget.js within valid.panel had previously been sufficient:
+		`ok: function(v) !v || v instanceof panels.Panel || (v.show && typeof v.isShowing !== 'undefined') // Adding duck-typing to avoid wrapper complaining of instanceof`
+2. instanceof issues with chrome content
     1. e.g., the wrapping within AsYouWish (using specialPowers/proxies)
     does not work with SDK Widget (/addon-sdk-1.15/lib/sdk/widget.js) which
     checks for instanceof Panel (resolved within AsYouWish by changing this
@@ -546,7 +563,8 @@ __exposedProps__ requirement with functions).
 at that time with content-document-global-created event.
 4. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
 for a possible means around it (though probably better to move away from XUL
-unless standard support is added in the future for XBL). Being tracked now in [issue 4](https://github.com/brettz9/asyouwish/issues/4).
+unless standard support is added in the future for XBL). Being tracked now in
+[issue 4](https://github.com/brettz9/asyouwish/issues/4).
 5. The exposure to users of the JSON-based preferences is clearly less than ideal
 (and the lack of incorporation of site-based prefs within about:permissions).
 
@@ -579,7 +597,8 @@ by other sites.
 8. Allow require_(['eval'], function () {}) which will toString() the
 function and eval() it with all privs (avoiding need to specify modules to load (pre-load
 chrome for convenience))? (but require expects static analysis)
-9. Package AYW for use as addon-dependency only (e.g., for [Executable Builder](https://github.com/brettz9/executable-builder) using
+9. Package AYW for use as addon-dependency only (e.g., for
+[Executable Builder](https://github.com/brettz9/executable-builder) using
 an icon handler without necessarily exposing all of AYW to sites)
 10. Expose AYW APIs to the command line (including preference and privilege
 over-ride); could be used with [WebAppFind](https://github.com/brettz9/webappfind)
@@ -594,20 +613,34 @@ particular designated site (or file), perform XPath transformations, etc.
 (create FF add-on to allow users to remember these per site without protocol
 as well). Also option to auto-append to URL.
 12. Create adapters to work with node-webkit, Deskshell, AppJS, etc.
-APIs? (See Mozilla bug [855936](https://bugzilla.mozilla.org/show_bug.cgi?id=855936) (and see also  [848647](https://bugzilla.mozilla.org/show_bug.cgi?id=848647) for a related idea) for work that would
+APIs? (See Mozilla bug [855936](https://bugzilla.mozilla.org/show_bug.cgi?id=855936) (and see also
+[848647](https://bugzilla.mozilla.org/show_bug.cgi?id=848647) for a related idea) for work that would
 help facilitate this.)
 13. Change AsYouWish.requestPrivs injection to "require" (hoping that especially
 RequireJS users will use another variable and that browserify can work with this!),
 or, better yet (especially if Node and the
 SDK begin to use it), use `System.import()` ([ES6 modules](https://github.com/ModuleLoader/es6-module-loader/)).
-14. Incorporate AMO suggestion to integrate site-specific preferences with *about:permissions* (via [nsIPermissionManager](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIPermissionManager), [nsIContentPrefService2](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIContentPrefService2) or [Services.jsm](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Services.jsm)?) and also move JSON preferences like whitelisted privs out of the simple preferences which expose this to users; being tracked in [issue 8](https://github.com/brettz9/asyouwish/issues/8).
+14. Incorporate AMO suggestion to integrate site-specific preferences with *about:permissions* (via
+[nsIPermissionManager](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIPermissionManager),
+[nsIContentPrefService2](https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIContentPrefService2)
+or [Services.jsm](https://developer.mozilla.org/en-US/docs/Mozilla/JavaScript_code_modules/Services.jsm)?) and also
+move JSON preferences like whitelisted privs out of the simple preferences which expose this to users; being tracked
+in [issue 8](https://github.com/brettz9/asyouwish/issues/8).
 15. Optional, user-approved DOM/XUL escalation if possible: [issue 4](https://github.com/brettz9/asyouwish/issues/4)
 16. Add privileged file dialog saving as a custom module so websites do not need to ask for
 full chrome privileges to get this feature.
-17. Create a shared add-on dependency for WebAppFind and AsYouWish exposing perhaps at least for privilege escalation with some of the underlying non-SDK APIs (e.g., a privilege to save
+17. Create a shared add-on dependency for WebAppFind and AsYouWish
+exposing perhaps at least for privilege escalation
+with some of the underlying non-SDK APIs (e.g., a privilege to save
 only to a specific directory if WebAppFind adds such a fundamental mode).
-18. Ensure some additional security/privacy for users desiring it by restricting external access (using https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIContentPolicy and https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIPrincipal per http://stackoverflow.com/questions/18369052/firefox-add-on-to-load-webpage-without-network-access ?) See also http://en.wikipedia.org/wiki/Site-specific_browser regarding such sandboxing.
-19. Create frequently-used, granularly restricted APIs like informing the user which file or folder is being requested for write access, for universal read access, etc.
+18. Ensure some additional security/privacy for users desiring it by restricting external access (using
+https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIContentPolicy and
+https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIPrincipal per
+<http://stackoverflow.com/questions/18369052/firefox-add-on-to-load-webpage-without-network-access>?)
+See also http://en.wikipedia.org/wiki/Site-specific_browser regarding such sandboxing.
+19. Create frequently-used, granularly restricted APIs like informing the
+user which file or folder is being requested for write access, for universal
+read access, etc.
 
 # Name
 
