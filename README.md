@@ -568,10 +568,6 @@ unless standard support is added in the future for XBL). Being tracked now in
 5. The exposure to users of the JSON-based preferences is clearly less than ideal
 (and the lack of incorporation of site-based prefs within about:permissions).
 
-# Future goals (planned)
-
-* More precise control by the user or site over namespaced shared storage.
-
 # Possible future goals
 
 1. Expose custom APIs for (shareable) IndexedDB (if SDK does not do so)
@@ -642,6 +638,18 @@ See also http://en.wikipedia.org/wiki/Site-specific_browser regarding such sandb
 19. Create frequently-used, granularly restricted APIs like informing the
 user which file or folder is being requested for write access, for universal
 read access, etc.
+20. More precise control by the user or site over namespaced shared storage.
+21. If Mozilla supports more [simple-prefs types](https://developer.mozilla.org/en-US/Add-ons/SDK/High-Level_APIs/simple-prefs#Setting_Types)
+types (or if we decide to add our own support; see
+[this pull request](https://github.com/mozilla/addon-sdk/pull/597)
+on where the relevant code might need to be added), we might unhide the
+following options: "Allowed websites" and "Allowed and approved websites"
+might be replaced by a type which supported multiple select and arbitrary
+addition of URLs (including file:// URLs), "Whitelisted privileges" could be
+replaced by a simple multiple select string option, and "Addon websites"
+would be more complex to map to any simple type (unless JSON structures
+were to be given an editing UI) as it is not only a list of URLs but a map to
+meta-data on the site.
 
 # Name
 

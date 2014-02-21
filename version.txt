@@ -1,7 +1,7 @@
-Planned for 1.3.0:
-* More precise control by the user or site over namespaced shared storage.
-
 Version notes:
+
+1.3.0
+* Hide "Allowed protocols", "Allowed websites", "Allowed and approved websites", "Addon websites", and "Whitelisted privileges" JSON array/object options from user options dialog as there are currently no appropriate multiple select preference types we could use here (and users are liable to misunderstand or break the code with such an interface); these preferences are all controllable in the main AsYouWish dialog anyways.
 
 1.2.1
 * Ensure version notes up to date, including missing breaking change for 1.0.0
