@@ -1,8 +1,10 @@
 Version notes:
 
-2.0.0
+3.0.0
+* Breaking change: Remove deprecated "sdk/addon-page" API
 
-* Breaking change: Replace deprecated "sdk/page-mod/match-pattern" with "sdk/util/match-pattern"
+2.0.0
+* Breaking change: Replace deprecated API "sdk/page-mod/match-pattern" with "sdk/util/match-pattern"
 
 1.3.1
 * Fix a bug with localization of messages
