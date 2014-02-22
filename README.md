@@ -443,6 +443,8 @@ trickier and lower level plumbing handled by the browsers.
 
 I'd also like to see support for PUT editing (for built-in publishing).
 
+Also a browser as in a Gopher-like remote file browser.
+
 If approach in https://github.com/brettz9/asyouwish/issues/4#issuecomment-11670998
 using nsIPermissionManager doesn't work, when an AYW x-DOM request is made,
 we might re-open the AsYouWish document in a chrome URL, gaining
@@ -503,7 +505,8 @@ base for a server-side wiki (including a remote PUT-saving file-based one).
 command line requests, etc. for potential scripting of, and interaction with,
 outside apps.
 
-8. A Gopher-like remote file browser
+8. jQuery/XQuery-like reshaping of remote HTML, ideally via
+[HTTPQuery](https://github.com/brettz9/httpquery) using JavaScript.
 
 9. Last but not least, a Git-accessible client-side web-based
 IDE/word processor... (Firefox can execute files and processes, so if
