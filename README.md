@@ -441,6 +441,8 @@ allow normal web developers the ability to use familiar and easier
 languages to innovate with user interfaces, while accessing the
 trickier and lower level plumbing handled by the browsers.
 
+I'd also like to see support for PUT editing (for built-in publishing).
+
 If approach in https://github.com/brettz9/asyouwish/issues/4#issuecomment-11670998
 using nsIPermissionManager doesn't work, when an AYW x-DOM request is made,
 we might re-open the AsYouWish document in a chrome URL, gaining
@@ -490,6 +492,8 @@ an AsYouWish Browser-in-Browser were built) might be
 useful for the likes of displaying the songs the admin has downloaded
 and is listening to in a web app. Allow anyone to publish and administer!
 
+This might be able to work as a file server as well as web server.
+
 6. Make desktop file editing as interconnected as the Web (one can
 already make file:// links but create an AsYouWish tool for local WYSIWYG
 HTML editing which is new-page-wiki-linking friendly! Use the same code
@@ -499,7 +503,9 @@ base for a server-side wiki (including a remote PUT-saving file-based one).
 command line requests, etc. for potential scripting of, and interaction with,
 outside apps.
 
-8. Last but not least, a Git-accessible client-side web-based
+8. A Gopher-like remote file browser
+
+9. Last but not least, a Git-accessible client-side web-based
 IDE... (Firefox can execute files and processes, so if
 nothing else, some kind of command-line interface, along the
 lines of the included command line demo).
