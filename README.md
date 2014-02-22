@@ -506,7 +506,7 @@ outside apps.
 8. A Gopher-like remote file browser
 
 9. Last but not least, a Git-accessible client-side web-based
-IDE... (Firefox can execute files and processes, so if
+IDE/word processor... (Firefox can execute files and processes, so if
 nothing else, some kind of command-line interface, along the
 lines of the included command line demo).
 
