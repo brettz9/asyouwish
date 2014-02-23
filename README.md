@@ -654,7 +654,8 @@ allowing open read capabilities by other sites, avoid allowing write access.
 While sites can already do this through providing `postMessage` access
 through their site, this latter proposal would bypass the need for the hosting
 site to be online or to otherwise govern the viewing (as opposed to editing)
-of the data.
+of the data. Also consider recommending https://github.com/joelarson4/LSNS/ ,
+as being discussed at https://github.com/joelarson4/LSNS/issues/2
 21. If Mozilla supports more [simple-prefs types](https://developer.mozilla.org/en-US/Add-ons/SDK/High-Level_APIs/simple-prefs#Setting_Types)
 types (or if we decide to add our own support; see
 [this pull request](https://github.com/mozilla/addon-sdk/pull/597)
