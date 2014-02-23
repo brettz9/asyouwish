@@ -648,6 +648,13 @@ See also http://en.wikipedia.org/wiki/Site-specific_browser regarding such sandb
 user which file or folder is being requested for write access, for universal
 read access, etc.
 20. More precise control by the user or site over namespaced shared storage.
+Besides allowing for dialogs asking permission regarding license, etc., the
+site might be enabled to store its data namespaced by site, and while still
+allowing open read capabilities by other sites, avoid allowing write access.
+While sites can already do this through providing `postMessage` access
+through their site, this latter proposal would bypass the need for the hosting
+site to be online or to otherwise govern the viewing (as opposed to editing)
+of the data.
 21. If Mozilla supports more [simple-prefs types](https://developer.mozilla.org/en-US/Add-ons/SDK/High-Level_APIs/simple-prefs#Setting_Types)
 types (or if we decide to add our own support; see
 [this pull request](https://github.com/mozilla/addon-sdk/pull/597)
