@@ -178,7 +178,7 @@ a site from being treated as an add-on, but if you have assigned privileges
 to an untrustworthy site, damages may have already been done.
 
 For developer information on "addon" websites, see
-[https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites).
+[Add-on websites](./doc/Developer-Guidelines.md#addon-websites).
 
 For my concept of a Browser-in-Browser (to allow a regular website to
 function as the browser UI) and the idea for it to become itself extensible
@@ -187,17 +187,17 @@ with addons, see the section "Some additional intended use cases" below.
 # IMPORTANT information for developers
 
 * PLEASE READ
-[https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-security)
+[Developer Guidelines on Security](./doc/Developer-Guidelines.md#security)
 for the very critical **security concerns** to take into account when making an application for your users.
-* See [https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-privileges)
+* See [Privileges](./doc/Developer-Guidelines.md#privileges)
 on the **specific privileges** you can request (as also documented at
 [https://developer.mozilla.org/en-US/Add-ons/SDK](https://developer.mozilla.org/en-US/Add-ons/SDK)).
 * The **API** is documented at
-[https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-api)
+[Developer Guidelines API](./doc/Developer-Guidelines.md#api)
 and error listeners at
-[https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-errors).
+[Errors](./doc/Developer-Guidelines.md#errors).
 * Creation of **"Addon" websites** is documented at
-[https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-addon-websites)
+[Add-on websites](./doc/Developer-Guidelines.md#addon-websites)
 
 # Advantages over custom add-ons
 
@@ -549,7 +549,7 @@ asynchronous calls?
 and/or [requireJS](http://requirejs.org/)
 as plugin or even make API the same (and handle non-plugin
 requiring) so additional script not needed. Use with
-[my shim plugin](https://github.com/brettz9/asyouwish/wiki/Developer-Guidelines#wiki-priv-plugin),
+[my shim plugin](./doc/Developer-Guidelines.md#priv-plugin),
 so every environment from addons to privileged HTML to the server and regular
 client-side code can write clean modules in uniform manner.
 5. Inject AsYouWish methods as functions instead? (if possible to overcome
@@ -570,7 +570,7 @@ __exposedProps__ requirement with functions).
     that can be overridden?)
 3. Privileges don't load on initial browser load as apparently not injected
 at that time with content-document-global-created event.
-4. XUL elements are not supported, but see [https://github.com/brettz9/asyouwish/wiki#wiki-xul](the wiki)
+4. XUL elements are not supported, but see [XUL in the Developer FAQ](./doc/Developer-FAQ.md#xul)
 for a possible means around it (though probably better to move away from XUL
 unless standard support is added in the future for XBL). Being tracked now in
 [issue 4](https://github.com/brettz9/asyouwish/issues/4).
