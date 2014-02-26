@@ -187,15 +187,15 @@ with addons, see the section "Some additional intended use cases" below.
 # IMPORTANT information for developers
 
 * PLEASE READ
-[Developer Guidelines on Security](./doc/Developer-Guidelines.md#security)
+[Developer Guidelines on Security](./doc/Developer-Guidelines.md#security-concerns)
 for the very critical **security concerns** to take into account when making an application for your users.
-* See [Privileges](./doc/Developer-Guidelines.md#privileges)
+* See [Privileges](./doc/Developer-Guidelines.md#exposed-privileges)
 on the **specific privileges** you can request (as also documented at
 [https://developer.mozilla.org/en-US/Add-ons/SDK](https://developer.mozilla.org/en-US/Add-ons/SDK)).
 * The **API** is documented at
 [Developer Guidelines API](./doc/Developer-Guidelines.md#api)
 and error listeners at
-[Errors](./doc/Developer-Guidelines.md#errors).
+[Errors](./doc/Developer-Guidelines.md#error-listeners).
 * Creation of **"Addon" websites** is documented at
 [Add-on websites](./doc/Developer-Guidelines.md#addon-websites)
 
@@ -549,7 +549,7 @@ asynchronous calls?
 and/or [requireJS](http://requirejs.org/)
 as plugin or even make API the same (and handle non-plugin
 requiring) so additional script not needed. Use with
-[my shim plugin](./doc/Developer-Guidelines.md#priv-plugin),
+[my shim plugin](./doc/Developer-Guidelines.md#requirejs-priv-plugin),
 so every environment from addons to privileged HTML to the server and regular
 client-side code can write clean modules in uniform manner.
 5. Inject AsYouWish methods as functions instead? (if possible to overcome
@@ -570,7 +570,7 @@ __exposedProps__ requirement with functions).
     that can be overridden?)
 3. Privileges don't load on initial browser load as apparently not injected
 at that time with content-document-global-created event.
-4. XUL elements are not supported, but see [XUL in the Developer FAQ](./doc/Developer-FAQ.md#xul)
+4. XUL elements are not supported, but see [XUL in the Developer FAQ](./doc/Developer-FAQ.md#can-i-use-xul-elements-within-my-html)
 for a possible means around it (though probably better to move away from XUL
 unless standard support is added in the future for XBL). Being tracked now in
 [issue 4](https://github.com/brettz9/asyouwish/issues/4).
