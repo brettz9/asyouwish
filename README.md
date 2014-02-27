@@ -607,11 +607,23 @@ chrome for convenience))? (but require expects static analysis)
 [Executable Builder](https://github.com/brettz9/executable-builder) using
 an icon handler without necessarily exposing all of AYW to sites)
 10. Expose AYW APIs to the command line (including preference and privilege
-over-ride); could be used with [WebAppFind](https://github.com/brettz9/webappfind)
-to open a file from the desktop into a web app in privileged mode
-([Executable Builder](https://github.com/brettz9/executable-builder)
-might facilitate this), including being opened in hidden windows (and
-potentially with arguments) for batch-like processing.
+over-ride)
+    1. Could be used with [WebAppFind](https://github.com/brettz9/webappfind)
+    to open a file from the desktop into a web app in privileged mode
+    ([Executable Builder](https://github.com/brettz9/executable-builder)
+    might facilitate this), possibly in conjunction with user prefs, but
+    with override capability, including being opened in hidden windows (and
+    potentially with arguments) for batch-like processing.
+    1. Support calling AsYouWish from an
+    [atyourcommand](https://github.com/brettz9/atyourcommand)
+    context menu (or etc.) (like WebAppFind allows calling it from
+    the desktop)
+        1. atyourcommand could do this by invoking WebAppFind
+        which invokes AYW with data or with a file?); how to prioritize AYW
+        command line with WebAppFind command line? (pass args through?)
+        Could use WebAppFind to allow a particular site to be opened
+        in a hidden window, etc. for batch-like functionality (in this case,
+        activated from the browser)
 11. Register a protocol which gets translated into AsYouWish requests, e.g.,
 especially for being able to override request or response headers (e.g., for
 [HTTPQuery](https://github.com/brettz9/httpquery) on a
