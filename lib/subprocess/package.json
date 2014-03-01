@@ -1,1 +1,14 @@
-{"license": "", "description": "Fork of jetpack-subprocess for use within Add-on builder site", "contributors": [], "author": "brettz9", "url": "", "dependencies": ["api-utils"], "version": "initial.rev14", "lib": "lib", "fullName": "subprocess", "main": "lib/index", "id": 158632, "name": "subprocess"}
+{
+    "name": "subprocess",
+    "license": "MPL 1.1/GPL 2.0/LGPL 2.1",
+    "author": "Alexandre Poirot",
+    "contributors": [
+      "Patrick Brunschwig (author of almost all code!) <patrick@mozilla-enigmail.org>",
+      "Ramalingam Saravanan (from enigmail team) <svn@xmlterm.org>"
+    ],
+    "version": "0.1.1",
+    "dependencies": [
+      "api-utils"
+    ],
+    "description": "Addon-sdk package for subprocess xpcom components from enigmail. Allow to run process, manipulate stdin/out and kill it."
+}
