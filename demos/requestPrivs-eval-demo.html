@@ -127,6 +127,7 @@ window.addEventListener('DOMContentLoaded', function () {
     var iframe = document.querySelector('#javascript');
     var contentWin = iframe.contentWindow;
 
+    // Todo: Ensure WebAppFind works from here (not within iframe)
     // Todo: upon user toggle, optionally eval upon button click instead
     iframe.addEventListener('load', function () {
         contentWin.cm.setValue(
