@@ -679,6 +679,14 @@ replaced by a simple multiple select string option, and "Addon websites"
 would be more complex to map to any simple type (unless JSON structures
 were to be given an editing UI) as it is not only a list of URLs but a map to
 meta-data on the site.
+21. Demo our own [Ubiquity](https://wiki.mozilla.org/Labs/Ubiquity)-lite by
+calling AsYouWish apps from Firefox's Awesome Bar using bookmark
+keywords to get arguments, and optionally use AsYouWish to do
+more sophisticated things like get data out of designated sites, batch
+process files, etc. Could leverage the same from shareable links by using
+a custom web protocol to link to an AsYouWish app which accepts arguments
+(making very sure that the AsYouWish app doesn't use privileged operations
+without user approval to avoid XSRF! attacks).
 
 # Name
 
