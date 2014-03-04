@@ -66,9 +66,9 @@ not properly escape them according to standard security practices, it would
 be possible for a malicious individual to inject code into the site (whether scripts, 
 links, etc.) for which you have granted AsYouWish privileges which
 could then abuse those privileges when you visit the site and do
-great harm to your system.
+great harm to your system.**
 
-Another important risk to avoid is in the case of bookmarklets. Bookmarklets
+**Another important risk to avoid is in the case of bookmarklets. Bookmarklets
 are links which you can drag to your browser's bookmarks toolbar which,
 when subsequently clicked from your toolbar, will run the code included as
 part of the link as if the code were running on the currently displayed page.
@@ -76,25 +76,8 @@ So, it is important not to add bookmarklets from untrusted sources
 especially if you try to click them while visiting pages for which 
 you have granted AsYouWish permissions.**
 
-You can see this in action (but in a safe way!) by dragging [this link](javascript:(function()%7Bvar%20require%20%3D%20AsYouWish.requestPrivs%3Bvar%20xhr%20%3D%20require('sdk%2Fnet%2Fxhr')%3Bvar%20x%20%3D%20new%20xhr.XMLHttpRequest()%3Bx.open('GET'%2C%20'http%3A%2F%2Fmozilla.org%2F'%2C%20false)%3Bx.send(null)%3Balert(x.responseText)%7D)())
-to your bookmarks toolbar and then clicking it to see an alert of the
-contents of a remote HTML file (something which sites can normally
-not do unless the site is hosted on their own domain), bearing in mind
-again, that if you grant AsYouWish privileges to the site on which the code
-is hosted (e.g., Github), whether as a normal page or a bookmarklet,
-the site will be able to invoke those privileges
-(including if the site were found to be open to exploits).
-
-This is the code above in a readable format:
-
-```javascript
-var require = AsYouWish.requestPrivs;
-var xhr = require('sdk/net/xhr');
-var x = new xhr.XMLHttpRequest();
-x.open('GET', 'http://mozilla.org/', false);
-x.send(null);
-alert(x.responseText);
-```
+You can see this in action (but in a safe way!) at the
+[following site](http://brett-zamir.me/tests2/ayw-bookmarklet.html).
 
 # Usage of the options dialog
 
