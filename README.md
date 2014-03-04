@@ -46,8 +46,8 @@ bank passwords, read and control what tabs they have open, visit other
 sites in their name, read or destroy their local files, etc. etc. Yes, this
 is dangerous stuff, but that capability is also available to regular addons,
 and can be used to provide useful functionality to users (e.g., a password
-manager, a file browser, etc.). This addon just makes it all explicit and
-slightly easier for developers to create.
+manager, a file browser, etc.). This add-on makes explicit exactly what is
+being requested of users and somewhat easier for developers to create.
 
 The API mirrors the Mozilla Add-ons SDK API, so there is little new for
 developers to learn who are familiar with this API. It is also hoped
@@ -57,6 +57,44 @@ Access is granted to specific URLs, not including the query string/hash.
 Privileges do not apply site or even folder wide (to allow a greater sense
 of security and choice in case a website allows third party add-ons
 which may seek their own privileges).
+
+**Before granting permission to any site to use AsYouWish, please note that
+even well-meaning websites may, if poorly designed (as with a poorly designed
+browser add-on), expose your system
+to exploitation. For example, if a website allows user comments but does
+not properly escape them according to standard security practices, it would
+be possible for a malicious individual to inject code into the site (whether scripts, 
+links, etc.) for which you have granted AsYouWish privileges which
+could then abuse those privileges when you visit the site and do
+great harm to your system.
+
+Another important risk to avoid is in the case of bookmarklets. Bookmarklets
+are links which you can drag to your browser's bookmarks toolbar which,
+when subsequently clicked from your toolbar, will run the code included as
+part of the link as if the code were running on the currently displayed page.
+So, it is important not to add bookmarklets from untrusted sources
+especially if you try to click them while visiting pages for which 
+you have granted AsYouWish permissions.**
+
+You can see this in action (but in a safe way!) by dragging [this link](javascript:(function()%7Bvar%20require%20%3D%20AsYouWish.requestPrivs%3Bvar%20xhr%20%3D%20require('sdk%2Fnet%2Fxhr')%3Bvar%20x%20%3D%20new%20xhr.XMLHttpRequest()%3Bx.open('GET'%2C%20'http%3A%2F%2Fmozilla.org%2F'%2C%20false)%3Bx.send(null)%3Balert(x.responseText)%7D)())
+to your bookmarks toolbar and then clicking it to see an alert of the
+contents of a remote HTML file (something which sites can normally
+not do unless the site is hosted on their own domain), bearing in mind
+again, that if you grant AsYouWish privileges to the site on which the code
+is hosted (e.g., Github), whether as a normal page or a bookmarklet,
+the site will be able to invoke those privileges
+(including if the site were found to be open to exploits).
+
+This is the code above in a readable format:
+
+```javascript
+var require = AsYouWish.requestPrivs;
+var xhr = require('sdk/net/xhr');
+var x = new xhr.XMLHttpRequest();
+x.open('GET', 'http://mozilla.org/', false);
+x.send(null);
+alert(x.responseText);
+```
 
 # Usage of the options dialog
 
@@ -190,7 +228,7 @@ to an untrustworthy site, damages may have already been done.
 For developer information on "addon" websites, see
 [Add-on websites](./doc/Developer-Guidelines.md#addon-websites).
 
-For my concept of a Browser-in-Browser (to allow a regular website to
+For the concept of a Browser-in-Browser (to allow a regular website to
 function as the browser UI) and the idea for it to become itself extensible
 with addons, see the section "Some additional intended use cases" below.
 
