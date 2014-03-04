@@ -67,7 +67,8 @@ especially if you try to click them while visiting pages for which
 you have granted AsYouWish permissions.**
 
 You can see this in action (but in a safe way!) at the
-[following site](http://brett-zamir.me/tests2/ayw-bookmarklet.html).
+[following site](http://brett-zamir.me/tests2/ayw-bookmarklet.html) (also
+in the [source of this repo](./demos/ayw-bookmarklet.html)).
 
 # Usage of the options dialog
 
