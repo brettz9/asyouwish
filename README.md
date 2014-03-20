@@ -8,9 +8,19 @@ https://addons.mozilla.org/en-US/addon/as-you-wish/ .
 to your data (not only browser data) so don't install--especially at this
 time--unless you are willing to take the risks. It is hoped this may go
 through a thorough security vetting as part of the process to get the
-add-on accepted at [AMO](https://addons.mozilla.org/). The current
-way this add-on may be tested is either through the built XPI file
-included with the source, or by using the SDK cfx tool.***
+add-on accepted at [AMO](https://addons.mozilla.org/).***
+
+***I recently encountered a privileged AsYouWish request while visiting
+Yahoo.com; it is possible that a malicious third-party added some code
+which Yahoo included (and sites not familiar with AsYouWish might not be
+familiar with the consequences of including code aimed for it). (I
+unfortunately rejected the request before noticing what exact privileges had
+been sought or which domain/code segment had been responsible for
+the request.) This points to the dangers of approving privileges on any
+site which is not actively prohibiting untrusted third-party code.***
+
+The current way this add-on may be tested is either through the built XPI file
+included with the source, or by using the SDK cfx tool.
 
 Obviously allowing privileges may be dangerous if used by a malicious
 site (as with addons), so there needs to be a way to inform the user that
