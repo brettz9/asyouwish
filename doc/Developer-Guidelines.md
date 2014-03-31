@@ -247,7 +247,6 @@ well as high-level ones), see <https://developer.mozilla.org/en-US/Add-ons/SDK>)
 * **sdk/content/content**: 
 * **sdk/content/content-proxy**: 
 * **sdk/content/loader**: 
-* **sdk/content/symbiont**: 
 * **sdk/content/worker**: 
 * **sdk/core/heritage**: 
 * **sdk/core/namespace**: 
