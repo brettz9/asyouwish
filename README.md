@@ -80,8 +80,9 @@ You can see this in action (but in a safe way!) at the
 [following site](http://brett-zamir.me/tests2/ayw-bookmarklet.html) (also
 in the [source of this repo](./demos/ayw-bookmarklet.html)).
 
-*Note: I have updated my password and SSH keys after the Heartbleed
-patches were applied by Github for greater security.*
+*Note: For greater security I have updated my password and SSH keys
+on Github (and updated email accounts) after the Heartbleed
+patches were applied by Github. No suspicious activity was found.*
 
 # Usage of the options dialog
 
