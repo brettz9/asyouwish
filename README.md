@@ -80,6 +80,9 @@ You can see this in action (but in a safe way!) at the
 [following site](http://brett-zamir.me/tests2/ayw-bookmarklet.html) (also
 in the [source of this repo](./demos/ayw-bookmarklet.html)).
 
+*Note: I have updated my password and SSH keys after the Heartbleed
+patches were applied by Github for greater security.*
+
 # Usage of the options dialog
 
 ![Options dialog](https://raw.github.com/brettz9/asyouwish/master/data/ayw-options/options-screenshot.png "Options dialog")
