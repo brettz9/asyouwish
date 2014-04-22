@@ -723,6 +723,12 @@ process files, etc. Could leverage the same from shareable links by using
 a custom web protocol to link to an AsYouWish app which accepts arguments
 (making very sure that the AsYouWish app doesn't use privileged operations
 without user approval to avoid XSRF! attacks).
+22. One-time privilege permission (e.g., approve a copy to clipboard just
+for one time).
+23. Preference to indicate to user that a site sought privileges but is not
+enabled to even ask for them (this could prevent users from accidentally
+clicking to grant permission while still informing them of the site's
+intentions).
 
 # Name
 
