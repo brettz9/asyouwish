@@ -1,4 +1,12 @@
-<p>By dragging <a href="javascript:(function()%7Bif%20(typeof%20AsYouWish%20%3D%3D%3D%20'undefined')%20%7Balert(%22You%20do%20not%20appear%20to%20have%20AsYouWish%20installed.%20Redirecting%20to%20Github...%22)%3Breturn%20window.location%20%3D%20'https%3A%2F%2Fgithub.com%2Fbrettz9%2Fasyouwish%2F'%3B%7Dvar%20require%20%3D%20AsYouWish.requestPrivs%3Bvar%20xhr%20%3D%20require('sdk%2Fnet%2Fxhr')%3Bvar%20x%20%3D%20new%20xhr.XMLHttpRequest()%3Bx.open('GET'%2C%20'http%3A%2F%2Fmozilla.org%2F'%2C%20false)%3Bx.send(null)%3Balert(x.responseText)%7D)()">this link</a>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+<p>By dragging <a id="bookmarklet">this link</a>
 to your bookmarks toolbar and then clicking it to see an alert of the
 contents of a remote HTML file (something which sites can normally
 not do unless the site is hosted on their own domain), bearing in mind
@@ -9,15 +17,24 @@ the site will be able to invoke those privileges
 
 <p>This is the code above in a readable format:</p>
 
-<pre><code>
-if (typeof AsYouWish === 'undefined') {
-    alert("You do not appear to have AsYouWish installed. Redirecting to Github...");
-    return window.location = 'https://github.com/brettz9/asyouwish/';
-}
-var require = AsYouWish.requestPrivs;
-var xhr = require('sdk/net/xhr');
-var x = new xhr.XMLHttpRequest();
-x.open('GET', 'http://mozilla.org/', false);
-x.send(null);
-alert(x.responseText);
+<pre><code id="source">
+(function() {
+    if (typeof AsYouWish === 'undefined') {
+        alert("You do not appear to have AsYouWish installed. Redirecting to Github...");
+        return window.location = 'https://github.com/brettz9/asyouwish/';
+    }
+    var require = AsYouWish.requestPrivs;
+    var xhr = require('sdk/net/xhr');
+    var x = new xhr.XMLHttpRequest();
+    x.open('GET', 'http://mozilla.org/', false);
+    x.send(null);
+    alert(x.responseText);
+}());
 </code></pre>
+<script>
+var bookmarklet = document.getElementById('bookmarklet');
+bookmarklet.href = 'javascript:' + encodeURIComponent(document.getElementById('source').textContent.trim().replace(/\s\s+/g, ' '));
+</script>
+
+</body>
+</html>
