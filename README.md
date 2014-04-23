@@ -729,6 +729,9 @@ for one time).
 enabled to even ask for them (this could prevent users from accidentally
 clicking to grant permission while still informing them of the site's
 intentions).
+24. File a bug to allow protocols to be associated with specific
+profiles (e.g., if one clicks `web+mycalcapp`, it can open a specific
+profile under which one has registered this app)?
 
 # Name
 
