@@ -539,7 +539,7 @@ base for a server-side wiki (including a remote PUT-saving file-based one).
 
 7. A macro program with differing levels of potential privileges. Could make
 command line requests, etc. for potential scripting of, and interaction with,
-outside apps.
+outside apps. Might be expanded to do web-crawling and search indexing.
 
 8. jQuery/XQuery-like reshaping of remote HTML, ideally via
 [HTTPQuery](https://github.com/brettz9/httpquery) using JavaScript.
