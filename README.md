@@ -692,6 +692,11 @@ https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIContentPol
 https://developer.mozilla.org/en-US/docs/XPCOM_Interface_Reference/nsIPrincipal per
 <http://stackoverflow.com/questions/18369052/firefox-add-on-to-load-webpage-without-network-access>?)
 See also http://en.wikipedia.org/wiki/Site-specific_browser regarding such sandboxing.
+Perhaps users could be directed to
+[CSP policy directives](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives)
+or the
+[UserCSP](https://addons.mozilla.org/en-US/firefox/addon/newusercspdesign/)
+add-on.
 19. Create frequently-used, granularly restricted APIs like informing the
 user which file or folder is being requested for write access, for universal
 read access, etc.
