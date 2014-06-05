@@ -738,6 +738,8 @@ intentions).
 24. File a bug to allow protocols to be associated with specific
 profiles (e.g., if one clicks `web+mycalcapp`, it can open a specific
 profile under which one has registered this app)?
+25. Add right-click option in Firefox to open tab in hidden window
+(esp. so it could be used to handle AYW tasks).
 
 # Name
 
