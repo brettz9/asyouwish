@@ -492,7 +492,7 @@ be private, however, as other sites sharing the same domain can
 also access normal browser data without AsYouWish approval
 (but again, each page does require its own approval). Please
 experiment (as with any AYW app) with both honorable intentions
-and caution!
+and caution! See CDN-related todo below.
 
 I'd also like to see support for PUT editing (for built-in publishing).
 
@@ -754,6 +754,15 @@ intentions).
 24. File a bug to allow protocols to be associated with specific
 profiles (e.g., if one clicks `web+mycalcapp`, it can open a specific
 profile under which one has registered this app)?
+25. For a CDN-related todo, make the eval() demo in the
+test-request-all branch avoid the issue with too many privileges
+showing at once and get the demo to accept initial data for
+eval() within a URL param, but with a very important need to
+confirm that the user understands the danger unless they know
+from where they opened the link, they trust the site and this one,
+and are willing to give the privileges (and they will have to whitelist
+the site as well). Use case is for access to trusted remote
+configuration routines requiring privileges.
 
 # Name
 
