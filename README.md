@@ -757,7 +757,8 @@ profile under which one has registered this app)?
 25. For a CDN-related todo, make the eval() demo in the
 test-request-all branch avoid the issue with too many privileges
 showing at once and get the demo to accept initial data for
-eval() within a URL param, but with a very important need to
+eval() within a URL param (or WebAppFind postMessage
+listener, but with a very important need to
 confirm that the user understands the danger unless they know
 from where they opened the link, they trust the site and this one,
 and are willing to give the privileges (and they will have to whitelist
