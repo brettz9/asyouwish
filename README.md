@@ -477,23 +477,6 @@ allow normal web developers the ability to use familiar and easier
 languages to innovate with user interfaces, while accessing the
 trickier and lower level plumbing handled by the browsers.
 
-3. One might supply privileged AsYouWish requests to a secure,
-https site accepting user-submitted content and HTML execution
-without filtering--like on this CDN for Github repos,
-[rawgit](https://cdn.rawgit.com/brettz9/asyouwish/master/demos/requestPrivs-clipboard-demo.html)!
-Since AsYouWish privileges are page-specific, rather than domain specific,
-as long as the hosting site does not have security flaws (as with
-any especially public AsYouWish application) and the executing
-script is trustworthy, one can provide snippets which help a user
-configure privileged features of their system (assuming the user
-whitelists the page and accepts the request). Bear in mind that
-cookies, localStorage and such added via such a site will NOT
-be private, however, as other sites sharing the same domain can
-also access normal browser data without AsYouWish approval
-(but again, each page does require its own approval). Please
-experiment (as with any AYW app) with both honorable intentions
-and caution! See CDN-related todo below.
-
 I'd also like to see support for PUT editing (for built-in publishing).
 
 Also a browser as in a Gopher-like remote file browser.
