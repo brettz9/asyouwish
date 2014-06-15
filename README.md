@@ -700,7 +700,7 @@ add-on. Could also adapt or make new add-on to ensure site-sent headers
 could be translated into some kind of visual indicator to know when visiting
 such a site assuming CSP can prevent all remote requests including have
 safeguards if using a cache manifest to redeliver the HTML without CSP
-headers.
+headers. Detect CSP using "http-on-examine-response" per https://developer.mozilla.org/en-US/Add-ons/Overlay_Extensions/XUL_School/Intercepting_Page_Loads
 19. Create frequently-used, granularly restricted APIs like informing the
 user which file or folder is being requested for write access, for universal
 read access, etc.
