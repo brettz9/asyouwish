@@ -696,8 +696,11 @@ Perhaps users could be directed to
 [CSP policy directives](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives)
 or the
 [UserCSP](https://addons.mozilla.org/en-US/firefox/addon/newusercspdesign/)
-add-on assuming CSP can prevent all remote requests including have safeguards
-if using a cache manifest to redeliver the HTML without CSP headers.
+add-on. Could also adapt or make new add-on to ensure site-sent headers
+could be translated into some kind of visual indicator to know when visiting
+such a site assuming CSP can prevent all remote requests including have
+safeguards if using a cache manifest to redeliver the HTML without CSP
+headers.
 19. Create frequently-used, granularly restricted APIs like informing the
 user which file or folder is being requested for write access, for universal
 read access, etc.
