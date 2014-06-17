@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        iframe {width: 100%; height: 500px;}
+        #location-bar {width: 90%;}
+    </style>
+</head>
+<body>
+<button id="back" disabled="disabled">&lt;</button>
+<button id="forward" disabled="disabled">></button>
+<input id="location-bar" type="url" /><br />
+<iframe id="content" src=""></iframe>
+<script>
+function $q (sel) {
+    return document.querySelector(sel);
+}
+function addURL (url) {
+    $q('#location-bar').value = $q('#content').src = url;
+}
+
+var startURL = 'http://brett-zamir.me';
+
+var historyTracker = {
+    sites: [startURL],
+    index: 0,
+    add: function (site) {
+        alert('unloading' + site);
+        switch (state) {
+            case 'back':
+                break;
+            case 'forward':
+                break;
+            default:
+                this.sites.splice(this.index + 1, this.sites.length);
+                this.sites.push(site);
+                this.index = this.sites.length;
+                break;
+        }
+    },
+    lowerIndex: function () {
+        if (this.index > 0) {
+            this.index--;
+        }
+        if (this.index === 0) {
+            this.event('zeroIndex');
+        }
+    },
+    back: function () {
+        this.state = 'back';
+        this.lowerIndex();
+        return historyTracker.sites[historyTracker.index];
+    },
+    forward: function () {
+        this.state = 'forward';
+        historyTracker.index++;
+        if (historyTracker.index >= historyTracker.sites.length - 1) {
+            this.event('highestIndex');
+        }
+        return historyTracker.sites[historyTracker.index - 1];
+    }
+};
+
+// Respond to history events with DOM alterations
+historyTracker.event = function (type) {
+    switch (type) {
+        case 'highestIndex':
+            $q('#forward').disabled = true;
+            break;
+        case 'zeroIndex':
+            $q('#back').disabled = true;
+            break;
+    }
+};
+
+$q('#back').addEventListener('click', function (e) {
+    $q('#forward').disabled = false;
+    addURL(historyTracker.back());
+});
+$q('#forward').addEventListener('click', function (e) {
+    $q('#back').disabled = false;
+    addURL(historyTracker.forward());
+});
+$q('#location-bar').addEventListener('change', function (e) {
+    $q('#forward').disabled = false;
+    var url = e.target.value;
+    $q('#content').src = url;
+    historyTracker.add(url);
+});
+
+// Todo: Any way to prevent frame killing, e.g., by setting "top" === "self"?
+document.addEventListener('DOMFrameContentLoaded', function () {
+    var iwin = $q('#content').contentWindow;
+    iwin.addEventListener('unload', function () {
+        historyTracker.add(iwin.location);
+    });
+});
+
+addURL(startURL);
+
+/*
+// Also works!
+var Cc = Components.classes;
+var Ci = Components.interfaces;
+alert(Cc['@mozilla.org/process/util;1'].createInstance(Ci.nsIProcess))
+*/
+</script>
+<!--
+We can thankfully only load or link to chrome URLs from within our already privileged environment
+<a href="chrome://asyouwish/content/privileged-dom.html">chrome URL</a>
+-->
+</body>
+</html>
