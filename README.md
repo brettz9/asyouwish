@@ -696,7 +696,11 @@ Perhaps users could be directed to
 [CSP policy directives](https://developer.mozilla.org/en-US/docs/Web/Security/CSP/CSP_policy_directives)
 or the
 [UserCSP](https://addons.mozilla.org/en-US/firefox/addon/newusercspdesign/)
-add-on.
+add-on. Could also adapt or make new add-on to ensure site-sent headers
+could be translated into some kind of visual indicator to know when visiting
+such a site assuming CSP can prevent all remote requests including have
+safeguards if using a cache manifest to redeliver the HTML without CSP
+headers. Detect CSP using "http-on-examine-response" per https://developer.mozilla.org/en-US/Add-ons/Overlay_Extensions/XUL_School/Intercepting_Page_Loads
 19. Create frequently-used, granularly restricted APIs like informing the
 user which file or folder is being requested for write access, for universal
 read access, etc.
@@ -737,16 +741,9 @@ intentions).
 24. File a bug to allow protocols to be associated with specific
 profiles (e.g., if one clicks `web+mycalcapp`, it can open a specific
 profile under which one has registered this app)?
-25. For a CDN-related todo, make the eval() demo in the
-test-request-all branch avoid the issue with too many privileges
-showing at once and get the demo to accept initial data for
-eval() within a URL param (or WebAppFind postMessage
-listener, but with a very important need to
-confirm that the user understands the danger unless they know
-from where they opened the link, they trust the site and this one,
-and are willing to give the privileges (and they will have to whitelist
-the site as well). Use case is for access to trusted remote
-configuration routines requiring privileges.
+25. Add right-click option in Firefox to open tab in hidden window
+(esp. so it could be used to handle AYW tasks).
+26. Utilize system/child_process in place of x-subprocess?
 
 # Name
 
