@@ -34,16 +34,15 @@ window.addEventListener('DOMContentLoaded', function () {
     };
 
     try {
-        AsYouWish.requestPrivs(['chrome', 'x-subprocess'], function (chrome, subprocess) {
-            var Cc = chrome.Cc, Ci = chrome.Ci,
-                env = Cc['@mozilla.org/process/environment;1'].getService(Ci.nsIEnvironment),
+        AsYouWish.requestPrivs(['sdk/system', 'x-subprocess'], function (sys, subprocess) {
+		    var comSpec = sys.env.ComSpec,
                 envTestValue = "OK",
                 gotStdout = false;
 
             try {
                 var p = subprocess.call({
                     // Retrieve windows cmd.exe path from env
-                    command: env.get('ComSpec'),
+                    command: comSpec,
                     // In order to execute a simple "echo" function
                     arguments: ['/C', 'echo %ENV_TEST%'], // ' & type CON' should display stdin, but doesn't work
                     // Printing an environnement variable set here by the parent process

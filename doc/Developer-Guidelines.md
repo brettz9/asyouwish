@@ -200,100 +200,124 @@ At present, all [APIs](https://developer.mozilla.org/en-US/Add-ons/SDK)
 are exposed.
 
 Requests at this point can therefore be made of the user for the following high-level APIs:
-* **clipboard**: Accessing or setting the clipboard
-* **context-menu**: Accessing or adding to the browser's own context menu
-* **hotkeys**: Creating new browser-wide keyboard shortcuts
-* **page-mod**: Modifying any web content the user loads in the browser
-* **page-worker**: Performing hidden loads of cross-domain web content
-* **panel**: Loading HTML into a dialog
-* **passwords**: Reading or removing user's site passwords or store new passwords
-* **private-browsing**: Detecting of when user is in private browsing mode.
-* **request**: Making cross-domain browser requests (accessing a remote website
+- **sdk/clipboard**: Accessing or setting the clipboard
+- **sdk/context-menu**: Accessing or adding to the browser's own context menu
+- **sdk/hotkeys**: Creating new browser-wide keyboard shortcuts
+- **sdk/indexed-db**: Access to IndexedDB API
+- **sdk/page-mod**: Modifying any web content the user loads in the browser
+- **sdk/page-worker**: Performing hidden loads of cross-domain web content
+- **sdk/panel**: Loading HTML into a dialog
+- **sdk/passwords**: Reading or removing user's site passwords or store new passwords
+- **sdk/private-browsing**: Detecting of when user is in private browsing mode.
+- **sdk/request**: Making cross-domain browser requests (accessing a remote website
 using the user's credentials)
-* **selection**: Accessing user highlighted selections made within the browser
-* **simple-storage**: Accessing SHARED simple storage to store data accessible to any
+- **sdk/selection**: Accessing user highlighted selections made within the browser
+- **sdk/simple-storage**: Accessing SHARED simple storage to store data accessible to any
 other AsYouWish-enabled website approved by the user without needing one site to act
 as gate-keeper of the data.
-* **system**: Gets information about the environment it's running in and can quit Firefox!
-* **tabs**: Listening to changes in user tabs, controlling tabs, opening new tabs, or accessing any other opened browser tab content
-* **widget**: Creating an addon user interface (widget) to be hosted in the add-on bar
-* **windows**: Listening to changes in user's browser tabs, controlling tabs, opening new tabs, or accessing any other opened browser tab content
+- **sdk/system**: Gets information about the environment it's running in and can quit Firefox!
+- **sdk/tabs**: Listening to changes in user tabs, controlling tabs, opening new tabs, or accessing any other opened browser tab content
+- **sdk/ui**: Provides access to button, toolbar, and sidebar UI objects.
+- **sdk/widget**: Creating an addon user interface (widget) to be hosted in the add-on bar
+- **sdk/windows**: Listening to changes in user's browser tabs, controlling tabs, opening new tabs, or accessing any other opened browser tab content
 
 The following, apparently fully safe libraries made available by the Addons SDK
 and which can perhaps be allowed without permissions in the future (if not standardized):
-* **url**: URL parsing/retrieval utilities
-* **base64**: Character-set-aware base64 encoding and decoding
-* **querystring**: Serializing/deserializing of URL query strings
+- **sdk/base64**: Character-set-aware base64 encoding and decoding
+- **sdk/querystring**: Serializing/deserializing of URL query strings
+- **sdk/url**: URL parsing/retrieval utilities
+- **sdk/lang/functional**: Functional helper methods
+- **sdk/lang/type**: Functions for working with type detection.
+- **sdk/test/utils**: Helper methods used in the CommonJS Unit Testing suite.
+- **sdk/test/assert**: Implements the assert interface defined in the CommonJS Unit Testing specification version 1.1.
+- **sdk/test/harness**: Tests harness setup and execution.
+- **sdk/ui/id**: Creates UI component IDs.
+- **sdk/util/array**: Helper functions for working with arrays.
 
 The following other high-level APIs have currently been allowed, but they are
 apparently of limited to no use because they are either already available to
 regular websites or they are specific to the AsYouWish addon:
-* **notifications**: Creating Toaster-style notifications; use Web Notifications instead?
-* **console**: Accessing addon console object (including 'exception' method)
-* **addon-page**: Opening AsYouWish's data/index.html in a bare type of tab (doesn't exist currenty)
-* **l10n**: Acccesing AsYouWish's localization strings
-* **self**: Accessing data of the AsYouWish addon
-* **simple-prefs**: Storing and setting non-site-specific preferences for AsYouWish if stored using this preference
-* **timers**: Accessing web-like timing
+- **sdk/console**: Accessing addon console object (including 'exception' method)
+- **sdk/l10n**: Acccesing AsYouWish's localization strings
+- **sdk/notifications**: Creating Toaster-style notifications; use Web Notifications instead?
+- **sdk/self**: Accessing data of the AsYouWish addon
+- **sdk/simple-prefs**: Storing and setting non-site-specific preferences for AsYouWish if stored using this preference
+- **sdk/timers**: Accessing web-like timing
 
 The following low-level APIs are also available (although summaries are
 provided of those which may be of special interest, it is preferable to use
 the high-level APIs where possible (the paths may change if the full "sdk/"
 path becomes deprecated or required); for documentation of low-level APIs (as
 well as high-level ones), see <https://developer.mozilla.org/en-US/Add-ons/SDK>):
-* **toolkit/loader**: 
-* **sdk/console/plain-text**: 
-* **sdk/console/traceback**: 
-* **sdk/content/content**: 
-* **sdk/content/content-proxy**: 
-* **sdk/content/loader**: 
-* **sdk/content/worker**: 
-* **sdk/core/heritage**: 
-* **sdk/core/namespace**: 
-* **sdk/core/promise**: 
-* **sdk/event/core**: 
-* **sdk/event/target**: 
-* **sdk/frame/hidden-frame**: 
-* **sdk/frame/utils**: 
-* **sdk/io/byte-streams**: 
-* **sdk/io/file**: Reading, removing, or writing files and directories on the user's desktop
-* **sdk/io/text-streams**: 
-* **sdk/loader/cuddlefish**: 
-* **sdk/loader/sandbox**: 
-* **sdk/net/url**: 
-* **sdk/net/xhr**: Making cross-domain browser requests (accessing a remote website
-using the user's credentials)
-* **sdk/util/match-pattern**: 
-* **sdk/platform/xpcom**: 
-* **sdk/preferences/service**: 
-* **sdk/system/environment**: 
-* **sdk/system/runtime**: 
-* **sdk/system/unload**: 
-* **sdk/system/xul-app**: 
-* **sdk/test/assert**: 
-* **sdk/test/harness**: 
-* **sdk/test/httpd**: Usable for creating server for user where they can serve evaluated files to the requesting server?
-* **sdk/test/runner**: 
-* **sdk/util/collection**: 
-* **sdk/util/deprecate**: 
-* **sdk/util/list**: 
-* **sdk/util/uuid**: 
-* **sdk/window/utils**: 
 
-Requiring the chrome object (for access to most XPCOM functionality) is
+- **toolkit/loader**: 
+- **sdk/console/plain-text**: 
+- **sdk/console/traceback**: 
+- **sdk/content/content**: 
+- **sdk/content/loader**: 
+- **sdk/content/mod**: 
+- **sdk/content/symbiont**:
+- **sdk/content/worker**: 
+- **sdk/core/heritage**: 
+- **sdk/core/namespace**: 
+- **sdk/core/promise**: 
+- **sdk/event/core**: 
+- **sdk/event/target**: 
+- **sdk/frame/hidden-frame**: 
+- **sdk/frame/utils**: 
+- **sdk/io/byte-streams**: 
+- **sdk/io/file**: Reading, removing, or writing files and directories on the user's desktop
+- **sdk/io/text-streams**: 
+- **sdk/loader/cuddlefish**: 
+- **sdk/loader/sandbox**: 
+- **sdk/net/url**: 
+- **sdk/net/xhr**: Making cross-domain browser requests (accessing a remote website
+using the user's credentials)
+- **sdk/places/bookmarks**: 
+- **sdk/places/favicon**: 
+- **sdk/places/history**: 
+- **sdk/platform/xpcom**: 
+- **sdk/preferences/service**: 
+- **sdk/stylesheet/style**:
+- **sdk/stylesheet/utils**:
+- **sdk/system/child_process**:
+- **sdk/system/environment**: 
+- **sdk/system/events**: 
+- **sdk/system/runtime**: 
+- **sdk/system/unload**: 
+- **sdk/system/xul-app**: 
+- **sdk/tabs/utils**: 
+- **sdk/test/httpd**: 
+- **sdk/test/runner**: Sets up unit tests.
+- **sdk/ui/button/action**: 
+- **sdk/ui/button/toggle**: 
+- **sdk/ui/frame**: 
+- **sdk/ui/sidebar**: 
+- **sdk/ui/toolbar**: 
+- **sdk/util/collection**: 
+- **sdk/util/deprecate**: 
+- **sdk/util/list**: 
+- **sdk/util/match-pattern**: 
+- **sdk/util/object**: 
+- **sdk/util/uuid**: 
+- **sdk/window/utils**: 
+
+Requiring the chrome object via `require('chrome')` (for access to
+most XPCOM functionality) is
 currently also possible, though this Mozilla-oriented API may be removed
 in the future, especially if existing functionality becomes available through
 other means.
 
 The following custom APIs have also been added:
-* **x-namespaced-simple-storage**: Simple storage applied to a particular
+- **x-namespaced-simple-storage**: Simple storage applied to a particular
 namespaced subobject; allows sites to only request privileges for shared
 storage on a particular namespace without needing any particular site to
 be the sole owner/manager of the data.
-* **x-subprocess** (version 0.5.2): Launch subprocesses (currently only
+- **x-subprocess** (version 0.5.2): Launch subprocesses (currently only
 tested in Windows, but the [underlying library](https://github.com/ochameau/jetpack-subprocess/)
 appears to support others); sample test and sample working command line
-demo provided.
+demo provided. One may be able to get the desired functionality now by using
+the built-in `sdk/system/child_process` module instead.
 
 (Custom APIs should normally only be added if they offer some functionality
 that is particularly suited to the web environment; otherwise, we will defer to
@@ -310,13 +334,13 @@ adequately warns them of risks to that API.
 
 Currently, the following errors may be reported (but this API is not yet frozen):
 
-* _bad-privilege_: The privilege is not even potentially supported. A second argument is populated with the specific bad privilege.
-* _disallowed-privilege_: The privilege is not on the user's currently enforced whitelist. A second argument is populated with the specific disallowed privilege.
-* _failed-retrieval_: There was an unknown failure in requiring the object. A second argument is populated with the specific failed privilege.
-* _refused_: The user explicitly refused permission for a privilege. A second argument is populated with the specific as yet unapproved privileges, and a third argument is populated with the currently approved privileges.
-* _denied_: The site has since been completely denied access. A second argument is populated with the specific bad privilege.
-* _dismissed_: Should occur when user clicks away or switches tabs, though due to an apparent Firefox bug, that is currently being reported be 'removed'. A second argument is populated with 'initial' or 'callback' to indicate at what phase the dismissal occurred.
-* _removed_: Occurs when permissions hanger is closed with 'Not now' or with 'x', but not with the explicit option 'Refuse permission' (which reports "refused"); also currently reporting dismissed, though this is apparently a Firefox bug
+- _bad-privilege_: The privilege is not even potentially supported. A second argument is populated with the specific bad privilege.
+- _disallowed-privilege_: The privilege is not on the user's currently enforced whitelist. A second argument is populated with the specific disallowed privilege.
+- _failed-retrieval_: There was an unknown failure in requiring the object. A second argument is populated with the specific failed privilege.
+- _refused_: The user explicitly refused permission for a privilege. A second argument is populated with the specific as yet unapproved privileges, and a third argument is populated with the currently approved privileges.
+- _denied_: The site has since been completely denied access. A second argument is populated with the specific bad privilege.
+- _dismissed_: Should occur when user clicks away or switches tabs, though due to an apparent Firefox bug, that is currently being reported be 'removed'. A second argument is populated with 'initial' or 'callback' to indicate at what phase the dismissal occurred.
+- _removed_: Occurs when permissions hanger is closed with 'Not now' or with 'x', but not with the explicit option 'Refuse permission' (which reports "refused"); also currently reporting dismissed, though this is apparently a Firefox bug
 
 Currently 'shown' is only an internal event and not reported.
 

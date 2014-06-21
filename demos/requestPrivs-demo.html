@@ -17,10 +17,13 @@ window.addEventListener('DOMContentLoaded', function () {
         AsYouWish.requestPrivs(['sdk/net/xhr'], function (xhr) {
             try {
                 var x = new xhr.XMLHttpRequest();
-                x.open('GET', 'http://mozilla.org/', false);
+                x.onreadystatechange = function () {
+                    if (x.readyState === 4 && x.status === 200) {
+                        alert(x.responseText);
+                    }
+                };
+                x.open('GET', 'http://mozilla.org/', true);
                 x.send(null);
-                alert(x.responseText);
-
 
                 // We don't want to trigger request twice, so we wait until callback returns.
                 AsYouWish.requestPrivs(['sdk/url'], function (URLObj) {

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<script src="../lib/possiblePrivs.js"></script>
+<script>
+/*globals alert, document, window, AsYouWish*/
+
+window.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+
+    var errBack = function (error) {
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error type: ' + error + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+
+    try {
+        AsYouWish.requestPrivs(possiblePrivs.slice(0, -2).concat(
+            'x-namespaced-simple-storage-http://brett-zamir.me' // This needs a namespace afterward
+        ), function (
+            fileObj
+        ) {
+            alert('All ok');
+        }, errBack);
+
+    } catch (e) {
+        alert('page error: ' + e);
+    }
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+</body></html>
