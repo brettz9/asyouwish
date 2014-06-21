@@ -178,16 +178,15 @@ already approved addons or explicitly added ones).
 
 # "Addon" websites
 
-**Note that as of recent Firefox versions, AsYouWish is not able to work**
-** with adding a panel to a widget as needed by an add-on bar extension.**
-
 AsYouWish allows websites to be run as "addons". While these "addon"
 websites do not automatically gain additional privileges,
 they will be able to request additional privileges upon load and they are
 loaded in a hidden window immediately upon approval and upon
 each browser restart.
 
-This could be used, for example, to add a widget/panel to the add-on bar
+This can be used, for example, to add a `ui`
+[panel](https://developer.mozilla.org/en-US/Add-ons/SDK/High-Level_APIs/panel#Attaching_panels_to_buttons)
+to the add-on bar
 (or say add to the context menu, etc.) to function similarly to normal
 addons--except that you never need to zip up your HTML file (though the
 site can take advantage of HTML5 features for offline caching).
@@ -360,7 +359,7 @@ execute AsYouWish-enabled web applications locally.
 3. Although there is no `<HTA:application>` element for declaratively
 defining within HTML a means of accessing the "add-on", the user
 may pin the AsYouWish-enabled site as an application tab (a normal
-browser feature), and the developer may use the "widget" API to make
+browser feature), and the developer may use the "ui" API to make
 the application accessible via the add-on bar (though the contentScript
 may need to be expressed as an eval-able string currently since it may
 otherwise expect the script files to be stored within the AsYouWish
@@ -593,24 +592,23 @@ __exposedProps__ requirement with functions).
 
 # Known Issues
 
-1. Adding a panel to a widget has problems as of recent versions of Firefox
-    1. This patch to widget.js within valid.panel had previously been sufficient:
-		`ok: function(v) !v || v instanceof panels.Panel || (v.show && typeof v.isShowing !== 'undefined') // Adding duck-typing to avoid wrapper complaining of instanceof`
-2. instanceof issues with chrome content
+1. instanceof issues with chrome content
     1. e.g., the wrapping within AsYouWish (using specialPowers/proxies)
-    does not work with SDK Widget (/addon-sdk-1.15/lib/sdk/widget.js) which
+    does not work with SDK Widget (/addon-sdk-1.16/lib/sdk/widget.js) which
     checks for instanceof Panel (resolved within AsYouWish by changing this
-    code to duck type)
+    code to duck type) though this one is now deprecated and `ui` appears to be working
+		1. Note: this patch to widget.js within valid.panel had previously been sufficient:
+			`ok: function(v) !v || v instanceof panels.Panel || (v.show && typeof v.isShowing !== 'undefined') // Adding duck-typing to avoid wrapper complaining of instanceof`
     2. workarounds most likely needed for other instanceof usages within
     the SDK (no way to get SDK to [use custom instanceOf function](https://bugzilla.mozilla.org/show_bug.cgi?id=823790)
     that can be overridden?)
-3. Privileges don't load on initial browser load as apparently not injected
+1. Privileges don't load on initial browser load as apparently not injected
 at that time with content-document-global-created event.
-4. XUL elements are not supported, but see [XUL in the Developer FAQ](./doc/Developer-FAQ.md#can-i-use-xul-elements-within-my-html)
+1. XUL elements are not supported, but see [XUL in the Developer FAQ](./doc/Developer-FAQ.md#can-i-use-xul-elements-within-my-html)
 for a possible means around it (though probably better to move away from XUL
 unless standard support is added in the future for XBL). Being tracked now in
 [issue 4](https://github.com/brettz9/asyouwish/issues/4).
-5. The exposure to users of the JSON-based preferences is clearly less than ideal
+1. The exposure to users of the JSON-based preferences is clearly less than ideal
 (and the lack of incorporation of site-based prefs within about:permissions).
 
 # Possible future goals
