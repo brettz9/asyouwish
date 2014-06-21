@@ -20,7 +20,7 @@ This same page:
     a) mainWindow = getMainWindowFromChildWindow(subject);
 */
 
-var Panel, testWidget,
+var panel, actionButton,
     errBack = function errBack (error, error2, error3) {
         document.getElementById('errs').
             appendChild(document.createTextNode('Error type: ' + error + (error2 ? ' ' + error2 : '') + (error3 ? ' ' + error3 : '') + '\n'));
@@ -57,7 +57,7 @@ window.addEventListener('DOMContentLoaded', function () {
             AsYouWish.register({
                 name: 'ClipboardTest',
                 description: 'For testing addon registration and the clipboard',
-                version: '0.1',
+                version: '0.1.0',
                 license: 'BSD',
                 developer: {name: 'Brett', url: 'http://brett-zamir.me'}
             }, errBack);
@@ -78,47 +78,55 @@ window.addEventListener('DOMContentLoaded', function () {
             AsYouWish.requestPrivs(['sdk/clipboard'], function (clip) {
                 try {
                     console.log('ok1');
-                    Panel.postMessage(
+                    panel.postMessage(
                         'In the clipboard:' + clip.get()
                     );
                 }
                 catch (e) {
                     console.log('err1'+e);
-                    Panel.postMessage('Page callback error11' + e);
+                    panel.postMessage('Page callback error11' + e);
                 }
             }, errBack);
         };
 
         //clipboard(); // Should ensure we have all permissions first, as otherwise, this will not work from a hidden window
         try {
-            AsYouWish.requestPrivs(['sdk/widget', 'sdk/panel'], function (widget, panel) {
+            AsYouWish.requestPrivs(['sdk/ui', 'sdk/panel'], function (ui, panels) {
+                var opts = {
+                    id: 'brettz9testselfregister',
+                    label: "My testing button - Self-registering",
+                    icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==',
+                    onClick: function () {
+                        // clipboard();
+                        panel = panels.Panel({
+                            width: 180,
+                            height: 180,
+                            contentURL: 'data:text/html;charset=utf-8,' + encodeURIComponent(
+                                document.body.innerHTML
+                            ),
+                            contentScript:
+                                'window.addEventListener("click", function () {self.postMessage();});' +
+                                'self.on("message", function (msg) {alert(msg);});', // we add events here, as adding in the HTML in the next line does not allow privileged access
+                            onMessage: function () {
+                                console.log('inside onMessage');
+                                clipboard();
+                            },
+                            onHide: function () {}
+                        });
+                        panel.show();
+                        // window.addEventListener('load', function () {document.body.innerHTML= '<b>hello!<\/b>'}); // This works as a replacement of contentURL (not DOMContentLoaded)
+                    }
+                    /*
+                    // This property had not been required earlier as we
+                    //   could use contentScript instead, but this has the
+                    //   bonus of separating concerns anyhow
+                    contentURL: 'data:text/html;charset=utf-8,' + encodeURIComponent(
+                        document.body.innerHTML
+                    ),
+                    */
+                };
                 try {
-                    Panel = panel.Panel({
-                        width: 180,
-                        height: 180,
-                        //contentURL: 'http://127.0.0.1/ayw/demos/requestPrivs-options-content.html'
-                        //contentScript: 'window.addEventListener("load", function () {document.body.innerHTML= "<b>hello!<\/b>"});' // This works as a replacement of contentURL (not DOMContentLoaded)
-                        onMessage: function () {
-                            console.log('inside onMessage');
-                            clipboard();
-                        },
-                        // This property had not been required earlier as we
-                        //   could use contentScript instead, but this has the
-                        //   bonus of separating concerns anyhow
-                        contentURL: 'data:text/html;charset=utf-8,' + encodeURIComponent(
-                            document.body.innerHTML
-                        ),
-                        contentScript:
-                            'window.addEventListener("click", function () {self.postMessage();});' +
-                            'self.on("message", function (msg) {alert(msg);});' // we add events here, as adding in the HTML in the next line does not allow privileged access
-                    });
-                    testWidget = widget.Widget({
-                        id: "brettz9test",
-                        label: "My testing Widget",
-                        contentURL: "http://www.mozilla.org/favicon.ico",
-                        //content: document.body.innerHTML // This will provide HTML to show ON add-on bar--we instead want panel and panel only support contentURL, not content (though as below, contentScript can be used to inject content)
-                        panel: Panel
-                    });
+                    actionButton = ui.ActionButton(opts);
                 }
                 catch (e) {
                     alert('Page callback error' + e + e.lineNumber + e.fileName);
