@@ -597,8 +597,8 @@ __exposedProps__ requirement with functions).
     does not work with SDK Widget (/addon-sdk-1.16/lib/sdk/widget.js) which
     checks for instanceof Panel (resolved within AsYouWish by changing this
     code to duck type) though this one is now deprecated and `ui` appears to be working
-		1. Note: this patch to widget.js within valid.panel had previously been sufficient:
-			`ok: function(v) !v || v instanceof panels.Panel || (v.show && typeof v.isShowing !== 'undefined') // Adding duck-typing to avoid wrapper complaining of instanceof`
+        1. Note: this patch to widget.js within valid.panel had previously been sufficient:
+            `ok: function(v) !v || v instanceof panels.Panel || (v.show && typeof v.isShowing !== 'undefined') // Adding duck-typing to avoid wrapper complaining of instanceof`
     2. workarounds most likely needed for other instanceof usages within
     the SDK (no way to get SDK to [use custom instanceOf function](https://bugzilla.mozilla.org/show_bug.cgi?id=823790)
     that can be overridden?)

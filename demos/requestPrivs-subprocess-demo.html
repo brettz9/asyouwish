@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     try {
         AsYouWish.requestPrivs(['sdk/system', 'x-subprocess'], function (sys, subprocess) {
-		    var comSpec = sys.env.ComSpec,
+            var comSpec = sys.env.ComSpec,
                 envTestValue = "OK",
                 gotStdout = false;
 
