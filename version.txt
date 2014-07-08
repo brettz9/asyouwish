@@ -1,5 +1,18 @@
 Version notes:
 
+4.0.0
+* Breaking change: Change AYW button from using deprecated widget API to ui/button/action API.
+* Breaking API change: Remove access to sdk/widget in favor of ui module (and utilize in own demos, including now fixed "add-on" demos)
+* Breaking API change: Drop now absent sdk/content/symbiont API
+* API: Add support for modules: sdk/(ui, content/mod, lang/functional, lang/type, places/bookmarks, places/favicon, places/history, stylesheet/style, stylesheet/utils, test/utils, ui/button/action, ui/button/toggle, ui/frame, ui/id, ui/sidebar, ui/toolbar, util/array, util/match-pattern, util/object)
+* i18n: Fix i18n of system/events
+* Demos: Add bookmarklet code with dire warning about usage
+* Demos: Add eval and simple eval demos for live SDK evaluation (has some responsiveness issues)
+* Demos: Use more granular sdk/system module for subprocess demo over chrome
+* Demos: Use async Ajax in demo
+* Demos: Fix requireJS priv! test to utilize full "sdk/" prefix
+* Minor: Add docs, update readme/todos, update CodeMirror, jQuery and subprocess, alter height in CM demos
+
 3.0.0
 * Breaking change: Remove deprecated "sdk/addon-page" API
 
