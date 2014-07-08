@@ -218,7 +218,6 @@ as gate-keeper of the data.
 - **sdk/system**: Gets information about the environment it's running in and can quit Firefox!
 - **sdk/tabs**: Listening to changes in user tabs, controlling tabs, opening new tabs, or accessing any other opened browser tab content
 - **sdk/ui**: Provides access to button, toolbar, and sidebar UI objects.
-- **sdk/widget**: Creating an addon user interface (widget) to be hosted in the add-on bar
 - **sdk/windows**: Listening to changes in user's browser tabs, controlling tabs, opening new tabs, or accessing any other opened browser tab content
 
 The following, apparently fully safe libraries made available by the Addons SDK
@@ -346,9 +345,6 @@ Currently 'shown' is only an internal event and not reported.
 
 <div id="addon-websites"></div>
 # "Addon" websites
-
-***While this code should still be working, the ability to attach a
-widget/panel via AsYouWish (a common use for add-ons) is currently not.***
 
 Even without creating an "addon" website, one can use regular privileged
 websites to create add-on-like features:
