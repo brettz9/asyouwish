@@ -20,9 +20,9 @@ window.addEventListener('DOMContentLoaded', function () {
             alert(
                 fileObj.read('C:\\Program Files (x86)\\Mozilla Firefox\\application.ini')
             );
-            require(['priv!clipboard', 'priv!widget'], function (clipboard, widget) {
+            require(['priv!sdk/clipboard', 'priv!sdk/ui'], function (clipboard, ui) {
                 alert(typeof clipboard);
-                alert(typeof widget);
+                alert(typeof ui);
             });
         }, errBack);
 
