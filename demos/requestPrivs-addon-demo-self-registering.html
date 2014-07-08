@@ -12,11 +12,11 @@ throw '';
 /*
 This same page:
 1) Registers "add-on" for restart (todo)
-2) Adds widget
-3) Adds panel content of widget
+2) Adds action button
+3) Adds panel content for action button
 4) Adds events (including privileged) to respond to panel requests
 
-0) Currently, besides code fix for widget.js, just requires approval BEFORE registration (find a way to do otherwise); why is this line not getting it?
+0) Currently, just requires approval BEFORE registration (find a way to do otherwise); why is this line not getting it?
     a) mainWindow = getMainWindowFromChildWindow(subject);
 */
 
@@ -29,7 +29,6 @@ var panel, actionButton,
     };
 
 window.addEventListener('x-unload', function () {
-    testWidget.destroy();
     console.log('unloaded addon demo');
     AsYouWish.requestPrivs(['chrome', 'sdk/windows'], function (chrome, windows) {
         try {
