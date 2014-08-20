@@ -1,5 +1,9 @@
 Version notes:
 
+4.1.0
+* Update to SDK 1.17
+* API: Add support for sdk/content/symbiont and sdk/content/symbiont
+
 4.0.0
 * Breaking change: Change AYW button from using deprecated widget API to ui/button/action API.
 * Breaking API change: Remove access to sdk/widget in favor of ui module (and utilize in own demos, including now fixed "add-on" demos)
