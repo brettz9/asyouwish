@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8" />
+<script>
+/*globals alert, document, window, AsYouWish*/
+
+window.addEventListener('DOMContentLoaded', function () {
+    'use strict';
+	
+	var displayMessage = function (msg) {
+		document.body.appendChild(document.createTextNode(msg));
+		document.body.appendChild(document.createElement('br'));
+	};
+
+    var errBack = function (error) {
+        document.getElementById('errs').
+            appendChild(document.createTextNode('Error type: ' + error + '\n'));
+        document.getElementById('errs').
+            appendChild(document.createElement('br'));
+    };
+
+    var test = {
+        assert: function (value, msg) {
+            if (!value) {
+                displayMessage(msg);
+            }
+        },
+        assertEqual: function (n1, n2, msg) {
+            if (n1 !== n2) {
+                displayMessage(msg);
+            }
+        },
+        fail: function (msg) {
+            displayMessage(msg);
+            throw msg;
+        },
+        done: function () {
+            displayMessage('Done!');
+        }
+    };
+
+    try {
+        AsYouWish.requestPrivs(['sdk/system', 'sdk/system/child_process'], function (sys, child_process) {
+            var comSpec = sys.env.ComSpec,
+                envTestValue = "OK",
+                gotStdout = false;
+
+            try {
+                var p = child_process.spawn(
+                    // Retrieve windows cmd.exe path from env
+                    comSpec,
+                    // In order to execute a simple "echo" function
+                    ['/C', 'echo %ENV_TEST%'],
+                    // Printing an environnement variable set here by the parent process
+                    {env: {'ENV_TEST': envTestValue}}
+				);
+                p.stdout.on('data', function(data) {
+					test.assert(!gotStdout, "don't get stdout twice");
+					test.assertEqual(data, envTestValue + "\r\n", "stdout contains the environment variable");
+					gotStdout = true;
+				});
+				p.stderr.on('data', function(data) {
+					test.fail("shouldn't get stderr");
+				});
+				p.on('close', function(exitCode) {
+					displayMessage("Exit code: " + exitCode);
+					test.assert(gotStdout, "got stdout before finished");
+					test.done();
+				});
+            }
+            catch (e) {
+                displayMessage('Page callback error' + e);
+            }
+        }, errBack);
+
+    } catch (e) {
+        displayMessage('page error: ' + e);
+    }
+});
+
+</script>
+</head><body>
+
+<div id="errs"></div>
+
+</body></html>

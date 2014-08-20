@@ -3,6 +3,7 @@ Version notes:
 4.1.0
 * Update to SDK 1.17
 * API: Add support for sdk/content/symbiont and sdk/content/symbiont
+* Add system/child_process demo
 
 4.0.0
 * Breaking change: Change AYW button from using deprecated widget API to ui/button/action API.
