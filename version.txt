@@ -1,5 +1,8 @@
 Version notes:
 
+5.0.0
+* Reformat package.json for jpm
+
 4.1.0
 * Update to SDK 1.17
 * API: Add support for sdk/content/symbiont and sdk/system/child_process
