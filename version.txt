@@ -2,7 +2,7 @@ Version notes:
 
 4.1.0
 * Update to SDK 1.17
-* API: Add support for sdk/content/symbiont and sdk/content/symbiont
+* API: Add support for sdk/content/symbiont and sdk/system/child_process
 * Add system/child_process demo
 
 4.0.0
