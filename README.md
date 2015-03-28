@@ -1,5 +1,11 @@
 # asyouwish
 
+***Important note: This project is no longer functional in the latest Firefox
+versions. If someone is capable of addressing the complex JavaScript issues
+in Firefox as per [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=823811)
+it is possible that the current problem can be overcome, but at this point
+it seems that I will not be able to fix it myself.***
+
 AsYouWish is a browser add-on (currently Firefox only) to allow requests for browser
 privileges to be made from regular HTML. The latest release should be at
 https://addons.mozilla.org/en-US/addon/as-you-wish/ .
