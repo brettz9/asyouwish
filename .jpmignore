@@ -1,0 +1,12 @@
+*.lnk
+*.xpi
+
+doc
+test
+demos
+restricted-copyright
+requirejsPrivPlugin
+
+.git
+.gitignore
+.jpmignore
