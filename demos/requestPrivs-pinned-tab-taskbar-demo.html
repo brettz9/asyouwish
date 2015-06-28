@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+<script>
+window.addEventListener('focus', function () {
+	var params = new URL(window.location).searchParams;
+
+	var path = params.get('path');
+	var icon = params.get('icon');
+	
+
+	if (!path) {
+//		alert("Please enter \"?path=XX\" in the URL where \"XX\" is the file path to execute");
+	}
+	
+	// Todo: Could expand to utilize an image file in the URL for this page's own (dynamic) icon
+
+	// Todo: Code to switch to app if open, so pinned tab can work like Windows task bar
+	alert(AsYouWish);
+	
+
+});
+</script>
+
+</body>
+</html>
