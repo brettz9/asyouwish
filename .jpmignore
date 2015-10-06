@@ -1,4 +1,5 @@
 *.lnk
+*.bat
 *.xpi
 
 doc

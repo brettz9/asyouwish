@@ -1,3 +1,6 @@
+# 5.1.0
+- Add support for private window browsing
+
 # 5.0.0
 - Reformat package.json for jpm
 
