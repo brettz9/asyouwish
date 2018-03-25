@@ -1,5 +1,10 @@
 # asyouwish
 
+***Note: To the extent this add-on can be salvaged, some work is underway
+in a branch of [WebAppFind](https://github.com/brettz9/webappfind) to
+restore this functionality. If it is decided not to be included, it may
+be moved back to this repository.***
+
 ***Important note: This project is no longer functional in the latest Firefox
 versions. If someone is capable of addressing the complex JavaScript issues
 in Firefox as per [this bug](https://bugzilla.mozilla.org/show_bug.cgi?id=823811)
@@ -69,7 +74,7 @@ even well-meaning websites may, if poorly designed (as with a poorly designed
 browser add-on), expose your system
 to exploitation. For example, if a website allows user comments but does
 not properly escape them according to standard security practices, it would
-be possible for a malicious individual to inject code into the site (whether scripts, 
+be possible for a malicious individual to inject code into the site (whether scripts,
 links, etc.) for which you have granted AsYouWish privileges which
 could then abuse those privileges when you visit the site and do
 great harm to your system.**
@@ -79,7 +84,7 @@ are links which you can drag to your browser's bookmarks toolbar which,
 when subsequently clicked from your toolbar, will run the code included as
 part of the link as if the code were running on the currently displayed page.
 So, it is important not to add bookmarklets from untrusted sources
-especially if you try to click them while visiting pages for which 
+especially if you try to click them while visiting pages for which
 you have granted AsYouWish permissions.**
 
 You can see this in action (but in a safe way!) at the
